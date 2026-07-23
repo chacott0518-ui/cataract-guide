@@ -47,19 +47,18 @@ export const RECOVERY_PAGE: ContentPage = {
   showFaqHub: true,
   repeatImageBeforeSectionNumber: null,
   seo: {
-    title:
-      "노안백내장 회복기간 | 일상 복귀와 관리 과정",
+    title: "노안백내장 회복기간 | 노안백내장",
     description:
-      "노안백내장 수술 후 회복 과정의 개인차와 세안·운전·운동 등 일상 복귀 시 확인할 점을 안내합니다.",
+      "노안백내장 회복기간은 개인차가 있으며, 세안·운전·운동 등 일상 복귀 시점과 경과 확인 시 살펴볼 점을 안내합니다.",
     keywords: [
       "노안백내장 회복기간",
       "백내장 수술 회복",
       "백내장 수술 후 일상생활",
       "백내장 수술 후 관리",
       "백내장 수술 후 운전",
-      "노안 수술 회복",
     ],
     ogImage: TOPIC_MEDIA.recovery.thumbnail.src,
+    socialImage: "/images/og/cataractguide-kakao.png",
     category: SITE.categoryLabel,
   },
   sections: [

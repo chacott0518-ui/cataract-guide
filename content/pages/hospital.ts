@@ -47,19 +47,18 @@ export const HOSPITAL_PAGE: ContentPage = {
   showFaqHub: true,
   repeatImageBeforeSectionNumber: null,
   seo: {
-    title:
-      "노안백내장 병원 선택 | 검사·상담 비교 기준",
+    title: "노안백내장 병원 선택 | 노안백내장",
     description:
-      "노안백내장 병원 선택 시 검사 체계, 렌즈 상담, 비용·사후관리를 비교할 때 확인할 기준을 안내합니다.",
+      "노안백내장 병원 선택 시 특정 기관 추천이 아니라 검사 체계, 렌즈 상담, 비용·사후관리를 비교할 기준을 안내합니다.",
     keywords: [
       "노안백내장 병원 선택",
       "백내장 수술 병원",
       "백내장 검사 병원",
       "인공수정체 상담",
       "백내장 병원 비교",
-      "노안 수술 병원",
     ],
     ogImage: TOPIC_MEDIA.hospital.thumbnail.src,
+    socialImage: "/images/og/cataractguide-kakao.png",
     category: SITE.categoryLabel,
   },
   sections: [

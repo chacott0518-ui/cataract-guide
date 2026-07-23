@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { MobileContactBar } from "@/components/layout/MobilePhoneBar";
 import { ScrollToTopOnNavigate } from "@/components/layout/ScrollToTopOnNavigate";
 import { HOME_SEO } from "@/content/pages/home";
-import { buildPageMetadata } from "@/lib/metadata";
+import { buildPageMetadata, DEFAULT_OG_IMAGE } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/site-url";
 
 import "./globals.css";
@@ -17,7 +17,7 @@ const baseMetadata = buildPageMetadata({
   type: "website",
 });
 
-const ogImage = "/images/og/cataractguide-kakao.png";
+const ogImage = DEFAULT_OG_IMAGE;
 
 export const metadata: Metadata = {
   ...baseMetadata,

@@ -18,8 +18,8 @@ import {
   HOME_SECTIONS,
 } from "@/content/pages/home";
 import {
-  faqPageJsonLd,
   itemListJsonLd,
+  organizationJsonLd,
   webPageJsonLd,
   websiteJsonLd,
 } from "@/lib/schema";
@@ -64,14 +64,16 @@ export default function HomePage() {
       </div>
       <JsonLd
         data={[
+          organizationJsonLd(),
           websiteJsonLd(),
           webPageJsonLd({
             name: SITE.name,
             description: SITE.tagline,
             path: "/",
+            image: "/images/og/cataractguide-kakao.png",
+            type: "WebPage",
           }),
           itemListJsonLd(),
-          faqPageJsonLd(faqs),
         ]}
       />
     </>

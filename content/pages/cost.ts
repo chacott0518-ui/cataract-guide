@@ -41,19 +41,18 @@ export const COST_PAGE: ContentPage = {
   showFaqHub: true,
   repeatImageBeforeSectionNumber: null,
   seo: {
-    title:
-      "노안백내장 수술비용 | 검사·렌즈·수술 범위 확인",
+    title: "노안백내장 수술비용, 어떤 항목을 확인할까? | 노안백내장",
     description:
-      "노안백내장 수술비용이 달라지는 검사·렌즈·수술 범위와 견적 비교 시 확인할 항목을 정리합니다.",
+      "노안백내장 수술비용은 검사 범위, 렌즈 종류, 수술 범위와 사후관리 구성에 따라 달라질 수 있습니다. 견적 비교 전에 포함·제외 항목을 확인하는 기준을 정리합니다.",
     keywords: [
       "노안백내장 수술비용",
       "백내장 수술비용",
       "인공수정체 비용",
       "백내장 렌즈 비용",
       "백내장 검사비용",
-      "노안 수술비용",
     ],
     ogImage: TOPIC_MEDIA.cost.thumbnail.src,
+    socialImage: "/images/og/cataractguide-kakao.png",
     category: SITE.categoryLabel,
   },
   sections: [

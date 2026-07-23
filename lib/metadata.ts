@@ -4,6 +4,9 @@ import { SITE, VERIFICATION } from "@/config/site";
 import { absoluteUrl } from "@/lib/site-url";
 import type { PageSeo } from "@/types/content";
 
+/** 공유·OG 기본 이미지 (1200×630) */
+export const DEFAULT_OG_IMAGE = "/images/og/cataractguide-kakao.png";
+
 type BuildMetadataOptions = {
   seo: PageSeo;
   path: string;
@@ -38,9 +41,8 @@ export function buildPageMetadata({
   modifiedTime,
 }: BuildMetadataOptions): Metadata {
   const url = absoluteUrl(path);
-  const imagePath = seo.socialImage || seo.ogImage;
+  const imagePath = seo.socialImage || DEFAULT_OG_IMAGE;
   const imageUrl = absoluteUrl(imagePath);
-  const isSocial = Boolean(seo.socialImage);
 
   return {
     title: {
@@ -67,7 +69,7 @@ export function buildPageMetadata({
         {
           url: imageUrl,
           width: 1200,
-          height: isSocial ? 630 : 1200,
+          height: 630,
           alt: seo.title,
         },
       ],

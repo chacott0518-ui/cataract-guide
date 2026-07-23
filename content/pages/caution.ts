@@ -47,19 +47,18 @@ export const CAUTION_PAGE: ContentPage = {
   showFaqHub: true,
   repeatImageBeforeSectionNumber: null,
   seo: {
-    title:
-      "노안백내장 주의사항 | 수술 전후 확인사항",
+    title: "노안백내장 주의사항 | 노안백내장",
     description:
-      "노안백내장 수술 전후 검사 준비, 당일 안내, 생활 관리와 의료진에게 확인할 증상을 정리합니다.",
+      "노안백내장 주의사항으로 수술 전 검사 준비, 당일 안내, 수술 후 생활 관리와 의료진에게 확인할 증상을 정리합니다.",
     keywords: [
       "노안백내장 주의사항",
       "백내장 수술 전 주의사항",
       "백내장 수술 후 주의사항",
       "백내장 수술 후 관리",
       "백내장 수술 전 검사",
-      "백내장 수술 안약",
     ],
     ogImage: TOPIC_MEDIA.precautions.thumbnail.src,
+    socialImage: "/images/og/cataractguide-kakao.png",
     category: SITE.categoryLabel,
   },
   sections: [

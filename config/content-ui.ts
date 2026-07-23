@@ -18,11 +18,11 @@ export type FaqHubCardConfig = {
   href: string;
 };
 
-/** 상세 콘텐츠 하단 FAQ 허브 카드 (신규 통합 FAQ 페이지에서는 미출력) */
+/** 상세 콘텐츠 하단 FAQ 허브 카드 (대표 FAQ 페이지로 연결) */
 export const FAQ_HUB_CARD: FaqHubCardConfig = {
   title: "더 많은 자주 묻는 질문 보기",
   description:
     "수술비용·렌즈·회복기간·주의사항·병원선택 질문을 한곳에서 확인하세요.",
-  linkLabel: "FAQ 전체 보기 →",
-  href: ROUTES.faqQuestions,
+  linkLabel: "노안백내장 FAQ 전체 보기 →",
+  href: ROUTES.faq,
 };

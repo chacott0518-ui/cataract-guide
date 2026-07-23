@@ -21,7 +21,7 @@ export function RelatedPages({ currentId }: RelatedPagesProps) {
         {items.map((card) => (
           <li key={card.id}>
             <Link className="cg-related-pages__link" href={card.href}>
-              <span>{card.title} 자세히 보기</span>
+              <span>{card.title} 안내 확인하기</span>
               <span aria-hidden="true"> →</span>
             </Link>
           </li>

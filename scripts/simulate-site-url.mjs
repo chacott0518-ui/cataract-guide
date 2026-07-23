@@ -5,6 +5,8 @@
  * node scripts/simulate-site-url.mjs
  */
 
+const CANONICAL_SITE_ORIGIN = "https://cataractguide.co.kr";
+
 function isLocalhostUrl(value) {
   try {
     const { hostname } = new URL(value);
@@ -25,6 +27,9 @@ function normalizeSiteUrl(value) {
     ? trimmed
     : `https://${trimmed}`;
   const parsed = new URL(withProtocol);
+  if (parsed.hostname.startsWith("www.")) {
+    parsed.hostname = parsed.hostname.slice(4);
+  }
   const path = parsed.pathname.replace(/\/$/, "");
   const normalizedPath = path === "/" ? "" : path;
   return `${parsed.protocol}//${parsed.host}${normalizedPath}`;
@@ -32,17 +37,9 @@ function normalizeSiteUrl(value) {
 
 function getSiteUrl() {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  const fromVercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
-  const raw =
-    fromEnv ||
-    (fromVercel
-      ? fromVercel.startsWith("http://") || fromVercel.startsWith("https://")
-        ? fromVercel
-        : `https://${fromVercel}`
-      : undefined);
 
-  if (raw) {
-    const normalized = normalizeSiteUrl(raw);
+  if (fromEnv) {
+    const normalized = normalizeSiteUrl(fromEnv);
     if (isLocalhostUrl(normalized) && process.env.VERCEL_ENV === "production") {
       throw new Error("localhost blocked on vercel production");
     }
@@ -53,7 +50,7 @@ function getSiteUrl() {
     return "http://localhost:3000";
   }
 
-  throw new Error("missing site url in production");
+  return CANONICAL_SITE_ORIGIN;
 }
 
 const saved = { ...process.env };
@@ -66,12 +63,7 @@ function restoreEnv() {
 }
 
 function applyEnv(env) {
-  for (const key of [
-    "NODE_ENV",
-    "NEXT_PUBLIC_SITE_URL",
-    "VERCEL_PROJECT_PRODUCTION_URL",
-    "VERCEL_ENV",
-  ]) {
+  for (const key of ["NODE_ENV", "NEXT_PUBLIC_SITE_URL", "VERCEL_ENV"]) {
     if (env[key] === undefined) delete process.env[key];
     else process.env[key] = env[key];
   }
@@ -79,39 +71,35 @@ function applyEnv(env) {
 
 const cases = [
   {
-    name: "production missing all",
+    name: "production missing env uses canonical",
     env: {
       NODE_ENV: "production",
       NEXT_PUBLIC_SITE_URL: undefined,
-      VERCEL_PROJECT_PRODUCTION_URL: undefined,
       VERCEL_ENV: undefined,
     },
-    throws: true,
+    expect: CANONICAL_SITE_ORIGIN,
   },
   {
-    name: "production vercel project url",
+    name: "NEXT_PUBLIC wins",
     env: {
       NODE_ENV: "production",
-      NEXT_PUBLIC_SITE_URL: undefined,
-      VERCEL_PROJECT_PRODUCTION_URL: "example.vercel.app",
+      NEXT_PUBLIC_SITE_URL: "https://cataractguide.co.kr",
     },
-    expect: "https://example.vercel.app",
+    expect: CANONICAL_SITE_ORIGIN,
   },
   {
-    name: "NEXT_PUBLIC wins over vercel",
+    name: "www stripped",
     env: {
       NODE_ENV: "production",
-      NEXT_PUBLIC_SITE_URL: "https://example.com",
-      VERCEL_PROJECT_PRODUCTION_URL: "example.vercel.app",
+      NEXT_PUBLIC_SITE_URL: "https://www.cataractguide.co.kr",
     },
-    expect: "https://example.com",
+    expect: CANONICAL_SITE_ORIGIN,
   },
   {
     name: "development fallback",
     env: {
       NODE_ENV: "development",
       NEXT_PUBLIC_SITE_URL: undefined,
-      VERCEL_PROJECT_PRODUCTION_URL: undefined,
     },
     expect: "http://localhost:3000",
   },
@@ -141,14 +129,14 @@ try {
         );
         failed += 1;
       } else {
-        console.log(`PASS ${testCase.name}: ${result}`);
+        console.log(`PASS ${testCase.name}`);
       }
-    } catch {
-      if (!testCase.throws) {
-        console.log(`FAIL ${testCase.name}: unexpected throw`);
-        failed += 1;
+    } catch (error) {
+      if (testCase.throws) {
+        console.log(`PASS ${testCase.name}`);
       } else {
-        console.log(`PASS ${testCase.name}: threw`);
+        console.log(`FAIL ${testCase.name}: unexpected throw ${error.message}`);
+        failed += 1;
       }
     }
   }
@@ -156,4 +144,8 @@ try {
   restoreEnv();
 }
 
-process.exit(failed ? 1 : 0);
+if (failed) {
+  console.log(`\nFAILED ${failed}`);
+  process.exit(1);
+}
+console.log("\nALL PASS");

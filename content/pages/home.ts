@@ -12,16 +12,16 @@ import type {
 export const HOME_SEO: PageSeo = {
   title: "노안백내장",
   description:
-    "노안백내장 수술비용, 회복기간, 주의사항, 병원 선택, 후기와 자주 묻는 질문을 한곳에서 확인할 수 있는 정보 안내 사이트입니다.",
+    "노안백내장 수술비용, 회복기간, 주의사항, 병원 선택, 후기와 FAQ를 한곳에서 확인할 수 있는 일반 정보 안내 사이트입니다. 진단·치료는 개인차가 있어 의료진 상담이 필요합니다.",
   keywords: [
-      "노안백내장",
-      "노안",
-      "백내장",
-      "노안백내장 수술",
-      "노안백내장 정보",
-    ],
+    "노안백내장",
+    "노안",
+    "백내장",
+    "노안백내장 수술",
+    "노안백내장 정보",
+  ],
   ogImage: TOPIC_MEDIA.cost.thumbnail.src,
-  socialImage: "/images/og/home-og.webp",
+  socialImage: "/images/og/cataractguide-kakao.png",
   category: SITE.categoryLabel,
 };
 

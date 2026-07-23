@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 
 import { CONTENT_PAGES } from "@/content/pages";
-import { getPublishedColumns } from "@/lib/content-registry";
 import { absoluteUrl } from "@/lib/site-url";
 
 const HOME_LAST_MODIFIED = "2026-07-22";
 
+/** 색인 대상: 홈 + 대표 콘텐츠 6개(총 7). redirect·칼럼 URL 제외 */
 export default function sitemap(): MetadataRoute.Sitemap {
   const home: MetadataRoute.Sitemap = [
     {
@@ -23,12 +23,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const columns: MetadataRoute.Sitemap = getPublishedColumns().map((column) => ({
-    url: absoluteUrl(`/칼럼/${column.slug}`),
-    lastModified: new Date(column.updatedAt),
-    changeFrequency: "monthly",
-    priority: 0.6,
-  }));
-
-  return [...home, ...pages, ...columns];
+  return [...home, ...pages];
 }

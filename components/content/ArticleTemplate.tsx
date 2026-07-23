@@ -73,7 +73,8 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
 
   const showEyebrow = page.showArticleEyebrow === true;
   const showContentCards = page.showContentCards !== false;
-  const showFaqHub = page.showFaqHub !== false && page.id !== "faqHub";
+  const showFaqHub =
+    page.showFaqHub !== false && page.id !== "faqHub" && page.id !== "faq";
   const showGuideHeading = page.showRelatedGuideHeading === true;
   const displayH1 = page.h1 || page.navLabel || page.heading;
   const breadcrumbLabel = page.breadcrumbLabel || displayH1;
@@ -81,21 +82,25 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
     page.heading && page.heading !== displayH1 ? page.heading : null;
   const topImages = resolveTopImages(page);
   const bodyImage = page.bodyImage?.src ? page.bodyImage : null;
+  const isFaqCanonical = page.id === "faq";
 
   const schemas = [
     webPageJsonLd({
       name: page.heading,
       description: page.seo.description,
       path: page.href,
-      image: page.seo.ogImage,
+      image: page.seo.socialImage || page.seo.ogImage,
       keywords: page.seo.keywords,
+      type: "MedicalWebPage",
     }),
     breadcrumbJsonLd([
       { name: SITE.name, path: "/" },
       { name: breadcrumbLabel, path: page.href },
     ]),
-    articleJsonLd(page),
-    ...(schemaFaqs.length > 0 ? [faqPageJsonLd(schemaFaqs)] : []),
+    ...(isFaqCanonical ? [] : [articleJsonLd(page)]),
+    ...(isFaqCanonical && schemaFaqs.length > 0
+      ? [faqPageJsonLd(schemaFaqs)]
+      : []),
   ];
 
   const accentStyle = {

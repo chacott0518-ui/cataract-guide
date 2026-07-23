@@ -4,8 +4,8 @@
  *
  * 사용:
  *   SITE_URL=http://localhost:3010 ALLOW_LOCALHOST=1 npm run verify:seo
- *   SITE_URL=https://example.com npm run verify:seo
- *   node scripts/predeploy-seo-check.mjs https://example.com
+ *   SITE_URL=https://cataractguide.co.kr npm run verify:seo
+ *   node scripts/predeploy-seo-check.mjs https://cataractguide.co.kr
  */
 
 const SITE_URL = (
@@ -15,19 +15,24 @@ const SITE_URL = (
 ).replace(/\/$/, "");
 const ALLOW_LOCALHOST = process.env.ALLOW_LOCALHOST === "1";
 
-const PUBLIC_PATHS = [
-  "/",
-  "/노안백내장-수술비용",
-  "/노안백내장-회복기간",
-  "/노안백내장-주의사항",
-  "/노안백내장-병원선택",
-  "/노안백내장-후기",
-  "/노안백내장-faq",
-  "/노안백내장-자주묻는질문",
-];
+const EXPECTED_TITLES = {
+  "/": "노안백내장",
+  "/노안백내장-수술비용": "노안백내장 수술비용, 어떤 항목을 확인할까? | 노안백내장",
+  "/노안백내장-회복기간": "노안백내장 회복기간 | 노안백내장",
+  "/노안백내장-주의사항": "노안백내장 주의사항 | 노안백내장",
+  "/노안백내장-병원선택": "노안백내장 병원 선택 | 노안백내장",
+  "/노안백내장-후기": "노안백내장 후기 | 노안백내장",
+  "/노안백내장-faq": "노안백내장 FAQ | 노안백내장",
+};
 
-const LEGACY_PATH = "/노안백내장-수술비";
+const PUBLIC_PATHS = Object.keys(EXPECTED_TITLES);
+
+const LEGACY_COST_PATH = "/노안백내장-수술비";
 const FINAL_COST_PATH = "/노안백내장-수술비용";
+const DUPLICATE_FAQ_PATH = "/노안백내장-자주묻는질문";
+const FINAL_FAQ_PATH = "/노안백내장-faq";
+const CANONICAL_ORIGIN = "https://cataractguide.co.kr";
+const DEFAULT_OG_PATH = "/images/og/cataractguide-kakao.png";
 
 const errors = [];
 const warnings = [];
@@ -115,6 +120,13 @@ function assertNoLocalhost(label, value) {
   }
 }
 
+function assertNoForbiddenHost(label, value) {
+  if (!value) return;
+  if (/www\.cataractguide\.co\.kr|\.vercel\.app/i.test(value)) {
+    fail(`${label}에 www 또는 vercel.app 포함: ${value}`);
+  }
+}
+
 async function fetchText(path, options = {}) {
   const url = `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
   const response = await fetch(url, {
@@ -142,8 +154,15 @@ async function checkPage(path) {
   const ogImage = metaContent(text, "og:image");
   const h1Count = countH1(text);
   const jsonLd = parseJsonLd(text);
+  const expectedTitle = EXPECTED_TITLES[path];
 
   if (!title) fail(`${path}: title 없음`);
+  else if (title !== expectedTitle) {
+    fail(`${path}: title 불일치 ("${title}" ≠ "${expectedTitle}")`);
+  }
+  if (title && /\| 노안백내장 \| 노안백내장/.test(title)) {
+    fail(`${path}: title template 중복`);
+  }
   if (!description) fail(`${path}: description 없음`);
   if (!canonical) fail(`${path}: canonical 없음`);
   if (h1Count !== 1) fail(`${path}: H1 개수 ${h1Count}`);
@@ -160,42 +179,56 @@ async function checkPage(path) {
       fail(`${path}: canonical 경로 불일치 (${canonicalPath})`);
     }
     assertNoLocalhost(`${path} canonical`, canonical);
+    assertNoForbiddenHost(`${path} canonical`, canonical);
+    if (!ALLOW_LOCALHOST && !canonical.startsWith(CANONICAL_ORIGIN)) {
+      fail(`${path}: canonical이 ${CANONICAL_ORIGIN} 기준이 아님 (${canonical})`);
+    }
   }
 
   assertNoLocalhost(`${path} og:url`, ogUrl);
   assertNoLocalhost(`${path} og:image`, ogImage);
+  assertNoForbiddenHost(`${path} og:url`, ogUrl);
+  assertNoForbiddenHost(`${path} og:image`, ogImage);
   if (ogImage && !/^https?:\/\//i.test(ogImage)) {
     fail(`${path}: og:image가 절대 URL이 아님`);
+  }
+  if (ogImage && !ogImage.includes(DEFAULT_OG_PATH)) {
+    warn(`${path}: og:image가 기본 카카오 OG가 아님 (${ogImage})`);
+  }
+
+  if (path === "/" && !/naver-site-verification/i.test(text)) {
+    fail(`${path}: 네이버 소유확인 메타 없음`);
   }
 
   const types = jsonLd.map((item) => item["@type"]).filter(Boolean);
   if (path === "/") {
     if (!types.includes("WebSite")) fail(`${path}: WebSite schema 없음`);
+    if (!types.includes("Organization")) fail(`${path}: Organization schema 없음`);
+    if (types.includes("FAQPage")) fail(`${path}: 홈에 FAQPage 있으면 안 됨`);
+  } else if (path === FINAL_FAQ_PATH) {
+    if (!types.includes("MedicalWebPage") && !types.includes("WebPage")) {
+      fail(`${path}: MedicalWebPage/WebPage schema 없음`);
+    }
+    if (!types.includes("BreadcrumbList")) fail(`${path}: BreadcrumbList 없음`);
+    if (!types.includes("FAQPage")) fail(`${path}: FAQPage schema 없음`);
+    const faqCount = types.filter((t) => t === "FAQPage").length;
+    if (faqCount > 1) fail(`${path}: FAQPage 중복 (${faqCount})`);
   } else {
-    if (!types.includes("WebPage") && !types.includes("Article")) {
-      fail(`${path}: WebPage/Article schema 없음`);
+    if (!types.includes("MedicalWebPage") && !types.includes("WebPage") && !types.includes("Article")) {
+      fail(`${path}: MedicalWebPage/WebPage/Article schema 없음`);
     }
     if (!types.includes("BreadcrumbList")) {
       fail(`${path}: BreadcrumbList 없음`);
+    }
+    if (types.includes("FAQPage")) {
+      fail(`${path}: FAQ 전용 페이지가 아닌데 FAQPage 포함`);
     }
   }
 
   for (const item of jsonLd) {
     const serialized = JSON.stringify(item);
     assertNoLocalhost(`${path} JSON-LD`, serialized);
-  }
-
-  if (path === "/노안백내장-자주묻는질문") {
-    const faq = jsonLd.find((item) => item["@type"] === "FAQPage");
-    const count = faq?.mainEntity?.length ?? 0;
-    if (count !== 30) {
-      fail(`${path}: FAQPage mainEntity ${count}개 (기대 30)`);
-    }
-    const screenCount = (text.match(/class="[^"]*cg-faq-item/g) || []).length;
-    if (screenCount > 0 && screenCount !== 30 && screenCount !== 60) {
-      // RSC duplication can inflate counts; prefer schema as source of truth
-      warn(`${path}: 화면 FAQ 마커 수 ${screenCount} (schema ${count})`);
-    }
+    assertNoForbiddenHost(`${path} JSON-LD`, serialized);
   }
 
   if (/overflow-x:\s*scroll|overflow:\s*scroll/i.test(text)) {
@@ -210,27 +243,22 @@ async function checkSitemap() {
     return;
   }
   assertNoLocalhost("sitemap", text);
-  for (const path of PUBLIC_PATHS) {
-    const encoded = encodeURI(path);
-    const plain = path;
-    if (!text.includes(plain) && !text.includes(encoded) && !text.includes(encodeURIComponent(path.slice(1)))) {
-      // loc may contain raw unicode path
-      const ok = [...text.matchAll(/<loc>([^<]+)<\/loc>/g)].some((m) => {
-        try {
-          return pathOfUrl(m[1]) === path;
-        } catch {
-          return false;
-        }
-      });
-      if (!ok) fail(`sitemap에 ${path} 없음`);
-    }
+  assertNoForbiddenHost("sitemap", text);
+
+  const locs = [...text.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+  if (locs.length !== PUBLIC_PATHS.length) {
+    fail(`sitemap URL 개수 ${locs.length} (기대 ${PUBLIC_PATHS.length})`);
   }
-  if (
-    [...text.matchAll(/<loc>([^<]+)<\/loc>/g)].some((m) => {
-      const p = pathOfUrl(m[1]);
-      return p === LEGACY_PATH;
-    })
-  ) {
+
+  for (const path of PUBLIC_PATHS) {
+    const ok = locs.some((loc) => pathOfUrl(loc) === path);
+    if (!ok) fail(`sitemap에 ${path} 없음`);
+  }
+
+  if (locs.some((loc) => pathOfUrl(loc) === DUPLICATE_FAQ_PATH)) {
+    fail("sitemap에 중복 FAQ /노안백내장-자주묻는질문 포함");
+  }
+  if (locs.some((loc) => pathOfUrl(loc) === LEGACY_COST_PATH)) {
     fail("sitemap에 legacy /노안백내장-수술비 포함");
   }
   if (/\/\d{4}\/\d{2}\/\d{2}\//.test(text)) {
@@ -244,26 +272,28 @@ async function checkRobots() {
     fail(`/robots.txt: HTTP ${response.status}`);
     return;
   }
+  if (!/Allow:\s*\//i.test(text)) fail("robots Allow: / 없음");
   if (!/sitemap:/i.test(text)) fail("robots에 Sitemap 없음");
   assertNoLocalhost("robots", text);
+  assertNoForbiddenHost("robots", text);
   if (/disallow:\s*\/images/i.test(text)) fail("robots가 images를 차단");
 }
 
-async function checkLegacyRedirect() {
-  const { response } = await fetchText(LEGACY_PATH, {
+async function checkRedirect(fromPath, toPath, label) {
+  const { response } = await fetchText(fromPath, {
     redirect: "manual",
     skipBody: true,
   });
   if (response.status !== 308) {
-    fail(`${LEGACY_PATH}: HTTP ${response.status} (기대 308)`);
+    fail(`${label} ${fromPath}: HTTP ${response.status} (기대 308)`);
     return;
   }
   const location = response.headers.get("location") || "";
   const locationPath = location.startsWith("http")
     ? pathOfUrl(location)
     : decodeURIComponent(location.split("?")[0] || "");
-  if (locationPath !== FINAL_COST_PATH) {
-    fail(`${LEGACY_PATH}: Location이 ${FINAL_COST_PATH}가 아님 (${location})`);
+  if (locationPath !== toPath) {
+    fail(`${label} ${fromPath}: Location이 ${toPath}가 아님 (${location})`);
   }
 }
 
@@ -285,7 +315,8 @@ async function main() {
   }
   await checkSitemap();
   await checkRobots();
-  await checkLegacyRedirect();
+  await checkRedirect(LEGACY_COST_PATH, FINAL_COST_PATH, "legacy cost");
+  await checkRedirect(DUPLICATE_FAQ_PATH, FINAL_FAQ_PATH, "duplicate FAQ");
 
   if (warnings.length) {
     console.log("\nWARNINGS");

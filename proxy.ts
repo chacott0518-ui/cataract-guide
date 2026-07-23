@@ -22,6 +22,12 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(url, 308);
   }
 
+  if (pathname === ROUTES.faqQuestions) {
+    const url = request.nextUrl.clone();
+    url.pathname = ROUTES.faq;
+    return NextResponse.redirect(url, 308);
+  }
+
   return NextResponse.next();
 }
 

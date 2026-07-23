@@ -47,19 +47,18 @@ export const REVIEW_PAGE: ContentPage = {
   showFaqHub: true,
   repeatImageBeforeSectionNumber: null,
   seo: {
-    title:
-      "노안백내장 후기 | 확인 기준과 개인차",
+    title: "노안백내장 후기 | 노안백내장",
     description:
-      "노안백내장 후기를 볼 때 확인하면 좋은 내용과 과장 표현 구분, 검사·상담과 함께 보는 이유를 정리합니다.",
+      "노안백내장 후기는 참고 자료일 뿐이며, 확인할 내용·과장 표현 구분과 검사·상담을 함께 보는 이유를 정리합니다. 결과는 개인차가 있습니다.",
     keywords: [
       "노안백내장 후기",
       "백내장 수술 후기",
       "다초점 렌즈 후기",
       "백내장 회복 후기",
       "인공수정체 후기",
-      "백내장 수술 개인차",
     ],
     ogImage: TOPIC_MEDIA.reviews.thumbnail.src,
+    socialImage: "/images/og/cataractguide-kakao.png",
     category: SITE.categoryLabel,
   },
   sections: [

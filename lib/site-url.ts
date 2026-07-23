@@ -2,13 +2,17 @@
  * Canonical·sitemap·OG·JSON-LD용 절대 URL 기준.
  *
  * 우선순위:
- * 1. NEXT_PUBLIC_SITE_URL
- * 2. VERCEL_PROJECT_PRODUCTION_URL (https:// 보정)
- * 3. development에서만 http://localhost:3000
- * 4. production에서 결정 불가 시 throw (localhost 조용한 fallback 금지)
+ * 1. NEXT_PUBLIC_SITE_URL (로컬·미리보기용)
+ * 2. development에서만 http://localhost:3000
+ * 3. 그 외(빌드·운영)는 고정 apex 도메인
+ *
+ * www / vercel.app 은 canonical에 사용하지 않는다.
  */
 
 const DEV_FALLBACK = "http://localhost:3000";
+
+/** 운영·색인용 고정 apex 도메인 */
+export const CANONICAL_SITE_ORIGIN = "https://cataractguide.co.kr";
 
 export function isLocalhostUrl(value: string): boolean {
   try {
@@ -45,23 +49,14 @@ export function normalizeSiteUrl(value: string): string {
     throw new Error(`Site URL은 http 또는 https여야 합니다: ${value}`);
   }
 
+  // www 금지 — apex로 통일
+  if (parsed.hostname.startsWith("www.")) {
+    parsed.hostname = parsed.hostname.slice(4);
+  }
+
   const path = parsed.pathname.replace(/\/$/, "");
   const normalizedPath = path === "/" ? "" : path;
   return `${parsed.protocol}//${parsed.host}${normalizedPath}`;
-}
-
-function resolveRawSiteUrl(): string | undefined {
-  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (fromEnv) return fromEnv;
-
-  const fromVercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
-  if (fromVercel) {
-    return fromVercel.startsWith("http://") || fromVercel.startsWith("https://")
-      ? fromVercel
-      : `https://${fromVercel}`;
-  }
-
-  return undefined;
 }
 
 /**
@@ -90,10 +85,10 @@ function assertSiteUrlAllowed(url: string): void {
 }
 
 export function getSiteUrl(): string {
-  const raw = resolveRawSiteUrl();
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 
-  if (raw) {
-    const normalized = normalizeSiteUrl(raw);
+  if (fromEnv) {
+    const normalized = normalizeSiteUrl(fromEnv);
     assertSiteUrlAllowed(normalized);
     return normalized;
   }
@@ -102,9 +97,8 @@ export function getSiteUrl(): string {
     return DEV_FALLBACK;
   }
 
-  throw new Error(
-    "Site URL을 결정할 수 없습니다. production에서는 NEXT_PUBLIC_SITE_URL(권장) 또는 VERCEL_PROJECT_PRODUCTION_URL이 필요합니다. localhost로 조용히 fallback하지 않습니다.",
-  );
+  // 빌드·운영: vercel.app fallback 없이 고정 도메인 사용
+  return CANONICAL_SITE_ORIGIN;
 }
 
 export function absoluteUrl(path = "/"): string {
