@@ -11,16 +11,51 @@ import { absoluteUrl } from "@/lib/site-url";
 import "./globals.css";
 import "@/styles/header.css";
 
+const baseMetadata = buildPageMetadata({
+  seo: HOME_SEO,
+  path: "/",
+  type: "website",
+});
+
+const ogImage = "/images/og/cataractguide-kakao.png";
+
 export const metadata: Metadata = {
-  ...buildPageMetadata({
-    seo: HOME_SEO,
-    path: "/",
-    type: "website",
-  }),
+  ...baseMetadata,
+
   metadataBase: new URL(absoluteUrl("/")),
+
   applicationName: "노안백내장",
+
   title: {
     absolute: HOME_SEO.title,
+  },
+
+  verification: {
+    other: {
+      "naver-site-verification":
+        "a1dabda7342da9966de7827e0502703515ec941f",
+    },
+  },
+
+  openGraph: {
+    ...baseMetadata.openGraph,
+    type: "website",
+    url: absoluteUrl("/"),
+    siteName: "노안백내장",
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "노안백내장 가이드",
+      },
+    ],
+  },
+
+  twitter: {
+    ...baseMetadata.twitter,
+    card: "summary_large_image",
+    images: [ogImage],
   },
 };
 
@@ -35,11 +70,14 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           본문 바로가기
         </a>
+
         <ScrollToTopOnNavigate />
         <Header />
+
         <main id="main-content" tabIndex={-1}>
           {children}
         </main>
+
         <Footer />
         <MobileContactBar />
       </body>
