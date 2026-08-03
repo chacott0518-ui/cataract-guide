@@ -1550,6 +1550,25 @@ img {
   margin-bottom: 0;
 }
 
+.cg-hub-context-link {
+  margin: 16px 0 0;
+  color: var(--cg-body);
+  font-size: var(--text-body);
+  line-height: 1.72;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.cg-hub-context-link a {
+  color: var(--cg-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.cg-hub-context-link a:hover {
+  color: var(--page-accent, var(--cg-ink));
+}
+
 .cg-article-start {
   margin: 8px 0 8px;
   width: 100%;
@@ -2181,6 +2200,7 @@ img {
   }
 
   .cg-article-mobile-enhanced .cg-article-intro p,
+  .cg-article-mobile-enhanced .cg-hub-context-link,
   .cg-article-mobile-enhanced .cg-article-section p,
   .cg-article-mobile-enhanced .cg-article-section__answer {
     font-size: 15px;

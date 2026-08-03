@@ -163,6 +163,11 @@ export type ContentPage = {
   lead?: string;
   /** 도입부 (보통 2문단) */
   intro: string[];
+  /**
+   * 메인(`/`)으로 향하는 본문 문맥링크 1개.
+   * 도입부 직후·목차 앞에 렌더한다.
+   */
+  hubContextLink?: HubContextLink;
   sections: ArticleSection[];
   faqIds: string[];
   faqTitle: string;
@@ -199,6 +204,14 @@ export type ContentPage = {
   showContentCards?: boolean;
   /** FAQ 허브 카드 표시 */
   showFaqHub?: boolean;
+};
+
+/** 하위 페이지 → 메인 허브 문맥링크 */
+export type HubContextLink = {
+  before: string;
+  anchor: string;
+  after: string;
+  href: "/";
 };
 
 export type HomeIntro = {

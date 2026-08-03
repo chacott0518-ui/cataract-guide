@@ -10,6 +10,7 @@ import { ContentCardGrid } from "@/components/content/ContentCardGrid";
 import { FaqAccordion } from "@/components/content/FaqList";
 import { FaqHubCard } from "@/components/content/FaqHubCard";
 import { HealthInformationNotice } from "@/components/content/HealthInformationNotice";
+import { HubContextLink } from "@/components/content/HubContextLink";
 import { RelatedPages } from "@/components/content/RelatedPages";
 import { TableOfContents } from "@/components/content/TableOfContents";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -156,6 +157,10 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
             ) : null}
 
             <ArticleIntro paragraphs={page.intro} />
+
+            {page.hubContextLink ? (
+              <HubContextLink link={page.hubContextLink} />
+            ) : null}
 
             {toc.length > 0 ? <TableOfContents items={toc} /> : null}
 
