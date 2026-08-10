@@ -11,6 +11,8 @@ import { FaqAccordion } from "@/components/content/FaqList";
 import { FaqHubCard } from "@/components/content/FaqHubCard";
 import { HealthInformationNotice } from "@/components/content/HealthInformationNotice";
 import { HubContextLink } from "@/components/content/HubContextLink";
+import { KeySummaryCards } from "@/components/content/KeySummaryCards";
+import { OfficialSources } from "@/components/content/OfficialSources";
 import { RelatedPages } from "@/components/content/RelatedPages";
 import { TableOfContents } from "@/components/content/TableOfContents";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -84,6 +86,9 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
   const topImages = resolveTopImages(page);
   const bodyImage = page.bodyImage?.src ? page.bodyImage : null;
   const isFaqCanonical = page.id === "faq";
+  const includeFaqSchema =
+    schemaFaqs.length > 0 &&
+    (isFaqCanonical || (page.officialSources?.length ?? 0) > 0);
 
   const schemas = [
     webPageJsonLd({
@@ -93,15 +98,15 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
       image: page.seo.socialImage || page.seo.ogImage,
       keywords: page.seo.keywords,
       type: "MedicalWebPage",
+      datePublished: page.publishedAt,
+      dateModified: page.updatedAt,
     }),
     breadcrumbJsonLd([
       { name: SITE.name, path: "/" },
       { name: breadcrumbLabel, path: page.href },
     ]),
     ...(isFaqCanonical ? [] : [articleJsonLd(page)]),
-    ...(isFaqCanonical && schemaFaqs.length > 0
-      ? [faqPageJsonLd(schemaFaqs)]
-      : []),
+    ...(includeFaqSchema ? [faqPageJsonLd(schemaFaqs, page.href)] : []),
   ];
 
   const accentStyle = {
@@ -158,6 +163,13 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
 
             <ArticleIntro paragraphs={page.intro} />
 
+            {page.keySummary && page.keySummary.length > 0 ? (
+              <KeySummaryCards
+                title={`${displayH1} 핵심요약`}
+                items={page.keySummary}
+              />
+            ) : null}
+
             {page.hubContextLink ? (
               <HubContextLink link={page.hubContextLink} />
             ) : null}
@@ -187,6 +199,10 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
             ) : null}
 
             <HealthInformationNotice />
+
+            {page.officialSources && page.officialSources.length > 0 ? (
+              <OfficialSources sources={page.officialSources} />
+            ) : null}
 
             {showFaqHub ? <FaqHubCard card={FAQ_HUB_CARD} /> : null}
 

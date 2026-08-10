@@ -3,11 +3,12 @@ import { COST_PAGE } from "@/content/pages/cost";
 import { FAQ_PAGE } from "@/content/pages/faq-page";
 import { HOSPITAL_PAGE } from "@/content/pages/hospital";
 import { CONTENT_CARDS } from "@/content/pages/home";
+import { PRE_EXAM_PAGE } from "@/content/pages/pre-exam";
 import { RECOVERY_PAGE } from "@/content/pages/recovery";
 import { REVIEW_PAGE } from "@/content/pages/review";
 import type { ContentPage } from "@/types/content";
 
-/** 색인·정적 생성 대상. 중복 FAQ(/노안백내장-자주묻는질문)는 proxy 308로만 처리 */
+/** 색인·정적 생성 대상. 핵심 6개 + 정보 가이드. 중복 FAQ는 proxy 308로만 처리 */
 export const CONTENT_PAGES: ContentPage[] = [
   COST_PAGE,
   RECOVERY_PAGE,
@@ -15,6 +16,7 @@ export const CONTENT_PAGES: ContentPage[] = [
   HOSPITAL_PAGE,
   REVIEW_PAGE,
   FAQ_PAGE,
+  PRE_EXAM_PAGE,
 ];
 
 export function getContentPageBySlug(slug: string): ContentPage | undefined {

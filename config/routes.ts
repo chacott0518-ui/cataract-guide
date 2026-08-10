@@ -8,6 +8,8 @@ export const ROUTES = {
   faq: "/노안백내장-faq",
   faqQuestions: "/노안백내장-자주묻는질문",
   costLegacy: "/노안백내장-수술비",
+  /** 핵심 카드 밖 의료정보 가이드 */
+  preExam: "/노안백내장-수술-전-검사",
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;

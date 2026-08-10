@@ -7,6 +7,7 @@ import { ContentCardGrid } from "@/components/content/ContentCardGrid";
 import { ContentIndex } from "@/components/content/ContentIndex";
 import { ExamNoticeBox } from "@/components/content/ExamNoticeBox";
 import { FaqAccordion } from "@/components/content/FaqList";
+import { InfoGuideCards } from "@/components/content/InfoGuideCards";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { SITE } from "@/config/site";
 import { getFaqsByIds } from "@/content/faqs";
@@ -24,6 +25,9 @@ import {
   websiteJsonLd,
 } from "@/lib/schema";
 
+/** sitemap/RSS에 이미 쓰이는 홈 기준일 — 임의 갱신하지 않음 */
+const HOME_DATE = "2026-07-22";
+
 export default function HomePage() {
   const faqs = getFaqsByIds([...HOME_FAQ_IDS]);
 
@@ -36,6 +40,8 @@ export default function HomePage() {
           </header>
 
           <ContentCardGrid />
+
+          <InfoGuideCards />
 
           <PartnershipCTA variant="top" />
 
@@ -72,6 +78,8 @@ export default function HomePage() {
             path: "/",
             image: "/images/og/cataractguide-kakao.png",
             type: "WebPage",
+            datePublished: HOME_DATE,
+            dateModified: HOME_DATE,
           }),
           itemListJsonLd(),
         ]}

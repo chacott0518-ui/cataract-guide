@@ -1,5 +1,6 @@
 import { SITE } from "@/config/site";
 import { CONTENT_CARDS } from "@/lib/content-registry";
+import { toIso8601Kst } from "@/lib/dates";
 import { absoluteUrl } from "@/lib/site-url";
 import type { ContentPage } from "@/types/content";
 import type { FaqItem } from "@/types/faq";
@@ -41,9 +42,18 @@ export function webPageJsonLd(options: {
   image?: string;
   keywords?: string[];
   type?: "WebPage" | "MedicalWebPage";
+  datePublished?: string;
+  dateModified?: string;
 }) {
   const url = absoluteUrl(options.path);
   const pageType = options.type ?? "WebPage";
+  const datePublished = options.datePublished
+    ? toIso8601Kst(options.datePublished)
+    : undefined;
+  const dateModified = options.dateModified
+    ? toIso8601Kst(options.dateModified)
+    : datePublished;
+
   return {
     "@context": "https://schema.org",
     "@type": pageType,
@@ -62,6 +72,8 @@ export function webPageJsonLd(options: {
     ...(options.keywords && options.keywords.length > 0
       ? { keywords: options.keywords.slice(0, 8).join(", ") }
       : {}),
+    ...(datePublished ? { datePublished } : {}),
+    ...(dateModified ? { dateModified } : {}),
   };
 }
 
@@ -109,8 +121,8 @@ export function articleJsonLd(page: ContentPage) {
     headline: page.heading,
     description: page.seo.description,
     image: absoluteUrl(page.seo.socialImage || DEFAULT_OG_IMAGE),
-    datePublished: page.publishedAt,
-    dateModified: page.updatedAt,
+    datePublished: toIso8601Kst(page.publishedAt),
+    dateModified: toIso8601Kst(page.updatedAt),
     inLanguage: "ko-KR",
     articleSection: page.categoryLabel,
     keywords: keywords.join(", "),
@@ -124,11 +136,11 @@ export function articleJsonLd(page: ContentPage) {
   };
 }
 
-export function faqPageJsonLd(items: FaqItem[]) {
+export function faqPageJsonLd(items: FaqItem[], path = "/노안백내장-faq") {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "@id": `${absoluteUrl("/노안백내장-faq")}#faq`,
+    "@id": `${absoluteUrl(path)}#faq`,
     mainEntity: items.map((item) => ({
       "@type": "Question",
       name: item.question,

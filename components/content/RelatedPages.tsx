@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 import { CONTENT_CARDS } from "@/lib/content-registry";
-import type { ContentClusterId } from "@/types/content";
+import type { ContentPageId } from "@/types/content";
 
 type RelatedPagesProps = {
-  currentId: ContentClusterId;
+  currentId: ContentPageId;
 };
 
 export function RelatedPages({ currentId }: RelatedPagesProps) {

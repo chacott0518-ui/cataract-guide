@@ -15,6 +15,11 @@ export type ContentClusterId =
   | "faq"
   | "faqHub";
 
+/** 핵심 6카드 밖의 의료정보 가이드 */
+export type InfoGuideId = "preExam";
+
+export type ContentPageId = ContentClusterId | InfoGuideId;
+
 export type ContentImage = {
   src: string;
   alt: string;
@@ -143,7 +148,7 @@ export type ContentCard = {
 };
 
 export type ContentPage = {
-  id: ContentClusterId;
+  id: ContentPageId;
   order: number;
   numberLabel: string;
   slug: string;
@@ -165,9 +170,17 @@ export type ContentPage = {
   intro: string[];
   /**
    * 메인(`/`)으로 향하는 본문 문맥링크 1개.
-   * 도입부 직후·목차 앞에 렌더한다.
+   * 도입부·핵심요약 직후·목차 앞에 렌더한다.
    */
   hubContextLink?: HubContextLink;
+  /** 홈 정보 카드용 짧은 주제 라벨 */
+  infoTopicLabel?: string;
+  /** 홈 정보 카드용 설명 (미설정 시 seo.description) */
+  infoCardDescription?: string;
+  /** 페이지 핵심요약 카드 */
+  keySummary?: KeySummaryEntry[];
+  /** 공식 출처 (details/summary) */
+  officialSources?: OfficialSource[];
   sections: ArticleSection[];
   faqIds: string[];
   faqTitle: string;
@@ -204,6 +217,28 @@ export type ContentPage = {
   showContentCards?: boolean;
   /** FAQ 허브 카드 표시 */
   showFaqHub?: boolean;
+};
+
+export type KeySummaryEntry = {
+  numberLabel: string;
+  title: string;
+  text: string;
+};
+
+export type OfficialSource = {
+  organization: string;
+  title: string;
+  url: string;
+};
+
+export type InfoGuideCard = {
+  id: InfoGuideId;
+  href: string;
+  topicLabel: string;
+  title: string;
+  description: string;
+  publishedAt: string;
+  topicName: string;
 };
 
 /** 하위 페이지 → 메인 허브 문맥링크 */

@@ -5,6 +5,7 @@ import { EXTRA_FAQS } from "@/content/faqs/extra";
 import { getHospitalLocationFaqs } from "@/content/faqs/hospital-location";
 import { HOSPITAL_FAQS } from "@/content/faqs/hospital";
 import { HUB_FAQS } from "@/content/faqs/hub";
+import { PRE_EXAM_FAQS } from "@/content/faqs/pre-exam";
 import { FAQ_QUESTIONS_30 } from "@/content/faqs/questions-30";
 import { RECOVERY_FAQS } from "@/content/faqs/recovery";
 import { REVIEW_FAQS } from "@/content/faqs/review";
@@ -19,6 +20,7 @@ const ALL_FAQS: FaqItem[] = [
   ...REVIEW_FAQS,
   ...EXTRA_FAQS,
   ...HUB_FAQS,
+  ...PRE_EXAM_FAQS,
   ...FAQ_QUESTIONS_30,
   ...getHospitalLocationFaqs(),
 ];
