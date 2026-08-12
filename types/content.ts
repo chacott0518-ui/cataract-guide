@@ -16,7 +16,24 @@ export type ContentClusterId =
   | "faqHub";
 
 /** 핵심 6카드 밖의 의료정보 가이드 */
-export type InfoGuideId = "preExam";
+export type InfoGuideId =
+  | "preExam"
+  | "medicationCheck"
+  | "historyCheck"
+  | "consultationQuestions"
+  | "iolInfoCheck"
+  | "lensTypeCheck"
+  | "targetDistanceConsult"
+  | "procedureProcess"
+  | "bothEyesSchedule"
+  | "dailyLifeAfter"
+  | "drivingResumeCheck"
+  | "glassesChangeCheck"
+  | "glareCheck"
+  | "visionChangeObservation"
+  | "symptomCheck"
+  | "medicalInfoCheck"
+  | "adInfoCheck";
 
 export type ContentPageId = ContentClusterId | InfoGuideId;
 
@@ -217,6 +234,10 @@ export type ContentPage = {
   showContentCards?: boolean;
   /** FAQ 허브 카드 표시 */
   showFaqHub?: boolean;
+  /** H1 아래 게시·수정일 표시 여부 (신규 InfoGuide 전용, 기본 미표시) */
+  showPublishedDate?: boolean;
+  /** FAQ 다음·공식출처 이전 "다른 노안백내장 의료정보" 카드용 InfoGuide id (신규 InfoGuide 전용) */
+  relatedGuideIds?: InfoGuideId[];
 };
 
 export type KeySummaryEntry = {

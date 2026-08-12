@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import { INFO_GUIDE_CARDS } from "@/content/info";
+import { ROUTES } from "@/config/routes";
+import { HOME_INFO_GUIDE_CARDS } from "@/content/info";
 import type { InfoGuideCard } from "@/types/content";
 
 function formatCardDate(isoDate: string): string {
@@ -18,7 +19,7 @@ type InfoGuideCardsProps = {
  * GNB/CONTENT_CARDS와 분리되어 데이터 추가만으로 카드가 늘어난다.
  */
 export function InfoGuideCards({
-  cards = INFO_GUIDE_CARDS,
+  cards = HOME_INFO_GUIDE_CARDS,
 }: InfoGuideCardsProps) {
   if (cards.length === 0) return null;
 
@@ -55,6 +56,10 @@ export function InfoGuideCards({
           </li>
         ))}
       </ul>
+
+      <Link href={ROUTES.infoHub} className="cg-info-guides__all">
+        노안백내장 의료정보 전체보기 →
+      </Link>
     </section>
   );
 }

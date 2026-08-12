@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 
+import { ROUTES } from "@/config/routes";
 import { CONTENT_PAGES } from "@/content/pages";
 import { absoluteUrl } from "@/lib/site-url";
 
 const HOME_LAST_MODIFIED = "2026-07-22";
+const INFO_HUB_LAST_MODIFIED = "2026-08-12";
 
-/** 색인 대상: 홈 + 대표 콘텐츠 6개(총 7). redirect·칼럼 URL 제외 */
+/** 색인 대상: 홈 + 핵심 6개 + 정보가이드 17개 + 의료정보 허브. redirect·칼럼 URL 제외 */
 export default function sitemap(): MetadataRoute.Sitemap {
   const home: MetadataRoute.Sitemap = [
     {
@@ -23,5 +25,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...home, ...pages];
+  const infoHub: MetadataRoute.Sitemap = [
+    {
+      url: absoluteUrl(ROUTES.infoHub),
+      lastModified: new Date(INFO_HUB_LAST_MODIFIED),
+      changeFrequency: "weekly",
+      priority: 0.7,
+    },
+  ];
+
+  return [...home, ...pages, ...infoHub];
 }

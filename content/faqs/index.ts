@@ -1,14 +1,31 @@
+import { AD_INFO_CHECK_FAQS } from "@/content/faqs/ad-info-check";
+import { BOTH_EYES_SCHEDULE_FAQS } from "@/content/faqs/both-eyes-schedule";
 import { CAUTION_FAQS } from "@/content/faqs/caution";
 import { COMMON_FAQS } from "@/content/faqs/common";
+import { CONSULTATION_QUESTIONS_FAQS } from "@/content/faqs/consultation-questions";
 import { COST_FAQS } from "@/content/faqs/cost";
+import { DAILY_LIFE_AFTER_FAQS } from "@/content/faqs/daily-life-after";
+import { DRIVING_RESUME_CHECK_FAQS } from "@/content/faqs/driving-resume-check";
 import { EXTRA_FAQS } from "@/content/faqs/extra";
+import { GLARE_CHECK_FAQS } from "@/content/faqs/glare-check";
+import { GLASSES_CHANGE_CHECK_FAQS } from "@/content/faqs/glasses-change-check";
 import { getHospitalLocationFaqs } from "@/content/faqs/hospital-location";
+import { HISTORY_CHECK_FAQS } from "@/content/faqs/history-check";
 import { HOSPITAL_FAQS } from "@/content/faqs/hospital";
 import { HUB_FAQS } from "@/content/faqs/hub";
+import { INFO_HUB_EXTRA_FAQS } from "@/content/faqs/info-hub-extra";
+import { IOL_INFO_CHECK_FAQS } from "@/content/faqs/iol-info-check";
+import { LENS_TYPE_CHECK_FAQS } from "@/content/faqs/lens-type-check";
+import { MEDICAL_INFO_CHECK_FAQS } from "@/content/faqs/medical-info-check";
+import { MEDICATION_CHECK_FAQS } from "@/content/faqs/medication-check";
 import { PRE_EXAM_FAQS } from "@/content/faqs/pre-exam";
+import { PROCEDURE_PROCESS_FAQS } from "@/content/faqs/procedure-process";
 import { FAQ_QUESTIONS_30 } from "@/content/faqs/questions-30";
 import { RECOVERY_FAQS } from "@/content/faqs/recovery";
 import { REVIEW_FAQS } from "@/content/faqs/review";
+import { SYMPTOM_CHECK_FAQS } from "@/content/faqs/symptom-check";
+import { TARGET_DISTANCE_CONSULT_FAQS } from "@/content/faqs/target-distance-consult";
+import { VISION_CHANGE_OBSERVATION_FAQS } from "@/content/faqs/vision-change-observation";
 import type { FaqItem } from "@/types/faq";
 
 const ALL_FAQS: FaqItem[] = [
@@ -23,6 +40,23 @@ const ALL_FAQS: FaqItem[] = [
   ...PRE_EXAM_FAQS,
   ...FAQ_QUESTIONS_30,
   ...getHospitalLocationFaqs(),
+  ...MEDICATION_CHECK_FAQS,
+  ...HISTORY_CHECK_FAQS,
+  ...CONSULTATION_QUESTIONS_FAQS,
+  ...IOL_INFO_CHECK_FAQS,
+  ...LENS_TYPE_CHECK_FAQS,
+  ...TARGET_DISTANCE_CONSULT_FAQS,
+  ...PROCEDURE_PROCESS_FAQS,
+  ...BOTH_EYES_SCHEDULE_FAQS,
+  ...DAILY_LIFE_AFTER_FAQS,
+  ...DRIVING_RESUME_CHECK_FAQS,
+  ...GLASSES_CHANGE_CHECK_FAQS,
+  ...GLARE_CHECK_FAQS,
+  ...VISION_CHANGE_OBSERVATION_FAQS,
+  ...SYMPTOM_CHECK_FAQS,
+  ...MEDICAL_INFO_CHECK_FAQS,
+  ...AD_INFO_CHECK_FAQS,
+  ...INFO_HUB_EXTRA_FAQS,
 ];
 
 const FAQ_BY_ID = new Map(ALL_FAQS.map((item) => [item.id, item]));

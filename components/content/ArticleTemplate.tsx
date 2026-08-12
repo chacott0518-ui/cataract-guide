@@ -13,12 +13,14 @@ import { HealthInformationNotice } from "@/components/content/HealthInformationN
 import { HubContextLink } from "@/components/content/HubContextLink";
 import { KeySummaryCards } from "@/components/content/KeySummaryCards";
 import { OfficialSources } from "@/components/content/OfficialSources";
+import { RelatedInfoGuides } from "@/components/content/RelatedInfoGuides";
 import { RelatedPages } from "@/components/content/RelatedPages";
 import { TableOfContents } from "@/components/content/TableOfContents";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { FAQ_HUB_CARD } from "@/config/content-ui";
 import { getLayoutDecorativeIcon } from "@/config/section-icons";
 import { SITE } from "@/config/site";
+import { getRelatedInfoGuides } from "@/content/info/hub";
 import { getFaqsByIds, getPageFaqs } from "@/lib/content-registry";
 import {
   articleJsonLd,
@@ -51,6 +53,12 @@ function buildToc(page: ContentPage): TocItem[] {
   }
 
   return items;
+}
+
+function formatDisplayDate(dateValue: string): string {
+  const [y, m, d] = dateValue.split("T")[0].split("-");
+  if (!y || !m || !d) return dateValue;
+  return `${y}.${m}.${d}`;
 }
 
 function resolveTopImages(page: ContentPage) {
@@ -86,6 +94,9 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
   const topImages = resolveTopImages(page);
   const bodyImage = page.bodyImage?.src ? page.bodyImage : null;
   const isFaqCanonical = page.id === "faq";
+  const relatedGuides = page.showPublishedDate
+    ? getRelatedInfoGuides(page)
+    : [];
   const includeFaqSchema =
     schemaFaqs.length > 0 &&
     (isFaqCanonical || (page.officialSources?.length ?? 0) > 0);
@@ -114,6 +125,44 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
     "--page-accent-hover": page.accentHoverColor,
   } as CSSProperties;
 
+  /** 신규 InfoGuide 전용 플래그(showPublishedDate)로 상단 레이아웃 순서를 분기한다. */
+  const isInfoGuide = page.showPublishedDate === true;
+
+  const partnerCardSection = (
+    <>
+      {showContentCards ? (
+        <ContentCardGrid
+          activeHref={page.href}
+          showIntro={showGuideHeading}
+        />
+      ) : null}
+
+      {showContentCards ? <PartnershipCTA variant="top" /> : null}
+    </>
+  );
+
+  const headerBlock = (
+    <header className="cg-article-start">
+      {showEyebrow ? (
+        <p className="cg-article-start__eyebrow">{page.categoryLabel}</p>
+      ) : null}
+      <h1>{displayH1}</h1>
+      {page.showPublishedDate ? (
+        <p className="cg-article-start__dates">
+          {page.updatedAt !== page.publishedAt ? (
+            <>
+              게시 {formatDisplayDate(page.publishedAt)}
+              <span aria-hidden="true"> · </span>
+              수정 {formatDisplayDate(page.updatedAt)}
+            </>
+          ) : (
+            <>게시 {formatDisplayDate(page.publishedAt)}</>
+          )}
+        </p>
+      ) : null}
+    </header>
+  );
+
   return (
     <>
       <article
@@ -128,25 +177,15 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
             ]}
           />
 
-          <header className="cg-article-start">
-            {showEyebrow ? (
-              <p className="cg-article-start__eyebrow">{page.categoryLabel}</p>
-            ) : null}
-            <h1>{displayH1}</h1>
-          </header>
+          {isInfoGuide ? partnerCardSection : null}
+
+          {headerBlock}
 
           {topImages.length > 0 ? (
             <ArticleImagePair images={topImages} priority />
           ) : null}
 
-          {showContentCards ? (
-            <ContentCardGrid
-              activeHref={page.href}
-              showIntro={showGuideHeading}
-            />
-          ) : null}
-
-          {showContentCards ? <PartnershipCTA variant="top" /> : null}
+          {isInfoGuide ? null : partnerCardSection}
 
           {bodyImage ? (
             <ArticleImagePair images={[bodyImage]} priority={false} />
@@ -192,6 +231,10 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
                 numberLabel={String(page.sections.length + 1).padStart(2, "0")}
                 className="cg-page-faq"
               />
+            ) : null}
+
+            {relatedGuides.length > 0 ? (
+              <RelatedInfoGuides guides={relatedGuides} />
             ) : null}
 
             {page.conclusion ? (

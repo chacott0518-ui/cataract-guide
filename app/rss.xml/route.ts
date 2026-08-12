@@ -1,9 +1,13 @@
+import { ROUTES } from "@/config/routes";
 import { SITE } from "@/config/site";
 import { CONTENT_PAGES, HOME_SEO } from "@/content/pages";
+import { INFO_HUB_SEO } from "@/content/info/hub";
 import { CANONICAL_SITE_ORIGIN } from "@/lib/site-url";
 
 /** sitemap과 동일한 홈 기준일 (빌드 시각으로 교체하지 않음) */
 const HOME_PUB_DATE = "2026-07-22";
+/** sitemap과 동일한 의료정보 허브 기준일 */
+const INFO_HUB_PUB_DATE = "2026-08-12";
 
 function escapeXml(value: string): string {
   return value
@@ -48,7 +52,14 @@ function buildItems(): RssItem[] {
     pubDate: toRfc822(page.publishedAt || page.updatedAt),
   }));
 
-  return [home, ...pages];
+  const infoHub: RssItem = {
+    title: INFO_HUB_SEO.title,
+    link: toAbsoluteUrl(ROUTES.infoHub),
+    description: INFO_HUB_SEO.description,
+    pubDate: toRfc822(INFO_HUB_PUB_DATE),
+  };
+
+  return [home, ...pages, infoHub];
 }
 
 function buildRssXml(items: RssItem[]): string {

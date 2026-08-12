@@ -64,6 +64,12 @@ export const PRE_EXAM_PAGE: ContentPage = {
   showRelatedGuideHeading: false,
   showContentCards: true,
   showFaqHub: false,
+  showPublishedDate: true,
+  relatedGuideIds: [
+    "medicationCheck",
+    "historyCheck",
+    "consultationQuestions",
+  ],
   repeatImageBeforeSectionNumber: null,
   keySummary: [
     {

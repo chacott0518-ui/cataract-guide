@@ -10,6 +10,23 @@ export const ROUTES = {
   costLegacy: "/노안백내장-수술비",
   /** 핵심 카드 밖 의료정보 가이드 */
   preExam: "/노안백내장-수술-전-검사",
+  infoHub: "/의료정보",
+  medicationCheck: "/노안백내장-수술-전-복용약-확인",
+  historyCheck: "/노안백내장-상담-전-병력-확인",
+  consultationQuestions: "/노안백내장-상담-질문",
+  iolInfoCheck: "/노안백내장-인공수정체-정보-확인",
+  lensTypeCheck: "/노안백내장-단초점-다초점-차이",
+  targetDistanceConsult: "/노안백내장-목표-거리-생활패턴-상담",
+  procedureProcess: "/노안백내장-수술-과정",
+  bothEyesSchedule: "/노안백내장-양안-수술-일정",
+  dailyLifeAfter: "/노안백내장-수술-후-일상생활",
+  drivingResumeCheck: "/노안백내장-수술-후-운전-재개",
+  glassesChangeCheck: "/노안백내장-수술-후-안경-사용",
+  glareCheck: "/노안백내장-수술-후-빛번짐-눈부심",
+  visionChangeObservation: "/노안백내장-수술-후-시력-변화-관찰",
+  symptomCheck: "/노안백내장-수술-후-이상증상",
+  medicalInfoCheck: "/노안백내장-의료정보-확인-방법",
+  adInfoCheck: "/노안백내장-광고-정보-확인",
 } as const;
 
 export type RouteKey = keyof typeof ROUTES;

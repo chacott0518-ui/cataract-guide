@@ -29,3 +29,6 @@ export const INFO_GUIDE_OFFICIAL_SOURCES = [
 
 /** 신규 의료정보 가이드 최초 발행일 */
 export const INFO_GUIDE_PUBLISHED_AT = "2026-08-10";
+
+/** 2차 확장 InfoGuide 16개 최초 발행일 */
+export const INFO_GUIDE_V2_PUBLISHED_AT = "2026-08-12";

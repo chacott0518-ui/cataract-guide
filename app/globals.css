@@ -1582,8 +1582,15 @@ img {
   letter-spacing: 0.02em;
 }
 
-.cg-article-start h1 {
+.cg-article-start__dates {
   margin: 0 0 16px;
+  color: var(--cg-muted);
+  font-size: var(--text-caption);
+  line-height: 1.5;
+}
+
+.cg-article-start h1 {
+  margin: 0 0 8px;
   color: var(--cg-ink);
   font-size: clamp(1.5rem, 2.4vw, 1.875rem);
   font-weight: 700;
@@ -1766,6 +1773,100 @@ img {
 
 .cg-article-page .cg-related-link__a:hover {
   color: var(--page-accent, var(--cg-link-hover));
+}
+
+/* 다른 노안백내장 의료정보 (신규 InfoGuide 하단 관련글 카드) */
+.cg-related-guides {
+  margin: 20px 0 0;
+  width: 100%;
+}
+
+.cg-related-guides__title {
+  margin: 0 0 10px;
+  color: var(--cg-ink);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  word-break: keep-all;
+}
+
+.cg-related-guides__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.cg-related-guides__card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: auto;
+  min-height: 0;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--cg-line-soft);
+  background: var(--cg-surface, #fff);
+  color: inherit;
+  text-decoration: none;
+}
+
+.cg-related-guides__card:hover,
+.cg-related-guides__card:focus-visible {
+  border-color: var(--page-accent, var(--cg-line-soft));
+}
+
+.cg-related-guides__card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--cg-ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.cg-related-guides__card-desc {
+  display: none;
+  color: var(--cg-muted);
+  font-size: var(--text-caption);
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.cg-related-guides__back {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--cg-line-soft);
+  border-radius: 999px;
+  color: var(--page-accent-hover, var(--cg-link));
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cg-related-guides__back:hover,
+.cg-related-guides__back:focus-visible {
+  border-color: var(--page-accent, var(--cg-line-soft));
+}
+
+@media (min-width: 640px) {
+  .cg-related-guides__card-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 900px) {
+  .cg-related-guides__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 .cg-related-pages {
@@ -2600,21 +2701,32 @@ img {
 
 .cg-key-summary__card {
   display: grid;
-  gap: 4px;
-  padding: 14px 16px;
+  grid-template-columns: auto 1fr;
+  grid-template-areas:
+    "num title"
+    "text text";
+  column-gap: 6px;
+  row-gap: 2px;
+  height: auto;
+  min-height: 0;
+  padding: 10px 12px;
   border-radius: 14px;
   background: color-mix(in srgb, var(--page-accent, #1758c9) 8%, var(--cg-surface, #fff));
   border: 1px solid var(--cg-line-soft);
 }
 
 .cg-key-summary__num {
+  grid-area: num;
+  align-self: baseline;
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--cg-muted);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
 }
 
 .cg-key-summary__title {
+  grid-area: title;
+  align-self: baseline;
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--cg-ink);
@@ -2622,9 +2734,10 @@ img {
 }
 
 .cg-key-summary__text {
+  grid-area: text;
   margin: 0;
   font-size: 0.875rem;
-  line-height: 1.65;
+  line-height: 1.55;
   color: var(--cg-body);
   word-break: keep-all;
 }
@@ -2744,6 +2857,20 @@ img {
   line-height: 1.4;
 }
 
+.cg-info-guides__all {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 12px;
+  color: #0d3f99;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cg-info-guides__all:hover {
+  text-decoration: underline;
+}
+
 @media (min-width: 768px) {
   .cg-info-guides {
     margin-bottom: 32px;
@@ -2837,4 +2964,199 @@ img {
   font-size: 0.8125rem;
   line-height: 1.55;
   word-break: keep-all;
+}
+
+/* =============================================
+   /의료정보 허브
+   ============================================= */
+.cg-info-hub-page {
+  padding: 16px 0 56px;
+  background: var(--cg-canvas, #fff);
+  color: var(--cg-body);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.cg-info-hub-page__header {
+  margin: 12px 0 clamp(18px, 3vw, 28px);
+  max-width: 42rem;
+}
+
+.cg-info-hub-page__eyebrow {
+  margin: 0 0 8px;
+  color: var(--page-accent-hover, #0d3f99);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cg-info-hub-page__h1 {
+  margin: 0 0 10px;
+  color: var(--cg-ink);
+  font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+  font-weight: 700;
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.cg-info-hub-page__lead {
+  margin: 0;
+  color: var(--cg-body);
+  font-size: var(--text-body);
+  line-height: 1.7;
+}
+
+.cg-info-hub-page__tabs {
+  position: relative;
+  margin: 0 0 clamp(14px, 2.4vw, 20px);
+}
+
+.cg-info-hub-page__tabs-track {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  white-space: nowrap;
+}
+
+.cg-info-hub-page__tabs-track::-webkit-scrollbar {
+  display: none;
+}
+
+.cg-info-hub-page__tabs-fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 2px;
+  width: 32px;
+  background: linear-gradient(to right, transparent, var(--cg-canvas, #fff));
+  pointer-events: none;
+}
+
+.cg-info-hub-page__tab {
+  flex-shrink: 0;
+  min-height: 38px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--cg-line-soft);
+  background: var(--cg-surface, #fff);
+  color: var(--cg-body);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cg-info-hub-page__tab.is-active {
+  border-color: var(--page-accent, #1758c9);
+  background: color-mix(in srgb, var(--page-accent, #1758c9) 12%, var(--cg-surface, #fff));
+  color: var(--page-accent-hover, #0d3f99);
+}
+
+.cg-info-hub-page__grid {
+  margin: 0 0 clamp(20px, 3vw, 32px);
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.cg-info-hub-page__card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: auto;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--cg-line-soft);
+  background: var(--cg-surface, #fff);
+  color: inherit;
+  text-decoration: none;
+}
+
+.cg-info-hub-page__card:hover {
+  border-color: var(--page-accent, #1758c9);
+}
+
+.cg-info-hub-page__card-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--cg-ink);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.cg-info-hub-page__card-desc {
+  display: none;
+  color: var(--cg-muted);
+  font-size: var(--text-caption);
+  line-height: 1.4;
+}
+
+.cg-info-hub-page__faq {
+  margin: 0 0 clamp(18px, 2.8vw, 28px);
+  padding: clamp(14px, 2.4vw, 20px);
+  border: 1px solid var(--cg-line-soft);
+  border-radius: 12px;
+  background: var(--cg-surface, #fff);
+}
+
+.cg-info-hub-page__faq h2 {
+  margin: 0 0 6px;
+  color: var(--cg-ink);
+  font-size: var(--text-h3);
+  font-weight: 600;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.cg-info-hub-page__faq .cg-faq-item__trigger {
+  padding: 10px 4px;
+}
+
+.cg-info-hub-page__faq .cg-faq-item__q {
+  font-size: var(--text-body);
+}
+
+.cg-info-hub-page__back {
+  margin: 0;
+}
+
+.cg-info-hub-page__back a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  color: var(--page-accent-hover, #0d3f99);
+  font-weight: 600;
+}
+
+@media (min-width: 640px) {
+  .cg-info-hub-page__card-desc {
+    display: block;
+  }
+}
+
+@media (min-width: 900px) {
+  .cg-info-hub-page {
+    padding-top: 28px;
+  }
+
+  .cg-info-hub-page__h1 {
+    font-size: var(--text-h1, 2rem);
+  }
+
+  .cg-info-hub-page__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .cg-info-hub-page__card {
+    padding: 16px;
+  }
 }

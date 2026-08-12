@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { MenuIcon } from "@/components/icons/MenuIcon";
+import { ROUTES } from "@/config/routes";
 import { topicConfig } from "@/config/topic";
 import { CONTENT_CARDS } from "@/lib/content-registry";
 
@@ -46,6 +47,21 @@ export function MegaMenu({ onNavigate, activePath }: MegaMenuProps) {
               </Link>
             );
           })}
+
+          <Link
+            href={ROUTES.infoHub}
+            className={`cg-mega__card${activePath === ROUTES.infoHub ? " is-active" : ""}`}
+            onClick={onNavigate}
+            aria-current={activePath === ROUTES.infoHub ? "page" : undefined}
+          >
+            <span className="cg-mega__label cg-mega__label--neutral">
+              <span className="cg-mega__card-icon" aria-hidden="true">
+                📚
+              </span>
+              <strong>의료정보</strong>
+            </span>
+            <small>상담·시술·회복·경과·안전 주제별 의료정보 가이드</small>
+          </Link>
         </div>
       </div>
     </div>
