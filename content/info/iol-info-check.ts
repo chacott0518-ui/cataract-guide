@@ -32,13 +32,13 @@ export const IOL_INFO_CHECK_PAGE: ContentPage = {
     "이 글은 인공수정체 정보를 확인할 때 볼 수 있는 항목과 렌즈 선택 상담에서 물어볼 내용을 정리한 일반적인 의료정보이며, 특정 제품을 추천하거나 우월성을 주장하지 않습니다.",
   ],
   hubContextLink: {
-    before: "인공수정체 외에 수술 과정까지 함께 보려면 ",
-    anchor: "노안백내장 종합 안내",
-    after: "에서 전체 흐름을 확인할 수 있습니다.",
+    before: "인공수정체 외에 노안백내장 전체 흐름까지 함께 보려면 ",
+    anchor: "노안백내장 전체 안내",
+    after: "를 참고하세요.",
     href: "/",
   },
   publishedAt: INFO_GUIDE_V2_PUBLISHED_AT,
-  updatedAt: INFO_GUIDE_V2_PUBLISHED_AT,
+  updatedAt: "2026-08-26",
   faqIds: [
     "iol-check-01",
     "iol-check-02",
@@ -115,7 +115,7 @@ export const IOL_INFO_CHECK_PAGE: ContentPage = {
       directAnswer:
         "인공수정체는 혼탁해진 수정체를 대신해 눈 안에 삽입하는 렌즈로, 제품마다 특성과 허가·인증 정보가 다를 수 있어 광고 문구보다 직접 확인하는 과정이 필요합니다.",
       paragraphs: [
-        "인공수정체는 한 가지 종류만 있는 것이 아니라 초점을 맺는 방식, 소재, 설계에 따라 여러 종류가 있을 수 있습니다. ‘신제품’, ‘프리미엄’ 같은 표현만으로 특정 렌즈가 모두에게 더 좋다고 판단하기는 어렵습니다.",
+        "인공 수정체는 한 가지 종류만 있는 것이 아니라 초점을 맺는 방식, 소재, 설계에 따라 여러 종류가 있을 수 있습니다. ‘신제품’, ‘프리미엄’ 같은 표현만으로 특정 렌즈가 모두에게 더 좋다고 판단하기는 어렵습니다.",
         "정보를 확인할 때는 제품명과 제조사, 국내 허가·인증 여부, 해당 렌즈의 특성과 한계를 함께 살펴보는 것이 중요합니다. 이 글은 특정 제품을 추천하지 않으며 일반적인 확인 기준만 안내합니다.",
       ],
       relatedHref: ROUTES.preExam,
@@ -135,7 +135,7 @@ export const IOL_INFO_CHECK_PAGE: ContentPage = {
       ],
       infoBlocks: [
         { label: "제품 정보", text: "제품명, 제조사, 국내 허가·인증 여부" },
-        { label: "초점 방식", text: "단초점·다초점 등 렌즈의 기본 설계" },
+        { label: "초점 방식", text: "단초점·다초점·연속초점 등 렌즈의 기본 설계" },
         { label: "특성과 한계", text: "장점뿐 아니라 알려진 한계도 함께 확인" },
         { label: "비용 구성", text: "렌즈별 비용 차이와 포함 항목" },
       ],

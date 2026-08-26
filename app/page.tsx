@@ -19,14 +19,16 @@ import {
   HOME_SECTIONS,
 } from "@/content/pages/home";
 import {
+  faqPageJsonLd,
   itemListJsonLd,
   organizationJsonLd,
   webPageJsonLd,
   websiteJsonLd,
 } from "@/lib/schema";
 
-/** sitemap/RSS에 이미 쓰이는 홈 기준일 — 임의 갱신하지 않음 */
-const HOME_DATE = "2026-07-22";
+/** datePublished 고정 — 본문 수정 시에만 dateModified를 갱신 */
+const HOME_PUBLISHED = "2026-07-22";
+const HOME_MODIFIED = "2026-08-26";
 
 export default function HomePage() {
   const faqs = getFaqsByIds([...HOME_FAQ_IDS]);
@@ -39,18 +41,18 @@ export default function HomePage() {
             <h1 className="cg-home__title">{SITE.name}</h1>
           </header>
 
-          <ContentCardGrid />
-
-          <InfoGuideCards />
-
-          <PartnershipCTA variant="top" />
-
           <HomeIntroBlock
             heading={HOME_INTRO.heading}
             paragraphs={HOME_INTRO.paragraphs}
             summary={HOME_INTRO.summary}
             featureImage={HOME_INTRO.featureImage}
           />
+
+          <ContentCardGrid />
+
+          <InfoGuideCards />
+
+          <PartnershipCTA variant="top" />
 
           <ContentIndex items={HOME_INDEX} />
 
@@ -78,10 +80,11 @@ export default function HomePage() {
             path: "/",
             image: "/images/og/cataractguide-kakao.png",
             type: "WebPage",
-            datePublished: HOME_DATE,
-            dateModified: HOME_DATE,
+            datePublished: HOME_PUBLISHED,
+            dateModified: HOME_MODIFIED,
           }),
           itemListJsonLd(),
+          faqPageJsonLd(faqs, "/"),
         ]}
       />
     </>

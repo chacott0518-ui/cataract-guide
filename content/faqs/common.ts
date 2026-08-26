@@ -18,8 +18,8 @@ export const COMMON_FAQS: FaqItem[] = [
     question: "어떤 증상이 있을 때 검사를 받아야 하나요?",
     answer:
       "시야가 뿌옇거나 빛 번짐이 커지고, 안경 교체 후에도 선명함이 충분히 돌아오지 않을 때 검사를 고려하는 경우가 많습니다. 증상의 강도와 진행 속도는 사람마다 다르므로, 증상만으로 원인을 단정할 수는 없습니다.",
-    relatedSlug: "노안백내장-병원선택",
-    relatedLabel: "병원선택 기준",
+    relatedSlug: "노안백내장-수술-전-검사",
+    relatedLabel: "수술 전 검사 안내",
     categories: ["home", "common", "symptoms"],
   },
   {
@@ -37,9 +37,9 @@ export const COMMON_FAQS: FaqItem[] = [
     order: 4,
     question: "단초점렌즈와 다초점렌즈는 어떻게 다른가요?",
     answer:
-      "단초점렌즈는 특정 거리 중심으로 초점을 맞추고, 다초점렌즈는 여러 거리 활용을 목표로 설계됩니다. 어느 한쪽이 모든 사람에게 더 낫다고 보기 어렵고, 생활 패턴과 눈 상태에 맞춰 비교하는 것이 필요합니다.",
-    relatedSlug: "노안백내장-수술비용",
-    relatedLabel: "렌즈와 비용",
+      "단초점렌즈는 특정 거리 중심으로 초점을 맞추고, 다초점 렌즈는 여러 거리 활용을 목표로 설계됩니다. 어느 한쪽이 모든 사람에게 더 낫다고 보기 어렵고, 생활 패턴과 눈 상태에 맞춰 비교하는 것이 필요합니다.",
+    relatedSlug: "노안백내장-단초점-다초점-차이",
+    relatedLabel: "렌즈 유형 비교",
     categories: ["home", "common", "cost", "lens"],
   },
   {

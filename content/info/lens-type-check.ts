@@ -29,16 +29,16 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
     "단초점·다초점 인공수정체의 기본 차이와 상담에서 확인하면 좋은 질문을 안내합니다.",
   intro: [
     "노안백내장 렌즈 상담에서는 단초점과 다초점이라는 표현을 자주 접하게 됩니다. 두 방식은 초점을 맺는 원리와 특성이 다르므로, 어느 쪽이 본인에게 맞는지는 검사 결과와 생활패턴을 함께 고려해 상담에서 확인해야 합니다.",
-    "이 글은 두 방식의 일반적인 차이와 상담에서 확인할 점을 정리한 의료정보이며, 특정 방식이 모두에게 더 우수하다고 단정하지 않습니다.",
+    "연속초점렌즈(연속초점 렌즈, 초점심도확장 계열)도 시야 목표가 다르게 설명되는 경우가 있어, 단초점·다초점과 함께 선택 관점을 비교해 두는 편이 도움이 됩니다. 이 글은 일반적인 차이와 상담 확인점을 정리하며, 특정 방식이 모두에게 더 우수하다고 단정하지 않습니다.",
   ],
   hubContextLink: {
-    before: "렌즈 종류 외에 인공수정체 정보 확인까지 함께 보려면 ",
-    anchor: "노안백내장 종합 안내",
-    after: "에서 전체 흐름을 확인할 수 있습니다.",
+    before: "렌즈 종류 외에 노안백내장 전체 흐름까지 함께 보려면 ",
+    anchor: "노안백내장 종합 가이드",
+    after: "를 참고하세요.",
     href: "/",
   },
   publishedAt: INFO_GUIDE_V2_PUBLISHED_AT,
-  updatedAt: INFO_GUIDE_V2_PUBLISHED_AT,
+  updatedAt: "2026-08-26",
   faqIds: [
     "lens-type-01",
     "lens-type-02",
@@ -48,7 +48,7 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
   ],
   faqTitle: "노안백내장 단초점·다초점 차이 자주 묻는 질문",
   conclusion: [
-    "단초점과 다초점은 초점을 맺는 방식이 다르며 각각 특성과 한계가 있습니다. 어느 쪽이 더 우수하다고 일률적으로 말하기 어렵고, 눈 상태와 생활패턴에 따라 상담에서 함께 확인해야 하는 사안입니다.",
+    "단초점, 다초점, 연속초점(초점심도확장) 계열은 시야 목표와 특성이 다를 수 있습니다. 어느 쪽이 더 우수하다고 일률적으로 말하기 어렵고, 눈 상태와 생활패턴에 따라 상담에서 함께 확인해야 하는 사안입니다.",
     "이 글은 일반적인 의료정보 제공을 목적으로 하며 개인의 진단·처방을 대신하지 않습니다.",
   ],
   thumbnail: IMAGE,
@@ -80,8 +80,8 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
     },
     {
       numberLabel: "03",
-      title: "개인차",
-      text: "적응 정도와 만족도는 개인마다 다르게 나타날 수 있습니다.",
+      title: "연속초점",
+      text: "초점심도확장 계열로 설명되며, 시야 목표와 특성이 다를 수 있습니다.",
     },
     {
       numberLabel: "04",
@@ -132,9 +132,61 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
       relatedLabel: "노안백내장 인공수정체 정보 확인 보기",
     },
     {
-      id: "lens-type-questions",
+      id: "lens-type-edof",
       order: 2,
       numberLabel: "02",
+      heading: "연속초점렌즈·초점심도확장은 어떻게 이해하나요?",
+      layout: "responsive-table",
+      decorativeIcon: "📊",
+      directAnswer:
+        "연속초점렌즈(연속초점 렌즈)는 초점심도확장(EDOF) 계열로 설명되는 경우가 많으며, 단초점·다초점과 시야 목표·특성 설명이 다를 수 있습니다. 특정 제품이 모든 사람에게 더 좋다고 단정할 수 없습니다.",
+      paragraphs: [
+        "상담에서는 ‘연속초점’이라는 명칭만으로 우열을 나누기보다, 어떤 거리 범위를 목표로 하는지, 야간 시야·안경 보조·적응과 관련해 어떤 특성이 설명되는지를 함께 확인하는 편이 안전합니다.",
+        "아래 표는 선택 관점을 비교하기 위한 일반적인 정리이며, 실제 적합성과 한계는 검사 결과와 의료진 설명을 기준으로 판단해야 합니다. 제품명·제조사·허가 정보는 인공수정체 정보 확인 안내에서 별도로 볼 수 있습니다.",
+      ],
+      table: {
+        caption: "단초점·다초점·연속초점 선택 관점 비교(일반 안내)",
+        mobileMode: "scroll",
+        columns: [
+          { key: "item", label: "비교 항목" },
+          { key: "mono", label: "단초점" },
+          { key: "multi", label: "다초점" },
+          { key: "edof", label: "연속초점·초점심도확장" },
+        ],
+        rows: [
+          {
+            item: "시야 목표",
+            mono: "특정 거리 중심",
+            multi: "여러 거리 활용을 목표",
+            edof: "초점 범위를 넓히는 설계로 설명되는 경우",
+          },
+          {
+            item: "안경 보조",
+            mono: "다른 거리에서 필요할 수 있음",
+            multi: "일부 거리에서 낮출 수 있음",
+            edof: "생활·목표 거리에 따라 달라질 수 있음",
+          },
+          {
+            item: "야간·적응",
+            mono: "비교적 단순한 적응(개인차)",
+            multi: "빛 번짐 등 특성이 함께 언급되는 경우",
+            edof: "설계에 따라 특성이 다르게 설명될 수 있음",
+          },
+          {
+            item: "선택 시 확인",
+            mono: "우선 거리와 안경 사용 계획",
+            multi: "근거리 작업·야간 활동 비중",
+            edof: "목표 거리 범위와 한계 설명",
+          },
+        ],
+      },
+      relatedHref: ROUTES.iolInfoCheck,
+      relatedLabel: "인공수정체 정보·허가 확인 보기",
+    },
+    {
+      id: "lens-type-questions",
+      order: 3,
+      numberLabel: "03",
       heading: "상담에서 어떤 질문을 하면 좋을까요?",
       layout: "checklist",
       decorativeIcon: "💬",
@@ -144,7 +196,7 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
         "아래 질문은 예시이며, 실제 상담에서는 검사 결과에 따라 추가로 확인할 항목이 있을 수 있습니다.",
       ],
       bullets: [
-        "제 눈 상태에서 단초점·다초점 각각의 장단점은 무엇인가요?",
+        "제 눈 상태에서 단초점·다초점·연속초점 각각의 장단점은 무엇인가요?",
         "야간 운전이나 독서를 많이 하는 경우 무엇을 더 고려해야 하나요?",
         "적응 기간은 어느 정도로 예상해야 하나요?",
         "선택 후 안경이 필요할 가능성은 어느 정도인가요?",
@@ -154,8 +206,8 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
     },
     {
       id: "lens-type-caution",
-      order: 3,
-      numberLabel: "03",
+      order: 4,
+      numberLabel: "04",
       heading: "선택할 때 주의할 점은 무엇인가요?",
       layout: "prose",
       decorativeIcon: "⚠️",
@@ -170,8 +222,8 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
     },
     {
       id: "lens-type-individual",
-      order: 4,
-      numberLabel: "04",
+      order: 5,
+      numberLabel: "05",
       heading: "적응 정도는 사람마다 다른가요?",
       layout: "prose",
       decorativeIcon: "🧑‍⚕️",

@@ -43,6 +43,13 @@ export const metadata: Metadata = {
     },
   },
 
+  alternates: {
+    ...baseMetadata.alternates,
+    types: {
+      "application/rss+xml": absoluteUrl("/rss.xml"),
+    },
+  },
+
   openGraph: {
     ...baseMetadata.openGraph,
     type: "website",
