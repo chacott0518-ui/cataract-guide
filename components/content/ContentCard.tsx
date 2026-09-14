@@ -40,6 +40,8 @@ export function ContentCard({
           height={card.image.height}
           sizes="(max-width: 639px) 50vw, (max-width: 899px) 50vw, 33vw"
           priority={priority}
+          className="cg-content-card__img"
+          style={{ width: "100%", height: "100%" }}
         />
       </span>
       <span className="cg-content-card__body">

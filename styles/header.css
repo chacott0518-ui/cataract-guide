@@ -88,8 +88,8 @@
 }
 
 .cg-header-logo__mark {
-  width: 11px;
-  height: 11px;
+  width: 9px;
+  height: 9px;
   border-radius: 3px;
   background: linear-gradient(135deg, var(--cg-orange), var(--cg-lime));
   flex-shrink: 0;
@@ -97,7 +97,7 @@
 
 .cg-header-logo__text {
   color: var(--cg-ink);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: var(--fw-bold);
   letter-spacing: -0.015em;
   white-space: nowrap;
@@ -493,7 +493,7 @@
   }
 
   .cg-header-logo__text {
-    font-size: 16.5px;
+    font-size: 15px;
   }
 
   .cg-header-actions {
@@ -538,5 +538,12 @@
   .cg-header-kakao {
     padding: 0 8px;
     font-size: 11.5px;
+  }
+}
+
+/* Mobile: hide header kakao (floating nav handles it) */
+@media (max-width: 900px) {
+  .cg-header-kakao--pc {
+    display: none !important;
   }
 }

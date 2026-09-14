@@ -5,12 +5,17 @@
  * 사용:
  *   node scripts/indexnow.mjs
  *   node scripts/indexnow.mjs https://cataractguide.co.kr
+ *
+ * URL 목록은 app/sitemap.ts 색인 대상과 동기화한다.
+ * (홈 + CONTENT_PAGES 23 + /의료정보 = 25)
+ * 308 redirect·미존재 URL은 포함하지 않는다.
  */
 
 const CANONICAL_ORIGIN = "https://cataractguide.co.kr";
 const INDEXNOW_KEY = "8c4e7a1f5d9032b6a8e14c7f2639bd51";
 const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";
 
+/** sitemap 색인 대상과 동일. content/pages + content/info + ROUTES.infoHub */
 const urlList = [
   "/",
   "/노안백내장-수술비용",
@@ -19,6 +24,24 @@ const urlList = [
   "/노안백내장-병원선택",
   "/노안백내장-후기",
   "/노안백내장-faq",
+  "/노안백내장-수술-전-검사",
+  "/노안백내장-수술-전-복용약-확인",
+  "/노안백내장-상담-전-병력-확인",
+  "/노안백내장-상담-질문",
+  "/노안백내장-인공수정체-정보-확인",
+  "/노안백내장-단초점-다초점-차이",
+  "/노안백내장-목표-거리-생활패턴-상담",
+  "/노안백내장-수술-과정",
+  "/노안백내장-양안-수술-일정",
+  "/노안백내장-수술-후-일상생활",
+  "/노안백내장-수술-후-운전-재개",
+  "/노안백내장-수술-후-안경-사용",
+  "/노안백내장-수술-후-빛번짐-눈부심",
+  "/노안백내장-수술-후-시력-변화-관찰",
+  "/노안백내장-수술-후-이상증상",
+  "/노안백내장-의료정보-확인-방법",
+  "/노안백내장-광고-정보-확인",
+  "/의료정보",
 ];
 
 const payload = {

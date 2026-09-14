@@ -1,7 +1,9 @@
 import type { OptionalEntity, SiteEntity } from "@/types/seo";
+import { CLINIC } from "@/config/clinic";
 import { topicConfig } from "@/config/topic";
 import { getSiteUrl } from "@/lib/site-url";
 
+/** 검색 주제·사이트 브랜드 (HOME title/H1 KEEP) */
 export const siteEntity: SiteEntity = {
   name: topicConfig.siteName,
   type: "WebSite",
@@ -11,17 +13,33 @@ export const siteEntity: SiteEntity = {
   language: topicConfig.locale,
 };
 
-/** 실제 운영 주체가 확정될 때만 enabled=true */
+/**
+ * 의료기관 Entity — 에스앤비안과의원.
+ * 사이트 브랜드(노안백내장)와 분리한다.
+ */
+export const medicalClinicEntity = {
+  enabled: true as const,
+  name: CLINIC.name,
+  legalName: CLINIC.legalName,
+  brandName: CLINIC.brandName,
+  description: `${CLINIC.name}에서 제공하는 노안·백내장 관련 진료·상담 안내`,
+  url: CLINIC.officialSiteUrl,
+  telephone: CLINIC.phoneDisplay,
+  address: CLINIC.address,
+  logo: CLINIC.logoPath,
+};
+
+/** 사이트 법적 운영주체 — 미확정 */
 export const operatorEntity: OptionalEntity = {
   enabled: false,
 };
 
-/** 광고주 확정 시에만 enabled=true */
+/** @deprecated 광고주/스폰서 미사용 */
 export const sponsorEntity: OptionalEntity = {
   enabled: false,
 };
 
-/** 실제 의료진 검수가 있을 때만 enabled=true */
+/** 검수자 Person/UI 미사용 — enabled false 유지 */
 export const reviewerEntity: OptionalEntity = {
   enabled: false,
 };

@@ -130,6 +130,8 @@ export type ArticleSection = {
   level?: "h2" | "h3";
   /** 섹션 내 인라인 FAQ (FAQ 페이지 그룹용) */
   faqIds?: string[];
+  /** H2 흐름 하단 관련 참고 이미지 */
+  sectionImage?: ContentImage;
 };
 
 export type ContentCard = {
@@ -279,6 +281,8 @@ export type HomeIntro = {
   /** 짧은 핵심 요약 */
   summary: string;
   featureImage?: ContentImage;
+  /** HOME Mobile Hero (4:5) — PC Hero와 분리 */
+  featureImageMobile?: ContentImage;
 };
 
 export type HomeIndexItem = {

@@ -54,6 +54,7 @@ type HomeIntroBlockProps = {
   paragraphs: string[];
   summary: string;
   featureImage?: ContentImage | null;
+  featureImageMobile?: ContentImage | null;
 };
 
 export function HomeIntroBlock({
@@ -61,20 +62,39 @@ export function HomeIntroBlock({
   paragraphs,
   summary,
   featureImage,
+  featureImageMobile,
 }: HomeIntroBlockProps) {
+  const hasPc = Boolean(featureImage?.src);
+  const hasMobile = Boolean(featureImageMobile?.src);
+
   return (
     <section className="cg-home-intro">
-      {featureImage?.src ? (
+      {hasPc || hasMobile ? (
         <figure className="cg-home-feature">
-          <Image
-            src={featureImage.src}
-            alt={featureImage.alt}
-            width={featureImage.width || 1200}
-            height={featureImage.height || 1200}
-            sizes="(max-width: 900px) 100vw, 960px"
-            className="cg-home-feature__img"
-            priority
-          />
+          {hasPc ? (
+            <Image
+              src={featureImage!.src}
+              alt={featureImage!.alt}
+              width={featureImage!.width || 1600}
+              height={featureImage!.height || 900}
+              sizes="(max-width: 900px) 0px, 1180px"
+              className="cg-home-feature__img cg-home-feature__img--pc"
+              style={{ width: "100%", height: "auto" }}
+              priority
+            />
+          ) : null}
+          {hasMobile ? (
+            <Image
+              src={featureImageMobile!.src}
+              alt={featureImageMobile!.alt}
+              width={featureImageMobile!.width || 1080}
+              height={featureImageMobile!.height || 1350}
+              sizes="(max-width: 900px) 100vw, 0px"
+              className="cg-home-feature__img cg-home-feature__img--mobile"
+              style={{ width: "100%", height: "auto" }}
+              priority
+            />
+          ) : null}
         </figure>
       ) : null}
       <h2 className="cg-home-intro__heading">{heading}</h2>

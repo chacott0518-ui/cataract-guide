@@ -28,8 +28,8 @@ export const IOL_INFO_CHECK_PAGE: ContentPage = {
   infoCardDescription:
     "인공수정체를 상담에서 확인할 때 볼 항목과 렌즈 선택 상담에서 물어볼 내용을 안내합니다.",
   intro: [
-    "노안백내장 수술에서는 혼탁해진 수정체를 제거하고 인공수정체를 삽입합니다. 인공수정체는 종류와 특성이 제품마다 다를 수 있어, 광고 문구보다 상담에서 직접 정보를 확인하는 과정이 중요합니다.",
-    "이 글은 인공수정체 정보를 확인할 때 볼 수 있는 항목과 렌즈 선택 상담에서 물어볼 내용을 정리한 일반적인 의료정보이며, 특정 제품을 추천하거나 우월성을 주장하지 않습니다.",
+    "노안백내장 수술에서는 혼탁해진 수정체를 제거하고 인공수정체를 삽입합니다. 고객 판단의 핵심은 광고의 ‘프리미엄’ 표현보다 제품명·허가·특성과 한계를 상담에서 확인하는 것입니다.",
+    "상담 전 적어 두면 좋은 항목은 제품명, 국내 허가·인증 여부, 초점 방식, 야간 시야·안경 사용 한계, 비용 구성입니다. 특정 제품을 추천하거나 우월성을 주장하지 않습니다.",
   ],
   hubContextLink: {
     before: "인공수정체 외에 노안백내장 전체 흐름까지 함께 보려면 ",
@@ -38,18 +38,19 @@ export const IOL_INFO_CHECK_PAGE: ContentPage = {
     href: "/",
   },
   publishedAt: INFO_GUIDE_V2_PUBLISHED_AT,
-  updatedAt: "2026-08-26",
+  updatedAt: "2026-09-14",
   faqIds: [
     "iol-check-01",
     "iol-check-02",
     "iol-check-03",
     "iol-check-04",
     "iol-check-05",
+    "iol-check-06",
   ],
   faqTitle: "노안백내장 인공수정체 정보 확인 자주 묻는 질문",
   conclusion: [
     "인공수정체 정보를 확인할 때는 제품명, 허가·인증 정보, 특성과 한계를 함께 살펴보는 편이 도움이 됩니다. 특정 렌즈가 모든 사람에게 더 좋다고 단정할 수 없으며, 최종 선택은 검사 결과와 상담을 통해 이뤄져야 합니다.",
-    "이 글은 일반적인 의료정보 제공을 목적으로 하며 개인의 진단·처방을 대신하지 않습니다.",
+    "에스앤비안과의원 상담에서는 눈 상태·목표 거리·생활패턴과 함께 렌즈 선택 기준을 설명할 수 있습니다. 이 글은 일반적인 의료정보 제공을 목적으로 하며 개인의 진단·처방을 대신하지 않습니다.",
   ],
   thumbnail: IMAGE,
   topImages: [],
@@ -122,9 +123,24 @@ export const IOL_INFO_CHECK_PAGE: ContentPage = {
       relatedLabel: "노안백내장 수술 전 검사 안내 보기",
     },
     {
-      id: "iol-check-items",
+      id: "iol-check-icl",
       order: 2,
       numberLabel: "02",
+      heading: "렌즈삽입술(ICL)과 인공수정체(IOL)는 어떻게 다른가요?",
+      layout: "prose",
+      decorativeIcon: "📌",
+      directAnswer:
+        "렌즈삽입술(ICL)은 수정체를 제거하지 않고 눈 안에 별도 렌즈를 넣는 시력교정술로 알려져 있고, 백내장 수술의 인공수정체(IOL)는 혼탁해진 수정체를 제거한 뒤 삽입하는 렌즈입니다. 목적과 절차가 달라 같은 수술로 보지 않는 편이 안전합니다.",
+      paragraphs: [
+        "이름이 비슷해 혼동하기 쉽지만, 이 페이지에서 다루는 인공수정체는 백내장 수술 맥락의 확인 정보입니다. 시력교정 목적의 렌즈삽입술 적합성·절차는 이 글의 범위가 아니며, 개별 상담에서 구분해서 확인해야 합니다.",
+      ],
+      relatedHref: ROUTES.lensTypeCheck,
+      relatedLabel: "백내장 수술 렌즈 유형 비교 보기",
+    },
+    {
+      id: "iol-check-items",
+      order: 3,
+      numberLabel: "03",
       heading: "상담에서 어떤 정보를 확인할 수 있나요?",
       layout: "info-blocks",
       decorativeIcon: "🔎",
@@ -144,8 +160,8 @@ export const IOL_INFO_CHECK_PAGE: ContentPage = {
     },
     {
       id: "iol-check-caution",
-      order: 3,
-      numberLabel: "03",
+      order: 4,
+      numberLabel: "04",
       heading: "인공수정체 정보를 볼 때 주의할 점은 무엇인가요?",
       layout: "prose",
       decorativeIcon: "⚠️",
@@ -160,8 +176,8 @@ export const IOL_INFO_CHECK_PAGE: ContentPage = {
     },
     {
       id: "iol-check-consult",
-      order: 4,
-      numberLabel: "04",
+      order: 5,
+      numberLabel: "05",
       heading: "렌즈 선택 상담에서는 무엇을 확인하나요?",
       layout: "prose",
       decorativeIcon: "💬",

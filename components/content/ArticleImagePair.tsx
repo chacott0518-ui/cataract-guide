@@ -66,6 +66,7 @@ export function ArticleImagePair({
                 : "(max-width: 767px) 100vw, 720px"
             }
             className="cg-image-pair__img"
+            style={{ width: "100%", height: "auto" }}
             priority={priority && index === 0}
           />
         </figure>

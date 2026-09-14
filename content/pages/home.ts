@@ -1,4 +1,9 @@
-import { HOME_FEATURE_IMAGE, TOPIC_MEDIA } from "@/config/media";
+import {
+  GUIDE_SECTION_IMAGES,
+  HOME_FEATURE_IMAGE,
+  HOME_FEATURE_IMAGE_MOBILE,
+  TOPIC_MEDIA,
+} from "@/config/media";
 import { ROUTES } from "@/config/routes";
 import { SITE } from "@/config/site";
 import type {
@@ -32,9 +37,10 @@ export const HOME_SEO: PageSeo = {
 export const HOME_INTRO: HomeIntro = {
   heading: "노안백내장 수술 전 알아야 할 정보",
   featureImage: HOME_FEATURE_IMAGE,
+  featureImageMobile: HOME_FEATURE_IMAGE_MOBILE,
   paragraphs: [
-    "노안백내장은 가까운 거리의 초점 조절력이 떨어지는 노안과 수정체가 혼탁해지는 백내장이 함께 나타나는 상태를 말합니다. 노안·백내장은 서로 다른 변화이지만 비슷한 연령대에서 함께 나타날 수 있어, 증상만으로 판단하기보다 검사 결과와 평소 생활 방식을 함께 확인하는 과정이 필요합니다.",
-    "같은 시야 불편이라도 원인과 판단 기준이 다를 수 있습니다. 검사에서 수정체 상태와 일상 영향이 확인되면, 필요에 따라 백내장 수술과 인공 수정체 선택을 검토하는 흐름으로 이어질 수 있습니다.",
+    "이 사이트는 노안백내장을 증상 비교, 비용·렌즈, 회복, 주의사항, 병원 선택과 FAQ 기준으로 정리하는 정보 허브입니다. 노안은 가까운 거리 초점 조절이 떨어지는 변화, 백내장은 수정체 혼탁과 관련된 상태로 함께 나타날 수 있지만, 원인과 확인 과정은 다를 수 있습니다.",
+    "같은 시야 불편이라도 비교·판단 기준이 다를 수 있습니다. 검사에서 수정체 상태와 일상 영향이 확인되면, 필요에 따라 백내장 수술과 인공 수정체 선택을 검토하는 흐름으로 이어질 수 있습니다.",
     "같은 불편처럼 보여도 관리 방향이 달라질 수 있으므로, 수술비용·렌즈 종류·회복기간·주의사항과 병원 선택 기준을 구분해 살펴보는 것이 도움이 됩니다.",
     "아래 정보는 일반적인 안내이며 개인의 진단이나 치료 결정을 대신하지 않습니다. 최종 확인은 검사와 상담을 통해 이루어져야 합니다.",
   ],
@@ -98,13 +104,10 @@ export const HOME_SECTIONS: ArticleSection[] = [
     heading: "노안백내장, 노안과 백내장은 어떻게 다른가",
     layout: "comparison",
     directAnswer:
-      "노안은 가까운 거리에 초점을 맞추는 조절력이 감소하는 변화이고, 백내장은 수정체가 혼탁해지면서 시야가 흐려지는 질환입니다. 두 상태가 함께 나타날 수 있지만 원인과 확인 과정은 다를 수 있습니다.",
+      "비교 기준으로 보면, 노안은 가까운 거리에 초점을 맞추는 조절력이 감소하는 변화이고, 백내장은 수정체가 혼탁해지면서 시야가 흐려지는 질환입니다. 두 상태가 함께 나타날 수 있지만 원인과 확인 과정은 다를 수 있습니다.",
     paragraphs: [
-      "중장년층에서는 노안/백내장이 함께 거론되는 경우가 많지만, 같은 불편함처럼 보여도 검사 결과에 따라 관리 방향이 달라질 수 있습니다. 이 사이트는 일반적인 정보 안내이며 개인의 진단이나 치료를 대신하지 않습니다.",
-      "예를 들어 스마트폰 글씨가 흐려지면 노안을 먼저 떠올리기 쉽지만, 밝은 곳에서도 시야가 뿌옇게 느껴지거나 안경 교체 후에도 선명도가 충분하지 않다면 수정체 상태도 함께 확인해야 할 수 있습니다.",
-      "노안만 있는 경우 돋보기·독서용 안경으로 불편이 줄어드는 경우가 많지만, 백내장이 함께 진행되면 같은 보조 수단만으로는 한계가 있을 수 있습니다. 어느 쪽이 더 큰 불편인지 일상에서 정리해 두면 상담에 도움이 됩니다.",
-      "안과 검사에서는 두 상태가 각각 어느 정도인지, 현재는 관리·안경 조정으로 충분한지, 수술 시점을 검토할 단계인지 등을 종합해 설명받을 수 있습니다.",
-      "증상이 비슷해도 직업, 사용하는 거리(근거리·운전·야간 활동)에 따라 우선 확인할 내용이 달라질 수 있습니다. 검사로 어떻게 구분하는지는 수술 전 검사 안내에서 이어서 확인할 수 있습니다.",
+      "비슷한 시야 불편처럼 보여도 검사 결과에 따라 관리 방향이 달라질 수 있습니다. 고객이 먼저 확인할 것은 ‘지금 불편이 조절력 저하인지, 수정체 혼탁인지’를 검사로 나누어 보는 기준입니다.",
+      "증상만으로 원인을 단정하기보다, 검사에서 두 상태가 각각 어느 정도인지 확인하는 과정이 필요합니다. 검사로 어떻게 구분하는지는 수술 전 검사 안내에서 이어서 볼 수 있습니다.",
     ],
     comparison: {
       left: {
@@ -116,8 +119,9 @@ export const HOME_SECTIONS: ArticleSection[] = [
         text: "수정체가 혼탁해지면서 시야가 흐리거나 눈부심이 나타날 수 있는 질환. 진행 정도에 따라 수술 시기를 검토할 수 있음",
       },
     },
+    sectionImage: GUIDE_SECTION_IMAGES.diff,
     relatedHref: ROUTES.preExam,
-    relatedLabel: "노안백내장 수술 전 검사로 구분 확인하기",
+    relatedLabel: "수술 전 검사에서 구분 확인하기",
   },
   {
     id: "home-symptoms",
@@ -126,13 +130,9 @@ export const HOME_SECTIONS: ArticleSection[] = [
     heading: "노안 백내장 검사를 고려해야 하는 주요 증상",
     layout: "checklist",
     directAnswer:
-      "가까운 글씨가 흐리거나 빛 번짐이 늘고, 안경을 바꿔도 시야가 충분히 선명하지 않다면 검사를 고려할 수 있습니다. 다만 증상만으로 수술 필요 여부를 판단해서는 안 됩니다.",
+      "가까운 글씨가 흐리거나 빛 번짐이 늘고, 안경을 바꿔도 시야가 충분히 선명하지 않다면 검사를 고려할 수 있습니다. 증상만으로 수술 필요 여부를 판단해서는 안 됩니다.",
     paragraphs: [
-      "검사에서는 시력뿐 아니라 수정체, 각막, 망막, 안압 등 여러 요소를 함께 확인할 수 있습니다. 변화가 지속되면 안과 진료를 통해 현재 상태를 확인하는 것이 안전합니다.",
-      "운전 중 대향 헤드라이트가 더 눈부시게 느껴지거나, 실내 조명 아래에서도 책·메뉴판이 선명하지 않다면 증상 기록을 남겨 상담 시 공유하면 도움이 됩니다.",
-      "증상이 한쪽 눈에서만 시작됐는지, 양쪽 모두인지, 최근 몇 달간 점점 심해졌는지도 함께 적어 두면 검사·상담 시 비교하기 수월합니다.",
-      "당장 수술이 필요하다는 뜻은 아니며, 검사 결과에 따라 안경·돋보기 조정, 정기 관찰, 수술 검토 등 방향이 달라질 수 있습니다.",
-      "증상이 갑자기 심해지거나 한쪽 눈만 급격히 달라지면, 평소와 다른 변화로 기록해 두고 검진 시 알리는 것이 좋습니다.",
+      "변화가 지속되면 안과 진료로 현재 상태를 확인하는 것이 안전합니다. 검사에서 무엇을 보는지, 상담 전 무엇을 정리하면 좋은지는 수술 전 검사 안내에서 자세히 확인할 수 있습니다.",
     ],
     bullets: [
       "가까운 글자·스마트폰 화면이 이전보다 흐리게 보임",
@@ -151,13 +151,9 @@ export const HOME_SECTIONS: ArticleSection[] = [
     heading: "노안백내장 수술 여부는 어떻게 판단하나요?",
     layout: "steps",
     directAnswer:
-      "노안백내장 수술은 시야 불편 정도, 일상생활 영향, 필요한 시야 범위, 검사상 눈 상태를 종합해 검토합니다. 증상이 있다고 모든 사람에게 같은 시점에 수술이 필요하다고 보기 어렵습니다.",
+      "시야 불편 정도, 일상생활 영향, 필요한 시야 범위, 검사상 눈 상태를 종합해 검토합니다. 증상이 있다고 모든 사람에게 같은 시점에 수술이 필요하다고 보기 어렵습니다.",
     paragraphs: [
-      "수술 시기는 단순 연령만으로 정해지지 않습니다. 검사 결과와 시야 불편, 일상·업무·운전에 실제로 얼마나 지장이 있는지, 의료진 판단을 함께 보는 경우가 많습니다.",
-      "렌즈 종류, 양안 수술 일정, 사후관리 범위처럼 결정에 영향을 주는 요소는 개인마다 다르게 적용될 수 있습니다. 최종 판단은 검사와 의료진 설명을 통해 이루어져야 합니다.",
-      "근거리 작업이 많은 직업, 야간 운전 빈도, 기존 망막·각막 질환 유무처럼 생활과 건강 조건을 미리 정리해 두면 상담 시간을 효율적으로 쓸 수 있습니다.",
-      "수술 외에도 안경·렌즈 조정, 생활 습관, 정기 경과 관찰 등 선택지가 있을 수 있으므로, 검사와 설명을 통해 본인에게 맞는 방향을 확인하는 것이 중요합니다.",
-      "양안 수술을 한 번에 할지, 한쪽씩 나눌지도 검사 결과·생활 일정·회복 계획에 따라 달라질 수 있습니다. 진행 방식의 개요는 수술 과정 안내에서 확인할 수 있습니다.",
+      "수술 시기는 단순 연령만으로 정해지지 않으며, 검사 결과와 의료진 판단을 함께 보는 경우가 많습니다. 진행 방식의 개요는 수술 과정 안내에서 확인할 수 있습니다.",
     ],
     steps: [
       {
@@ -170,11 +166,11 @@ export const HOME_SECTIONS: ArticleSection[] = [
       },
       {
         label: "03 생활 방식과 렌즈 검토",
-        text: "근거리·원거리 사용 패턴, 안경 보조 가능성, 기대 시야를 함께 점검합니다.",
+        text: "근거리·원거리 사용 패턴과 기대 시야를 함께 점검합니다.",
       },
       {
         label: "04 의료진과 수술 여부 판단",
-        text: "검사 결과·설명·대안을 바탕으로 수술 시기와 방향을 결정합니다.",
+        text: "검사 결과·설명·대안을 바탕으로 방향을 결정합니다.",
       },
     ],
     relatedHref: ROUTES.procedureProcess,
@@ -184,85 +180,26 @@ export const HOME_SECTIONS: ArticleSection[] = [
     id: "home-lens",
     order: 4,
     numberLabel: "04",
-    heading: "노안백내장 수술의 단초점렌즈와 다초점렌즈 비교",
-    layout: "compare-table",
+    heading: "노안백내장 수술과 렌즈 선택, 무엇을 먼저 볼까요?",
+    layout: "prose",
     directAnswer:
-      "단초점 인공수정체는 특정 거리 중심으로 초점을 맞추고, 다초점 렌즈는 여러 거리 활용을 목표로 설계됩니다. 연속초점렌즈(초점심도확장 계열)도 시야 목표가 다를 수 있어, 어느 한쪽이 무조건 우수하다고 단정할 수는 없습니다.",
+      "백내장 수술에서는 혼탁한 수정체를 제거한 뒤 인공수정체를 넣는 경우가 많고, 단초점·다초점·연속초점(초점심도확장) 등 시야 목표가 다른 선택지가 있습니다. 어느 한쪽이 무조건 우수하다고 단정할 수는 없습니다.",
     paragraphs: [
-      "선택 기준으로는 망막 상태, 동공 크기, 야간 운전 빈도, 근거리 작업량, 안경 보조 수용도를 함께 보는 편이 안전합니다.",
-      "예를 들어 컴퓨터·바느질 등 근거리 작업이 많다면 다초점렌즈를 검토할 수 있지만, 야간 운전이 잦다면 빛 번짐·halo 적응도 함께 상담하는 것이 좋습니다.",
-      "난시가 있는 경우 렌즈·수술 계획이 달라질 수 있으며, 수술 후에도 특정 거리에서 안경이 필요할 수 있다는 설명을 듣는 것이 기대 관리에 도움이 됩니다.",
-      "렌즈 선택은 비용만이 아니라 생활 패턴·적응 가능성·추가 검사 필요 여부까지 함께 보는 과정이므로, 충분한 설명과 질문 시간이 있는지도 확인하면 좋습니다.",
-      "유형별 차이와 상담 질문은 단초점·다초점 비교 안내에서, 제품·허가 정보 확인은 인공수정체 안내에서 이어서 볼 수 있습니다. 연속초점 렌즈를 검토하는 경우에도 시야 목표와 한계를 같은 기준으로 비교하는 것이 좋습니다.",
-    ],
-    compareHeaders: ["단초점렌즈", "다초점렌즈"],
-    compareRows: [
-      {
-        criterion: "초점 범위",
-        left: "원거리·근거리 등 특정 거리 중심",
-        right: "근·원거리 등 여러 거리 활용을 목표",
-      },
-      {
-        criterion: "안경 사용 가능성",
-        left: "독서·근거리용 안경이 필요할 수 있음",
-        right: "일부 거리에서 안경 의존도를 낮출 수 있음",
-      },
-      {
-        criterion: "야간 시야 적응",
-        left: "비교적 단순한 적응, 개인차 존재",
-        right: "빛 번짐·halo 등 적응 기간의 개인차가 큼",
-      },
-      {
-        criterion: "평소 생활 방식",
-        left: "운전·TV 시청 등 특정 거리 중심 생활",
-        right: "근거리 작업·다양한 거리 활용 생활",
-      },
-      {
-        criterion: "비용 구성",
-        left: "상대적으로 단순한 견적 구성",
-        right: "렌즈·추가 검사 비용이 달라질 수 있음",
-      },
-      {
-        criterion: "개인별 적합성",
-        left: "망막·동공·난시 상태에 따라 달라짐",
-        right: "망막·동공·생활 패턴에 따라 달라짐",
-      },
+      "메인에서는 렌즈 선택이 중요하다는 점만 짚습니다. 유형별 특성과 차이는 단초점·다초점 비교 안내에서, 선택 전 확인 정보는 인공수정체 안내에서, 운전·독서·PC 등 생활 요구는 목표 거리 상담에서 이어서 확인하세요.",
     ],
     relatedHref: ROUTES.lensTypeCheck,
-    relatedLabel: "단초점·다초점·연속초점 비교 자세히 보기",
+    relatedLabel: "단초점·다초점·연속초점 차이 자세히 보기",
   },
   {
     id: "home-cost",
     order: 5,
     numberLabel: "05",
     heading: "노안백내장 수술비용이 달라지는 요소",
-    layout: "info-blocks",
+    layout: "prose",
     directAnswer:
-      "노안백내장 수술비용은 렌즈 종류, 검사 구성, 난시 교정 여부, 사후관리 포함 범위에 따라 달라질 수 있습니다. 전국 공통 가격처럼 단정할 수 있는 금액은 없습니다.",
+      "노안백내장 수술비용은 검사 구성, 인공수정체 선택, 수술 범위, 사후관리 포함 여부에 따라 달라질 수 있습니다. 전국 공통 가격처럼 단정할 수 있는 금액은 없습니다.",
     paragraphs: [
-      "같은 수술처럼 보여도 포함되는 항목이 다르면 총액 비교만으로는 실제 부담을 파악하기 어렵습니다. 견적에서는 검사비, 렌즈비, 수술비, 약제비, 경과 관찰 비용을 구분해 확인하는 것이 좋습니다.",
-      "난시 교정 여부, 양안 수술 간격, 재진·약제 포함 기간처럼 조건이 다르면 같은 총액이라도 실제 부담이 달라질 수 있습니다. 견적서에 빠진 항목이 없는지 함께 확인하세요.",
-      "실손·건강보험 적용 범위는 개인 가입 조건·병원·수술·렌즈 구성에 따라 달라질 수 있으므로, 본인 부담액은 별도로 확인하는 것이 좋습니다.",
-      "견적을 받을 때는 '표시된 금액에 무엇이 포함되는지'와 '어떤 경우 추가 비용이 생기는지'를 함께 확인하면 이후 오해를 줄일 수 있습니다.",
-      "여러 병원 견적을 비교할 때는 총액뿐 아니라 렌즈 등급·검사 범위·재진 횟수까지 같은 조건인지 맞춰 보는 것이 좋습니다.",
-    ],
-    infoBlocks: [
-      {
-        label: "노안백내장 검사 범위",
-        text: "기본·정밀·추가 검사(망막·각막 등) 포함 여부에 따라 달라질 수 있습니다.",
-      },
-      {
-        label: "노안백내장 인공수정체 종류",
-        text: "단초점·다초점·연속초점·난시 교정 등 선택에 따라 구성이 달라집니다.",
-      },
-      {
-        label: "노안백내장 수술 범위",
-        text: "한쪽·양쪽 수술, 양안 동시·분리 수술 계획에 따라 달라질 수 있습니다.",
-      },
-      {
-        label: "사후관리 항목",
-        text: "재진 횟수, 처방 약제, 추가 처치·레이저 등 포함·제외 범위를 확인합니다.",
-      },
+      "총액만 비교하기보다 포함·제외 항목을 구분해 보는 것이 중요합니다. 상세한 비용 결정요인과 견적 확인 기준은 수술비용 안내에서 확인할 수 있습니다.",
     ],
     relatedHref: ROUTES.cost,
     relatedLabel: "노안백내장 수술비용 자세히 보기",
@@ -272,33 +209,11 @@ export const HOME_SECTIONS: ArticleSection[] = [
     order: 6,
     numberLabel: "06",
     heading: "노안 백내장 수술 후 회복 과정",
-    layout: "timeline",
+    layout: "prose",
     directAnswer:
       "회복 속도와 일상 복귀 시점은 개인차, 렌즈 적응, 생활 습관에 따라 달라질 수 있습니다. 모든 사람에게 동일한 회복 날짜를 단정할 수 없습니다.",
     paragraphs: [
-      "운전, 화면 작업, 운동, 세안·샤워 가능 시점은 의료진 안내를 우선합니다. 심한 통증이나 급격한 시력 저하는 즉시 진료가 필요할 수 있습니다.",
-      "다초점 렌즈를 선택한 경우 시야 적응에 수주에서 수개월이 걸릴 수 있으며, 일부 거리에서는 안경 보조가 필요할 수 있다는 설명을 함께 듣는 것이 기대 관리에 도움이 됩니다.",
-      "초기에는 세안·샤워·화장·격한 운동 등이 제한될 수 있으며, 허용 시점은 담당 의료진 안내를 따르는 것이 안전합니다. 회복 관련 자세한 내용은 회복기간 안내 페이지에서 확인할 수 있습니다.",
-      "회복 중 이상 증상과 일시적 불편을 구분하는 기준, 연락 방법도 수술 전후 상담에서 미리 확인해 두면 도움이 됩니다.",
-      "회복 일정은 직업·가사·이동 방식에 따라 체감이 다르므로, 본인 생활에 맞는 재개 시점을 상담에서 확인하는 것이 좋습니다.",
-    ],
-    timeline: [
-      {
-        label: "수술 직후",
-        text: "휴식, 보호 안경·안대 착용, 처방 안약 사용 등 초기 관리가 필요할 수 있습니다.",
-      },
-      {
-        label: "초기 회복",
-        text: "이물감·건조감·빛 번짐 등 일시적 증상이 있을 수 있으며 경과를 확인합니다.",
-      },
-      {
-        label: "일상 복귀",
-        text: "화면 작업·외출·가벼운 업무 등은 개인차에 따라 단계적으로 재개됩니다.",
-      },
-      {
-        label: "정기 확인",
-        text: "시력 적응, 염증·안압, 합병증 여부를 정기적으로 점검합니다.",
-      },
+      "운전·세안·운동 가능 시점은 의료진 안내를 우선합니다. 회복 일정과 생활 관리의 자세한 안내는 회복기간 페이지에서 확인하세요.",
     ],
     relatedHref: ROUTES.recovery,
     relatedLabel: "노안백내장 회복기간 자세히 보기",
@@ -312,18 +227,13 @@ export const HOME_SECTIONS: ArticleSection[] = [
     directAnswer:
       "특정 병원을 추천하지 않습니다. 검사 설명, 렌즈 안내, 사후관리 체계를 중심으로 비교하는 편이 도움이 됩니다.",
     paragraphs: [
-      "광고 문구나 단정적인 결과 표현보다, 본인 상태에 맞는 설명과 포함 비용, 이상 증상 시 연락 방법이 명확한지를 확인하세요. 후기는 참고 자료일 뿐 의료 판단을 대체하지 않습니다.",
-      "여러 곳을 방문할 때는 같은 질문 목록(검사 항목, 렌즈 비교, 견적 구성, 재진 일정)을 사용하면 설명 차이를 비교하기 쉽습니다.",
-      "상담 후에는 들은 설명·견적·사후관리 안내를 간단히 메모해 두면, 나중에 후기나 광고 문구와 비교할 때 본인에게 필요한 정보인지 다시 점검하기 좋습니다.",
-      "가까운 지역·지인 추천만으로 결정하기보다, 검사 설명·렌즈 비교·비용·사후관리를 같은 기준으로 확인하는 과정이 중요합니다.",
-      "광고·후기·홈페이지 문구보다 상담에서 들은 설명과 본인 검사 결과를 기준으로 판단하는 것이 안전합니다.",
+      "광고 문구나 단정적인 결과 표현보다, 본인 상태에 맞는 설명과 포함 비용, 이상 증상 시 연락 방법이 명확한지를 확인하세요. 비교 기준의 상세 안내는 병원선택 페이지에서 볼 수 있습니다.",
     ],
     bullets: [
-      "검사 결과를 수치·영상과 함께 충분히 설명하는지",
-      "렌즈별 장점뿐 아니라 적응 기간·제한점도 설명하는지",
-      "세안·운전·운동 등 수술 전후 주의사항을 구체적으로 안내하는지",
-      "견적 포함·제외 항목과 사후관리 범위를 확인할 수 있는지",
-      "근거리 작업·야간 운전 등 본인 생활 패턴을 반영해 설명하는지",
+      "검사 결과를 충분히 설명하는지",
+      "렌즈별 장점과 제한점을 함께 안내하는지",
+      "견적 포함·제외 항목을 확인할 수 있는지",
+      "사후관리·연락 방법이 명확한지",
     ],
     relatedHref: ROUTES.hospital,
     relatedLabel: "노안백내장 병원선택 기준 보기",
@@ -340,6 +250,16 @@ export const HOME_FAQ_IDS = [
 ] as const;
 
 export const CARD_PUBLISHED_AT = "2026-07-22";
+
+/** 목차카드 전용 — TOPIC_MEDIA.thumbnail과 동일 파일이되 src를 경로로 고정 */
+const CARD_IMAGE = {
+  cost: TOPIC_MEDIA.cost.thumbnail,
+  recovery: TOPIC_MEDIA.recovery.thumbnail,
+  precautions: TOPIC_MEDIA.precautions.thumbnail,
+  hospital: TOPIC_MEDIA.hospital.thumbnail,
+  reviews: TOPIC_MEDIA.reviews.thumbnail,
+  faq: TOPIC_MEDIA.faq.thumbnail,
+} as const;
 
 export const CONTENT_CARDS: ContentCard[] = [
   {
@@ -363,9 +283,9 @@ export const CONTENT_CARDS: ContentCard[] = [
     publishedAt: CARD_PUBLISHED_AT,
     categoryLabel: SITE.categoryLabel,
     faqIds: ["cost-01", "cost-02", "cost-03", "cost-04", "cost-05", "cost-06"],
-    image: TOPIC_MEDIA.cost.thumbnail,
-    heroImage: TOPIC_MEDIA.cost.thumbnail,
-    inlineImage: TOPIC_MEDIA.cost.thumbnail,
+    image: CARD_IMAGE.cost,
+    heroImage: CARD_IMAGE.cost,
+    inlineImage: CARD_IMAGE.cost,
   },
   {
     id: "recovery",
@@ -394,9 +314,9 @@ export const CONTENT_CARDS: ContentCard[] = [
       "recovery-04",
       "recovery-05",
     ],
-    image: TOPIC_MEDIA.recovery.thumbnail,
-    heroImage: TOPIC_MEDIA.recovery.thumbnail,
-    inlineImage: TOPIC_MEDIA.recovery.thumbnail,
+    image: CARD_IMAGE.recovery,
+    heroImage: CARD_IMAGE.recovery,
+    inlineImage: CARD_IMAGE.recovery,
   },
   {
     id: "precautions",
@@ -425,9 +345,9 @@ export const CONTENT_CARDS: ContentCard[] = [
       "caution-04",
       "caution-05",
     ],
-    image: TOPIC_MEDIA.precautions.thumbnail,
-    heroImage: TOPIC_MEDIA.precautions.thumbnail,
-    inlineImage: TOPIC_MEDIA.precautions.thumbnail,
+    image: CARD_IMAGE.precautions,
+    heroImage: CARD_IMAGE.precautions,
+    inlineImage: CARD_IMAGE.precautions,
   },
   {
     id: "hospital",
@@ -456,9 +376,9 @@ export const CONTENT_CARDS: ContentCard[] = [
       "hospital-04",
       "hospital-05",
     ],
-    image: TOPIC_MEDIA.hospital.thumbnail,
-    heroImage: TOPIC_MEDIA.hospital.thumbnail,
-    inlineImage: TOPIC_MEDIA.hospital.thumbnail,
+    image: CARD_IMAGE.hospital,
+    heroImage: CARD_IMAGE.hospital,
+    inlineImage: CARD_IMAGE.hospital,
   },
   {
     id: "reviews",
@@ -487,9 +407,9 @@ export const CONTENT_CARDS: ContentCard[] = [
       "review-04",
       "review-05",
     ],
-    image: TOPIC_MEDIA.reviews.thumbnail,
-    heroImage: TOPIC_MEDIA.reviews.thumbnail,
-    inlineImage: TOPIC_MEDIA.reviews.thumbnail,
+    image: CARD_IMAGE.reviews,
+    heroImage: CARD_IMAGE.reviews,
+    inlineImage: CARD_IMAGE.reviews,
   },
   {
     id: "faq",
@@ -512,8 +432,8 @@ export const CONTENT_CARDS: ContentCard[] = [
     publishedAt: CARD_PUBLISHED_AT,
     categoryLabel: SITE.categoryLabel,
     faqIds: [...HOME_FAQ_IDS],
-    image: TOPIC_MEDIA.faq.thumbnail,
-    heroImage: TOPIC_MEDIA.faq.thumbnail,
-    inlineImage: TOPIC_MEDIA.faq.thumbnail,
+    image: CARD_IMAGE.faq,
+    heroImage: CARD_IMAGE.faq,
+    inlineImage: CARD_IMAGE.faq,
   },
 ];

@@ -32,9 +32,9 @@ export const TARGET_DISTANCE_CONSULT_PAGE: ContentPage = {
     "이 글은 목표 거리와 생활패턴을 상담에서 어떻게 정리해 전달하면 좋은지 안내하는 일반적인 의료정보이며, 특정 렌즈 선택을 권고하지 않습니다.",
   ],
   hubContextLink: {
-    before: "생활패턴 정리 외에 렌즈 종류 비교까지 함께 보려면 ",
-    anchor: "노안백내장 종합 안내",
-    after: "에서 전체 흐름을 확인할 수 있습니다.",
+    before: "생활패턴 정리 외에 노안백내장 전체 흐름까지 보려면 ",
+    anchor: "노안 백내장 핵심 정보",
+    after: "를 참고하세요.",
     href: "/",
   },
   publishedAt: INFO_GUIDE_V2_PUBLISHED_AT,

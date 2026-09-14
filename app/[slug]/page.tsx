@@ -6,14 +6,17 @@ import { InfoHubTemplate } from "@/components/content/InfoHubTemplate";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ROUTES } from "@/config/routes";
 import { SITE } from "@/config/site";
-import { INFO_HUB_EXTRA_FAQS } from "@/content/faqs/info-hub-extra";
-import { INFO_HUB_SEO } from "@/content/info/hub";
+import { getInfoHubEntries, INFO_HUB_SEO } from "@/content/info/hub";
 import {
   CONTENT_PAGES,
   getContentPageBySlug,
 } from "@/lib/content-registry";
 import { buildPageMetadata } from "@/lib/metadata";
-import { breadcrumbJsonLd, faqPageJsonLd, webPageJsonLd } from "@/lib/schema";
+import {
+  breadcrumbJsonLd,
+  infoHubItemListJsonLd,
+  webPageJsonLd,
+} from "@/lib/schema";
 
 const INFO_HUB_SLUG = "의료정보";
 
@@ -65,6 +68,7 @@ export default async function ContentSlugPage({ params }: PageProps) {
   const slug = normalizeSlug((await params).slug);
 
   if (slug === INFO_HUB_SLUG) {
+    const hubEntries = getInfoHubEntries();
     return (
       <>
         <InfoHubTemplate />
@@ -81,7 +85,7 @@ export default async function ContentSlugPage({ params }: PageProps) {
               { name: SITE.name, path: "/" },
               { name: "노안백내장 의료정보", path: ROUTES.infoHub },
             ]),
-            faqPageJsonLd(INFO_HUB_EXTRA_FAQS, ROUTES.infoHub),
+            infoHubItemListJsonLd(hubEntries),
           ]}
         />
       </>

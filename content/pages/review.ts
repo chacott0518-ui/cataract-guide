@@ -26,7 +26,7 @@ export const REVIEW_PAGE: ContentPage = {
     href: "/",
   },
   publishedAt: "2026-07-01",
-  updatedAt: "2026-07-22",
+  updatedAt: "2026-09-14",
   faqIds: [
     "review-01",
     "review-02",
@@ -194,10 +194,31 @@ export const REVIEW_PAGE: ContentPage = {
         },
       ],
     },
-        {
-      id: "review-with-exam",
+    {
+      id: "review-checklist",
       order: 4,
       numberLabel: "04",
+      heading: "후기를 볼 때 확인할 점",
+      layout: "checklist",
+      directAnswer:
+        "후기 작성 시점, 개인차 언급, 검사·렌즈 조건, 광고성 정보 여부를 함께 보면 오해를 줄일 수 있습니다. 특정 효과를 보장하거나 전후 결과를 일반화하는 표현은 참고 가치를 낮춥니다.",
+      paragraphs: [
+        "이 페이지는 가짜 후기나 치료 성공 사례를 제시하지 않습니다. 후기는 참고 자료일 뿐이며, 본인 상태는 검사와 상담으로 확인해야 합니다.",
+      ],
+      bullets: [
+        "작성 시점·수술 후 경과 기간이 드러나는지",
+        "개인차·한계를 인정하는 표현이 있는지",
+        "검사 조건·선택한 렌즈·생활 패턴이 함께 적혔는지",
+        "광고·협찬·홍보성 문구 여부가 분명한지",
+        "비용·회복을 총액·일정만으로 단정하지 않는지",
+      ],
+      relatedHref: ROUTES.adInfoCheck,
+      relatedLabel: "광고 정보 확인 시 주의점 보기",
+    },
+        {
+      id: "review-with-exam",
+      order: 5,
+      numberLabel: "05",
       heading: "상담과 검사 내용을 함께 확인해야 하는 이유는 무엇인가요?",
       layout: "steps",
       directAnswer:

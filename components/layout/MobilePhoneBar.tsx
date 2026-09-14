@@ -1,10 +1,11 @@
 import { CONTACT } from "@/config/contact";
+import { CLINIC } from "@/config/clinic";
 
 export function MobileContactBar() {
   if (!CONTACT.enabled) return null;
 
   return (
-    <div className="cg-mobile-bar" role="navigation" aria-label="빠른 문의">
+    <div className="cg-mobile-bar" role="navigation" aria-label="빠른 상담">
       {CONTACT.kakaoEnabled ? (
         <a
           className="cg-mobile-bar__btn cg-mobile-bar__btn--kakao"
@@ -29,7 +30,7 @@ export function MobileContactBar() {
         <a
           className="cg-mobile-bar__btn cg-mobile-bar__btn--phone"
           href={CONTACT.phoneNumber}
-          aria-label={`${CONTACT.phoneLabel} ${CONTACT.phoneNumber.replace("tel:", "")}`}
+          aria-label={`${CONTACT.phoneLabel} ${CLINIC.phoneDisplay}`}
         >
           <svg
             width="15"

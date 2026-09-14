@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { ComparisonBlock } from "@/components/content/ComparisonBlock";
 import { ChecklistBlock } from "@/components/content/ChecklistBlock";
 import { InfoGrid } from "@/components/content/InfoGrid";
@@ -110,6 +112,19 @@ export function ArticleSectionBlock({
         <p key={paragraph.slice(0, 40)}>{paragraph}</p>
       ))}
       <SectionVisuals section={section} />
+      {section.sectionImage?.src ? (
+        <figure className="cg-article-section__figure">
+          <Image
+            src={section.sectionImage.src}
+            alt={section.sectionImage.alt}
+            width={section.sectionImage.width || 1200}
+            height={section.sectionImage.height || 900}
+            className="cg-article-section__img"
+            style={{ width: "100%", height: "auto" }}
+            sizes="(max-width: 900px) 100vw, 720px"
+          />
+        </figure>
+      ) : null}
       {section.callout ? <ArticleCallout text={section.callout} /> : null}
       {inlineFaqs.length > 0 ? (
         <FaqAccordion

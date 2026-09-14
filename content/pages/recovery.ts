@@ -1,4 +1,4 @@
-import { TOPIC_MEDIA } from "@/config/media";
+import { TOPIC_MEDIA, GUIDE_SECTION_IMAGES } from "@/config/media";
 import { ROUTES } from "@/config/routes";
 import { SITE } from "@/config/site";
 import type { ContentPage } from "@/types/content";
@@ -36,12 +36,12 @@ export const RECOVERY_PAGE: ContentPage = {
   faqTitle: "노안백내장 회복기간 자주 묻는 질문",
   conclusion: [
     "노안백내장 회복기간은 개인차가 큽니다. 기존 눈 상태, 렌즈 적응, 양안 일정과 생활 환경에 따라 체감 속도가 달라질 수 있으므로, 다른 사람의 일정과 비교하기보다 의료진 안내와 본인 경과를 기준으로 삼으세요.",
-    "세안·운전·운동은 허용 시점과 시야·불편 정도를 함께 확인한 뒤 단계적으로 재개하고, 갑작스러운 시력 변화나 심한 통증이 있으면 안내받은 연락 방법으로 확인하세요. 이 페이지는 일반 정보 안내입니다.",
+    "일상 복귀 전 스스로 확인할 질문은 ‘세안·샤워 시 눈 보호 안내를 지켰는지’, ‘운전 전 시야·눈부심을 실제로 점검했는지’, ‘운동 강도 제한을 받았는지’입니다. 갑작스러운 시력 변화나 심한 통증이 있으면 안내받은 연락 방법으로 확인하세요. 이 페이지는 일반 정보 안내입니다.",
   ],
   thumbnail: TOPIC_MEDIA.recovery.thumbnail,
-  topImages: [TOPIC_MEDIA.recovery.thumbnail],
+  topImages: [TOPIC_MEDIA.recovery.pageHero!],
   bodyImage: TOPIC_MEDIA.recovery.secondaryImage,
-  heroImage: TOPIC_MEDIA.recovery.thumbnail,
+  heroImage: TOPIC_MEDIA.recovery.pageHero!,
   secondaryImage: TOPIC_MEDIA.recovery.secondaryImage,
   repeatImage: null,
   inlineImage: TOPIC_MEDIA.recovery.secondaryImage,
@@ -174,6 +174,7 @@ export const RECOVERY_PAGE: ContentPage = {
           },
         ],
       },
+      sectionImage: GUIDE_SECTION_IMAGES.daily,
     },
     {
       id: "recovery-urgent",

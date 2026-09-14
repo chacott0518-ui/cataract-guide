@@ -4,7 +4,7 @@ import { ROUTES } from "@/config/routes";
 import { CONTENT_PAGES } from "@/content/pages";
 import { absoluteUrl } from "@/lib/site-url";
 
-const HOME_LAST_MODIFIED = "2026-08-26";
+const HOME_LAST_MODIFIED = "2026-09-14";
 const INFO_HUB_LAST_MODIFIED = "2026-08-12";
 
 /** 색인 대상: 홈 + 핵심 6개 + 정보가이드 17개 + 의료정보 허브. redirect·칼럼 URL 제외 */

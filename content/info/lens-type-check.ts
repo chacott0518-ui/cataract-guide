@@ -1,5 +1,6 @@
 import { ROUTES } from "@/config/routes";
 import { SITE } from "@/config/site";
+import { GUIDE_SECTION_IMAGES } from "@/config/media";
 import {
   INFO_GUIDE_OFFICIAL_SOURCES,
   INFO_GUIDE_V2_PUBLISHED_AT,
@@ -28,8 +29,8 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
   infoCardDescription:
     "단초점·다초점 인공수정체의 기본 차이와 상담에서 확인하면 좋은 질문을 안내합니다.",
   intro: [
-    "노안백내장 렌즈 상담에서는 단초점과 다초점이라는 표현을 자주 접하게 됩니다. 두 방식은 초점을 맺는 원리와 특성이 다르므로, 어느 쪽이 본인에게 맞는지는 검사 결과와 생활패턴을 함께 고려해 상담에서 확인해야 합니다.",
-    "연속초점렌즈(연속초점 렌즈, 초점심도확장 계열)도 시야 목표가 다르게 설명되는 경우가 있어, 단초점·다초점과 함께 선택 관점을 비교해 두는 편이 도움이 됩니다. 이 글은 일반적인 차이와 상담 확인점을 정리하며, 특정 방식이 모두에게 더 우수하다고 단정하지 않습니다.",
+    "노안백내장 렌즈 상담에서는 단초점과 다초점이라는 표현을 자주 접하게 됩니다. 이 페이지는 단초점·다초점·연속초점(초점심도확장)의 특성과 차이를 비교하는 안내이며, 인공수정체 제품·허가 확인은 별도 페이지에서 다룹니다.",
+    "고객 판단의 핵심은 ‘어떤 렌즈가 최고인가’가 아니라 ‘내 생활에서 중요한 거리와 감수할 특성을 상담에서 어떻게 전달할 것인가’입니다. 특정 방식이 모두에게 더 우수하다고 단정하지 않습니다.",
   ],
   hubContextLink: {
     before: "렌즈 종류 외에 노안백내장 전체 흐름까지 함께 보려면 ",
@@ -38,7 +39,7 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
     href: "/",
   },
   publishedAt: INFO_GUIDE_V2_PUBLISHED_AT,
-  updatedAt: "2026-08-26",
+  updatedAt: "2026-09-14",
   faqIds: [
     "lens-type-01",
     "lens-type-02",
@@ -49,7 +50,7 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
   faqTitle: "노안백내장 단초점·다초점 차이 자주 묻는 질문",
   conclusion: [
     "단초점, 다초점, 연속초점(초점심도확장) 계열은 시야 목표와 특성이 다를 수 있습니다. 어느 쪽이 더 우수하다고 일률적으로 말하기 어렵고, 눈 상태와 생활패턴에 따라 상담에서 함께 확인해야 하는 사안입니다.",
-    "이 글은 일반적인 의료정보 제공을 목적으로 하며 개인의 진단·처방을 대신하지 않습니다.",
+    "제품·허가·확인 항목은 인공수정체 정보 안내에서, 운전·독서·PC 등 생활 요구는 목표 거리 상담에서 이어서 보세요. 에스앤비안과의원 상담에서도 개인별 선택 기준을 설명할 수 있으며, 이 글은 일반적인 의료정보로 개인의 진단·처방을 대신하지 않습니다.",
   ],
   thumbnail: IMAGE,
   topImages: [],
@@ -116,7 +117,7 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
         "단초점은 일반적으로 한 거리에 초점을 맞추도록 설계되고, 다초점은 여러 거리에 초점을 맞추도록 설계된 방식입니다. 설계 방식이 다르므로 특성과 한계도 다르게 나타날 수 있습니다.",
       paragraphs: [
         "단초점 렌즈를 사용하면 특정 거리에서는 선명하게 볼 수 있지만, 다른 거리를 볼 때는 안경을 함께 사용하는 경우가 많다고 알려져 있습니다. 다초점 렌즈는 여러 거리에 대응하도록 설계되지만 야간 빛 번짐 등 별도로 고려할 특성이 있을 수 있습니다.",
-        "두 방식 모두 절대적으로 우수한 방식이라고 단정할 수 없으며, 개인의 눈 상태와 기대하는 생활 방식에 따라 적합성이 달라질 수 있습니다.",
+        "상담에서 고객이 먼저 정리할 판단 포인트는 ‘밤에 운전이 많은지’, ‘근거리 작업(독서·스마트폰) 비중이 큰지’, ‘중간거리(모니터)가 중요한지’입니다. 두 방식 모두 절대적으로 우수하다고 단정할 수 없습니다.",
       ],
       comparison: {
         left: {
@@ -128,6 +129,7 @@ export const LENS_TYPE_CHECK_PAGE: ContentPage = {
           text: "여러 거리 대응 설계. 야간 빛 번짐 등 별도 특성을 함께 고려",
         },
       },
+      sectionImage: GUIDE_SECTION_IMAGES.lens,
       relatedHref: ROUTES.iolInfoCheck,
       relatedLabel: "노안백내장 인공수정체 정보 확인 보기",
     },

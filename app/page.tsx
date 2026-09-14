@@ -1,8 +1,8 @@
-import { PartnershipCTA } from "@/components/advertising/AdInquiryBanner";
 import {
   ArticleBody,
   HomeIntroBlock,
 } from "@/components/content/ArticleBody";
+import { ClinicTrustSection } from "@/components/content/ClinicTrustSection";
 import { ContentCardGrid } from "@/components/content/ContentCardGrid";
 import { ContentIndex } from "@/components/content/ContentIndex";
 import { ExamNoticeBox } from "@/components/content/ExamNoticeBox";
@@ -21,6 +21,7 @@ import {
 import {
   faqPageJsonLd,
   itemListJsonLd,
+  medicalClinicJsonLd,
   organizationJsonLd,
   webPageJsonLd,
   websiteJsonLd,
@@ -28,10 +29,11 @@ import {
 
 /** datePublished 고정 — 본문 수정 시에만 dateModified를 갱신 */
 const HOME_PUBLISHED = "2026-07-22";
-const HOME_MODIFIED = "2026-08-26";
+const HOME_MODIFIED = "2026-09-14";
 
 export default function HomePage() {
   const faqs = getFaqsByIds([...HOME_FAQ_IDS]);
+  const clinicLd = medicalClinicJsonLd();
 
   return (
     <>
@@ -46,13 +48,12 @@ export default function HomePage() {
             paragraphs={HOME_INTRO.paragraphs}
             summary={HOME_INTRO.summary}
             featureImage={HOME_INTRO.featureImage}
+            featureImageMobile={HOME_INTRO.featureImageMobile}
           />
 
           <ContentCardGrid />
 
           <InfoGuideCards />
-
-          <PartnershipCTA variant="top" />
 
           <ContentIndex items={HOME_INDEX} />
 
@@ -67,12 +68,13 @@ export default function HomePage() {
             className="cg-main-faq"
           />
 
-          <PartnershipCTA variant="bottom" />
+          <ClinicTrustSection />
         </div>
       </div>
       <JsonLd
         data={[
           organizationJsonLd(),
+          ...(clinicLd ? [clinicLd] : []),
           websiteJsonLd(),
           webPageJsonLd({
             name: SITE.name,

@@ -1,11 +1,11 @@
 import type { CSSProperties } from "react";
 
-import { PartnershipCTA } from "@/components/advertising/AdInquiryBanner";
 import { ArticleBody } from "@/components/content/ArticleBody";
 import { ArticleConclusion } from "@/components/content/ArticleConclusion";
 import { ArticleImagePair } from "@/components/content/ArticleImagePair";
 import { ArticleIntro } from "@/components/content/ArticleIntro";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { ClinicDoctorsSection } from "@/components/content/ClinicDoctorsSection";
 import { ContentCardGrid } from "@/components/content/ContentCardGrid";
 import { FaqAccordion } from "@/components/content/FaqList";
 import { FaqHubCard } from "@/components/content/FaqHubCard";
@@ -26,6 +26,7 @@ import {
   articleJsonLd,
   breadcrumbJsonLd,
   faqPageJsonLd,
+  medicalClinicJsonLd,
   webPageJsonLd,
 } from "@/lib/schema";
 import type { ContentPage, TocItem } from "@/types/content";
@@ -71,7 +72,7 @@ function resolveTopImages(page: ContentPage) {
 
 /**
  * 범용 정보형 아티클 템플릿.
- * 업종·키워드·이미지 경로는 content/config에서만 주입한다.
+ * 본문 CTA 배너는 floating으로 이관 — 중간 중복 CTA 없음.
  */
 export function ArticleTemplate({ page }: ArticleTemplateProps) {
   const pageFaqs = getPageFaqs(page);
@@ -101,6 +102,7 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
     schemaFaqs.length > 0 &&
     (isFaqCanonical || (page.officialSources?.length ?? 0) > 0);
 
+  const clinicLd = medicalClinicJsonLd();
   const schemas = [
     webPageJsonLd({
       name: page.heading,
@@ -116,30 +118,32 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
       { name: SITE.name, path: "/" },
       { name: breadcrumbLabel, path: page.href },
     ]),
+    ...(clinicLd ? [clinicLd] : []),
     ...(isFaqCanonical ? [] : [articleJsonLd(page)]),
     ...(includeFaqSchema ? [faqPageJsonLd(schemaFaqs, page.href)] : []),
   ];
+
+  const showDoctors = [
+    "hospital",
+    "preExam",
+    "cost",
+    "iolInfoCheck",
+    "lensTypeCheck",
+    "targetDistanceConsult",
+    "recovery",
+    "precautions",
+  ].includes(page.id);
 
   const accentStyle = {
     "--page-accent": page.accentColor,
     "--page-accent-hover": page.accentHoverColor,
   } as CSSProperties;
 
-  /** 신규 InfoGuide 전용 플래그(showPublishedDate)로 상단 레이아웃 순서를 분기한다. */
   const isInfoGuide = page.showPublishedDate === true;
 
-  const partnerCardSection = (
-    <>
-      {showContentCards ? (
-        <ContentCardGrid
-          activeHref={page.href}
-          showIntro={showGuideHeading}
-        />
-      ) : null}
-
-      {showContentCards ? <PartnershipCTA variant="top" /> : null}
-    </>
-  );
+  const partnerCardSection = showContentCards ? (
+    <ContentCardGrid activeHref={page.href} showIntro={showGuideHeading} />
+  ) : null;
 
   const headerBlock = (
     <header className="cg-article-start">
@@ -177,80 +181,71 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
             ]}
           />
 
-          {isInfoGuide ? partnerCardSection : null}
+          {isInfoGuide ? (
+            <>
+              {partnerCardSection}
+              {headerBlock}
+            </>
+          ) : (
+            <>
+              {headerBlock}
+              {partnerCardSection}
+            </>
+          )}
 
-          {headerBlock}
+          {leadQuestion ? (
+            <p className="cg-article-lead-q">{leadQuestion}</p>
+          ) : null}
 
           {topImages.length > 0 ? (
             <ArticleImagePair images={topImages} priority />
           ) : null}
 
-          {isInfoGuide ? null : partnerCardSection}
+          {page.intro ? <ArticleIntro paragraphs={page.intro} /> : null}
+
+          {page.hubContextLink ? (
+            <HubContextLink link={page.hubContextLink} />
+          ) : null}
+
+          {page.keySummary && page.keySummary.length > 0 ? (
+            <KeySummaryCards items={page.keySummary} />
+          ) : null}
+
+          {toc.length > 0 ? <TableOfContents items={toc} /> : null}
 
           {bodyImage ? (
             <ArticleImagePair images={[bodyImage]} priority={false} />
           ) : null}
 
-          {/* 모바일 UX 개선 범위: 긴 질문형 제목(또는 도입부) ~ 하단 CTA. 관련 콘텐츠는 제외 */}
-          <div
-            className="cg-article-mobile-enhanced"
-            data-article-body="true"
-          >
-            {leadQuestion ? (
-              <h2 className="cg-article-lead-question">{leadQuestion}</h2>
-            ) : null}
+          <ArticleBody sections={page.sections} />
 
-            <ArticleIntro paragraphs={page.intro} />
-
-            {page.keySummary && page.keySummary.length > 0 ? (
-              <KeySummaryCards
-                title={`${displayH1} 핵심요약`}
-                items={page.keySummary}
-              />
-            ) : null}
-
-            {page.hubContextLink ? (
-              <HubContextLink link={page.hubContextLink} />
-            ) : null}
-
-            {toc.length > 0 ? <TableOfContents items={toc} /> : null}
-
-            <ArticleBody
-              sections={page.sections}
-              repeatImage={page.repeatImage}
-              repeatImageBeforeSectionNumber={
-                page.repeatImageBeforeSectionNumber ?? undefined
-              }
+          {pageFaqs.length > 0 ? (
+            <FaqAccordion
+              items={pageFaqs}
+              title={page.faqTitle}
+              id="faq"
+              numberLabel={String(page.sections.length + 1).padStart(2, "0")}
+              className="cg-page-faq"
             />
+          ) : null}
 
-            {pageFaqs.length > 0 ? (
-              <FaqAccordion
-                items={pageFaqs}
-                title={page.faqTitle}
-                id="faq"
-                numberLabel={String(page.sections.length + 1).padStart(2, "0")}
-                className="cg-page-faq"
-              />
-            ) : null}
+          {relatedGuides.length > 0 ? (
+            <RelatedInfoGuides guides={relatedGuides} />
+          ) : null}
 
-            {relatedGuides.length > 0 ? (
-              <RelatedInfoGuides guides={relatedGuides} />
-            ) : null}
+          {page.conclusion ? (
+            <ArticleConclusion body={page.conclusion} heading="결론" />
+          ) : null}
 
-            {page.conclusion ? (
-              <ArticleConclusion body={page.conclusion} heading="결론" />
-            ) : null}
+          <HealthInformationNotice />
 
-            <HealthInformationNotice />
+          {showDoctors ? <ClinicDoctorsSection compact /> : null}
 
-            {page.officialSources && page.officialSources.length > 0 ? (
-              <OfficialSources sources={page.officialSources} />
-            ) : null}
+          {page.officialSources && page.officialSources.length > 0 ? (
+            <OfficialSources sources={page.officialSources} />
+          ) : null}
 
-            {showFaqHub ? <FaqHubCard card={FAQ_HUB_CARD} /> : null}
-
-            <PartnershipCTA variant="bottom" />
-          </div>
+          {showFaqHub ? <FaqHubCard card={FAQ_HUB_CARD} /> : null}
 
           <RelatedPages currentId={page.id} />
         </div>

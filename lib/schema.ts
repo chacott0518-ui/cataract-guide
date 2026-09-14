@@ -1,4 +1,5 @@
-import { SITE } from "@/config/site";
+import { CLINIC } from "@/config/clinic";
+import { medicalClinicEntity, SITE } from "@/config/site";
 import { CONTENT_CARDS } from "@/lib/content-registry";
 import { toIso8601Kst } from "@/lib/dates";
 import { absoluteUrl } from "@/lib/site-url";
@@ -7,6 +8,7 @@ import type { FaqItem } from "@/types/faq";
 
 const DEFAULT_OG_IMAGE = "/images/og/cataractguide-kakao.png";
 
+/** 사이트 브랜드 Organization (노안백내장) — 검색 주제 */
 export function organizationJsonLd() {
   const orgId = absoluteUrl("/#organization");
   return {
@@ -17,6 +19,34 @@ export function organizationJsonLd() {
     url: absoluteUrl("/"),
     description: SITE.tagline,
     logo: absoluteUrl("/icon.svg"),
+  };
+}
+
+/**
+ * 의료기관 MedicalClinic — 화면에 표시되는 에스앤비안과의원 사실과 동일.
+ */
+export function medicalClinicJsonLd() {
+  if (!medicalClinicEntity.enabled) return null;
+
+  const clinicId = absoluteUrl("/#medical-clinic");
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalClinic",
+    "@id": clinicId,
+    name: CLINIC.name,
+    legalName: CLINIC.legalName,
+    alternateName: [CLINIC.brandName, CLINIC.legalName],
+    url: CLINIC.officialSiteUrl,
+    telephone: CLINIC.phoneDisplay,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "논현로 842 압구정빌딩 9층",
+      addressLocality: "강남구",
+      addressRegion: "서울특별시",
+      addressCountry: "KR",
+    },
+    logo: absoluteUrl(CLINIC.logoPath),
+    image: absoluteUrl(CLINIC.logoPath),
   };
 }
 
@@ -32,6 +62,9 @@ export function websiteJsonLd() {
     publisher: {
       "@id": absoluteUrl("/#organization"),
     },
+    ...(medicalClinicEntity.enabled
+      ? { about: { "@id": absoluteUrl("/#medical-clinic") } }
+      : {}),
   };
 }
 
@@ -66,6 +99,13 @@ export function webPageJsonLd(options: {
     isPartOf: {
       "@id": `${absoluteUrl("/")}#website`,
     },
+    ...(medicalClinicEntity.enabled
+      ? {
+          sourceOrganization: {
+            "@id": absoluteUrl("/#medical-clinic"),
+          },
+        }
+      : {}),
     ...(options.image
       ? { image: absoluteUrl(options.image) }
       : { image: absoluteUrl(DEFAULT_OG_IMAGE) }),
@@ -93,6 +133,24 @@ export function itemListJsonLd() {
   };
 }
 
+/** /의료정보 허브 — 가이드 디렉터리용 ItemList (FAQPage 대체) */
+export function infoHubItemListJsonLd(
+  entries: Array<{ title: string; href: string; description: string }>,
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "노안백내장 의료정보 가이드",
+    itemListElement: entries.map((entry, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: entry.title,
+      url: absoluteUrl(entry.href),
+      description: entry.description,
+    })),
+  };
+}
+
 export function breadcrumbJsonLd(
   items: Array<{ name: string; path: string }>,
 ) {
@@ -110,7 +168,6 @@ export function breadcrumbJsonLd(
 
 /**
  * 게시·수정일이 콘텐츠 데이터에 있을 때만 Article을 사용한다.
- * 가짜 작성자·기관 정보는 넣지 않는다.
  */
 export function articleJsonLd(page: ContentPage) {
   const pageUrl = absoluteUrl(page.href);
@@ -133,6 +190,12 @@ export function articleJsonLd(page: ContentPage) {
     isPartOf: {
       "@id": `${absoluteUrl("/")}#website`,
     },
+    ...(medicalClinicEntity.enabled
+      ? {
+          publisher: { "@id": absoluteUrl("/#organization") },
+          sourceOrganization: { "@id": absoluteUrl("/#medical-clinic") },
+        }
+      : {}),
   };
 }
 

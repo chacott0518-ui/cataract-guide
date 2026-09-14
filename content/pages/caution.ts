@@ -15,7 +15,7 @@ export const CAUTION_PAGE: ContentPage = {
 
   heading: "노안백내장 주의사항, 수술 전후 무엇을 확인해야 할까요?",
   intro: [
-    "노안백내장 수술 전후에는 검사 준비, 당일 안내, 생활 관리와 이상 증상 확인이 이어집니다. 개인 상태와 의료진 안내에 따라 세부 내용은 달라질 수 있으므로, 일반적인 확인 관점으로 정리해 두었습니다.",
+    "노안백내장 수술 전후에는 검사 준비, 당일 안내, 생활 관리와 이상 증상 확인이 이어집니다. 회복기간 안내와 역할을 나누면, 이 페이지는 ‘지금 당장 지킬 것·피해야 할 것·바로 연락할 증상’에 초점을 둡니다.",
     "복용 약·기존 질환·알레르기와 생활 방식을 미리 정리하고, 수술 당일·이후에는 안약·세안·운동·외출 관리를 안내 범위에서 지키는 것이 중요합니다. 부작용이 전혀 없다고 보장할 수는 없습니다.",
   ],
   hubContextLink: {
@@ -39,9 +39,9 @@ export const CAUTION_PAGE: ContentPage = {
     "갑작스러운 시야 변화나 심한 통증이 있으면 안내받은 연락 방법으로 확인하세요. 이 페이지는 일반 정보 안내이며, 개인의 진단·치료 결정을 대체하지 않습니다.",
   ],
   thumbnail: TOPIC_MEDIA.precautions.thumbnail,
-  topImages: [TOPIC_MEDIA.precautions.thumbnail],
+  topImages: [TOPIC_MEDIA.precautions.pageHero!],
   bodyImage: TOPIC_MEDIA.precautions.secondaryImage,
-  heroImage: TOPIC_MEDIA.precautions.thumbnail,
+  heroImage: TOPIC_MEDIA.precautions.pageHero!,
   secondaryImage: TOPIC_MEDIA.precautions.secondaryImage,
   repeatImage: null,
   inlineImage: TOPIC_MEDIA.precautions.secondaryImage,

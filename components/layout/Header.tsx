@@ -76,7 +76,7 @@ export function Header() {
             <div className="cg-header-actions">
               {CONTACT.kakaoEnabled ? (
                 <a
-                  className="cg-action-btn cg-header-kakao"
+                  className="cg-action-btn cg-header-kakao cg-header-kakao--pc"
                   href={CONTACT.kakaoUrl}
                   target="_blank"
                   rel="noopener noreferrer"

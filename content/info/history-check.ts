@@ -38,7 +38,7 @@ export const HISTORY_CHECK_PAGE: ContentPage = {
     href: "/",
   },
   publishedAt: INFO_GUIDE_V2_PUBLISHED_AT,
-  updatedAt: INFO_GUIDE_V2_PUBLISHED_AT,
+  updatedAt: "2026-09-14",
   faqIds: [
     "history-check-01",
     "history-check-02",
@@ -135,10 +135,10 @@ export const HISTORY_CHECK_PAGE: ContentPage = {
         "진단명이 정확히 기억나지 않더라도 언제, 어떤 증상으로 진료를 받았는지 정리해 두면 상담에서 의료진이 맥락을 파악하는 데 참고가 될 수 있습니다.",
       ],
       bullets: [
-        "과거 안과 질환 진단 이력(녹내장, 망막 질환 등)",
-        "안과 수술·레이저 치료 이력과 시기",
+        "과거 안과 질환·수술·레이저 치료 이력(라식·라섹 등 시력교정술 포함)",
+        "망막·황반 등 동반 안질환·치료력",
         "당뇨, 고혈압 등 전신 질환 여부",
-        "약물·기타 알레르기 이력",
+        "복용 약·약물·기타 알레르기 이력",
         "가족 중 비슷한 안과 질환 병력",
       ],
       relatedHref: ROUTES.medicationCheck,

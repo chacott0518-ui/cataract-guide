@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { MobileContactBar } from "@/components/layout/MobilePhoneBar";
+import { ClinicFloatingNav } from "@/components/layout/ClinicFloatingNav";
 import { ScrollToTopOnNavigate } from "@/components/layout/ScrollToTopOnNavigate";
 import { HOME_SEO } from "@/content/pages/home";
 import { buildPageMetadata, DEFAULT_OG_IMAGE } from "@/lib/metadata";
@@ -92,7 +92,7 @@ export default function RootLayout({
         </main>
 
         <Footer />
-        <MobileContactBar />
+        <ClinicFloatingNav />
       </body>
     </html>
   );
