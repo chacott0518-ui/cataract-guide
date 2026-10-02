@@ -116,11 +116,11 @@ export const HOME_FEATURE_IMAGE: ContentImage = {
 };
 
 /**
- * HOME 모바일 대표 이미지 — static src (optimizer/query 없음).
+ * HOME 모바일 LCP — static src (optimizer/query 없음).
  * preload href 와 img src 가 반드시 동일해야 한다.
  */
 export const HOME_MOBILE_HERO_IMAGE: ContentImage = {
-  src: "/images/노안백내장/노안백내장-hero-mobile-sm.webp",
+  src: "/images/노안백내장/노안백내장-hero-mobile-lcp.webp",
   alt: "노안백내장 검사·렌즈 상담 판단 포인트를 담은 모바일 대표 이미지",
   width: 750,
   height: 938,

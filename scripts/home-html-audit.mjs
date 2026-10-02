@@ -162,16 +162,59 @@ else if (
   ok("card5 lens href+title");
 else warn("card5 lens href/title partial");
 
-const heroRaw = "/images/노안백내장/노안백내장-hero-mobile-sm.webp";
-const hasHeroPreload = html.includes("hero-mobile-sm.webp");
+const heroRaw = "/images/노안백내장/노안백내장-hero-mobile-lcp.webp";
+const hasHeroPreload =
+  /rel=["']preload["'][^>]*href=["'][^"']*hero-mobile-lcp\.webp["']/i.test(
+    html,
+  ) ||
+  /href=["'][^"']*hero-mobile-lcp\.webp["'][^>]*rel=["']preload["']/i.test(
+    html,
+  );
 const hasHeroImg =
-  html.includes(`src="${heroRaw}"`) || html.includes("hero-mobile-sm.webp");
-if (hasHeroPreload && hasHeroImg) ok("mobile hero preload/src static sm webp");
-else fail(`mobile hero static mismatch preload=${hasHeroPreload} img=${hasHeroImg}`);
+  html.includes(`src="${heroRaw}"`) ||
+  /cg-home-feature__img--mobile[^>]*src=["'][^"']*hero-mobile-lcp\.webp["']/i.test(
+    html,
+  );
+if (hasHeroPreload && hasHeroImg)
+  ok("mobile hero preload/src static hero-mobile-lcp.webp");
+else
+  fail(
+    `mobile hero static mismatch preload=${hasHeroPreload} img=${hasHeroImg}`,
+  );
 
 if (/cg-home-feature__img--mobile[^>]*src=["']\/_next\/image/i.test(html))
-  warn("mobile hero img still via /_next/image");
+  fail("mobile hero img still via /_next/image");
 else ok("HOME mobile hero uses static img src");
+
+if (
+  /rel=["']preload["'][^>]*href=["'][^"']*\/_next\/image/i.test(html) ||
+  /href=["'][^"']*\/_next\/image[^"']*["'][^>]*rel=["']preload["']/i.test(html)
+)
+  fail("preload uses /_next/image");
+else ok("no /_next/image preload");
+
+if (
+  /rel=["']preload["'][^>]*href=["'][^"']*w=3840/i.test(html) ||
+  /href=["'][^"']*w=3840[^"']*["'][^>]*rel=["']preload["']/i.test(html)
+)
+  fail("preload uses w=3840");
+else ok("no w=3840 preload");
+
+/** Fail only on font-file preload (woff2) or as=font — desktop.css+media is OK */
+const fontPreloadBad = [...html.matchAll(/<link[^>]+rel=["']preload["'][^>]*>/gi)]
+  .map((m) => m[0])
+  .some((tag) => {
+    if (/as=["']font["']/i.test(tag)) return true;
+    if (/Pretendard[^"']*\.woff2/i.test(tag)) return true;
+    if (
+      /pretendard/i.test(tag) &&
+      !/media=["'][^"']*min-width:\s*768px/i.test(tag)
+    )
+      return true;
+    return false;
+  });
+if (fontPreloadBad) fail("mobile Pretendard/font preload present");
+else ok("no mobile Pretendard/font-file preload");
 
 const napNeedles = [
   "에스앤비안과의원",

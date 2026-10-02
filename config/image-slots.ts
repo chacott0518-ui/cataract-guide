@@ -47,15 +47,16 @@ export const HERO_PC_SLOT: ImageSlotSpec = slot({
 
 export const HERO_MOBILE_SLOT: ImageSlotSpec = slot({
   id: "hero-mobile",
-  targetSrc: `${BASE}/노안백내장-hero-mobile.webp`,
+  /** LCP 전용 경량 파일 — HOME preload/img src와 동일 경로 */
+  targetSrc: `${BASE}/노안백내장-hero-mobile-lcp.webp`,
   alt: "노안백내장 검사·렌즈 상담 판단 포인트를 담은 모바일 대표 이미지",
-  masterPc: { width: 1080, height: 1350 },
-  masterMobile: { width: 1080, height: 1350 },
+  masterPc: { width: 750, height: 938 },
+  masterMobile: { width: 750, height: 938 },
   renderPc: "숨김",
-  renderMobile: "100vw, 4:5, object-fit:contain",
+  renderMobile: "100vw, 4:5, object-fit:contain, static img + preload",
   aspectCss: "4 / 5",
   objectFit: "contain",
-  placement: "HOME HomeIntroBlock Mobile",
+  placement: "HOME HomeIntroBlock Mobile LCP",
   applyUrl: "/",
 });
 
