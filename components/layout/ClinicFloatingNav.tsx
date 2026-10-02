@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useState } from "react";
 
+import { ClinicDirectionsLink } from "@/components/content/ClinicDirectionsLink";
 import { CLINIC } from "@/config/clinic";
 import { CONTACT } from "@/config/contact";
 
@@ -24,18 +25,6 @@ export function ClinicFloatingNav() {
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
-  };
-
-  /** 병원정보 영역이 있으면 페이지 안에서 이동, 없으면 기존 외부 링크 유지 */
-  const goToClinicInfo = (event: MouseEvent<HTMLAnchorElement>) => {
-    const target = document.getElementById("clinic-info");
-    if (!target) return;
-    event.preventDefault();
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    target.scrollIntoView({
-      behavior: reduce ? "auto" : "smooth",
-      block: "start",
-    });
   };
 
   return (
@@ -128,19 +117,16 @@ export function ClinicFloatingNav() {
         </svg>
         <span>카톡상담</span>
       </a>
-      <a
+      <ClinicDirectionsLink
         className="cg-mobile-dock__item cg-mobile-dock__item--map"
-        href={CONTACT.locationUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={goToClinicInfo}
+        aria-label="오시는길 — 병원 정보로 이동"
       >
         <svg className="cg-mobile-dock__icon" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z" />
           <circle cx="12" cy="9.5" r="2.5" />
         </svg>
         <span>오시는길</span>
-      </a>
+      </ClinicDirectionsLink>
       <button
         type="button"
         className="cg-mobile-dock__item cg-mobile-dock__item--top"

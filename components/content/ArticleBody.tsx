@@ -147,7 +147,7 @@ export function HomeIntroBlock({
               className="cg-home-hero__img cg-home-hero__img--mobile"
               style={{ width: "100%", height: "auto" }}
               loading="eager"
-              decoding="async"
+              decoding="sync"
               fetchPriority="high"
             />
           ) : null}

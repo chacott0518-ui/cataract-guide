@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { ClinicDirectionsLink } from "@/components/content/ClinicDirectionsLink";
 import { CLINIC } from "@/config/clinic";
 import { LEGAL } from "@/config/legal";
 import { topicConfig } from "@/config/topic";
@@ -71,13 +72,7 @@ export function Footer() {
         <div className="cg-footer__links">
           <ul className="cg-footer__linklist">
             <li>
-              <a
-                href={CLINIC.locationUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                오시는길
-              </a>
+              <ClinicDirectionsLink>오시는길</ClinicDirectionsLink>
             </li>
             <li>
               <a

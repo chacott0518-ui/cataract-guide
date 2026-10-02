@@ -166,52 +166,75 @@ else if (
 else warn("card5 lens href/title partial");
 
 const heroRaw = "/images/노안백내장/노안백내장-hero-mobile-lcp.webp";
-const hasHeroPreload =
-  /rel=["']preload["'][^>]*href=["'][^"']*hero-mobile-lcp\.webp["']/i.test(
-    html,
+const heroEncoded = encodeURI(heroRaw);
+
+const preloadHrefs = [...html.matchAll(/<link\b[^>]*>/gi)]
+  .map((m) => m[0])
+  .filter((tag) => /rel=["']preload["']/i.test(tag) && /as=["']image["']/i.test(tag))
+  .map((tag) => {
+    const hm = tag.match(/href=["']([^"']+)["']/i);
+    return hm ? decode(hm[1]) : "";
+  })
+  .filter(Boolean);
+
+const heroPreloadHrefs = preloadHrefs.filter(
+  (h) => h.includes("hero-mobile-lcp.webp") || h === heroRaw || h === heroEncoded,
+);
+
+const mobileHeroImgMatch =
+  html.match(
+    /cg-home-hero__img--mobile[^>]*\ssrc=["']([^"']+)["']/i,
   ) ||
-  /href=["'][^"']*hero-mobile-lcp\.webp["'][^>]*rel=["']preload["']/i.test(
-    html,
-  );
-const hasHeroImg =
-  html.includes(`src="${heroRaw}"`) ||
-  /cg-home-hero__img--mobile[^>]*src=["'][^"']*hero-mobile-lcp\.webp["']/i.test(
-    html,
+  html.match(
+    /src=["']([^"']*hero-mobile-lcp\.webp)["'][^>]*cg-home-hero__img--mobile/i,
   ) ||
-  /cg-home-feature__img--mobile[^>]*src=["'][^"']*hero-mobile-lcp\.webp["']/i.test(
-    html,
-  );
-if (hasHeroPreload && hasHeroImg)
-  ok("mobile hero preload/src static hero-mobile-lcp.webp");
+  html.match(/src=["']([^"']*hero-mobile-lcp\.webp)["']/i);
+
+const heroImgSrc = mobileHeroImgMatch ? decode(mobileHeroImgMatch[1]) : "";
+
+if (heroPreloadHrefs.length === 0) fail("hero-mobile-lcp.webp preload missing");
+else if (!heroImgSrc.includes("hero-mobile-lcp.webp"))
+  fail(`hero-mobile-lcp.webp img src missing (got ${heroImgSrc || "none"})`);
+else if (
+  heroPreloadHrefs.every(
+    (h) => h === heroImgSrc || decodeURI(h) === heroImgSrc || h === heroRaw,
+  ) &&
+  (heroImgSrc === heroRaw || heroImgSrc.endsWith("hero-mobile-lcp.webp"))
+)
+  ok(`mobile hero preload href === img src (${heroImgSrc})`);
 else
   fail(
-    `mobile hero static mismatch preload=${hasHeroPreload} img=${hasHeroImg}`,
+    `preload/src mismatch preload=${heroPreloadHrefs.join("|")} img=${heroImgSrc}`,
   );
+
+if (heroPreloadHrefs.length > 1)
+  warn(`duplicate hero image preload tags: ${heroPreloadHrefs.length}`);
+else if (heroPreloadHrefs.length === 1) ok("single hero image preload");
 
 if (
   /cg-home-hero__img--mobile[^>]*src=["']\/_next\/image/i.test(html) ||
-  /cg-home-feature__img--mobile[^>]*src=["']\/_next\/image/i.test(html)
+  /cg-home-feature__img--mobile[^>]*src=["']\/_next\/image/i.test(html) ||
+  (heroImgSrc && heroImgSrc.includes("/_next/image"))
 )
   fail("mobile hero img still via /_next/image");
 else ok("HOME mobile hero uses static img src");
 
-if (
-  /rel=["']preload["'][^>]*href=["'][^"']*\/_next\/image/i.test(html) ||
-  /href=["'][^"']*\/_next\/image[^"']*["'][^>]*rel=["']preload["']/i.test(html)
-)
+const imagePreloadTags = [...html.matchAll(/<link\b[^>]*>/gi)]
+  .map((m) => m[0])
+  .filter((tag) => /rel=["']preload["']/i.test(tag) && /as=["']image["']/i.test(tag));
+
+if (imagePreloadTags.some((tag) => /\/_next\/image/i.test(tag)))
   fail("preload uses /_next/image");
 else ok("no /_next/image preload");
 
-if (
-  /rel=["']preload["'][^>]*href=["'][^"']*w=3840/i.test(html) ||
-  /href=["'][^"']*w=3840[^"']*["'][^>]*rel=["']preload["']/i.test(html)
-)
+if (imagePreloadTags.some((tag) => /w=3840/i.test(tag)))
   fail("preload uses w=3840");
 else ok("no w=3840 preload");
 
 /** Fail only on font-file preload (woff2) or as=font — desktop.css+media is OK */
-const fontPreloadBad = [...html.matchAll(/<link[^>]+rel=["']preload["'][^>]*>/gi)]
+const fontPreloadBad = [...html.matchAll(/<link\b[^>]*>/gi)]
   .map((m) => m[0])
+  .filter((tag) => /rel=["']preload["']/i.test(tag))
   .some((tag) => {
     if (/as=["']font["']/i.test(tag)) return true;
     if (/Pretendard[^"']*\.woff2/i.test(tag)) return true;

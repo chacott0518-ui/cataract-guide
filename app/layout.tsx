@@ -5,12 +5,10 @@ import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ClinicFloatingNav } from "@/components/layout/ClinicFloatingNav";
 import { ScrollToTopOnNavigate } from "@/components/layout/ScrollToTopOnNavigate";
+import { SiteCssLoader } from "@/components/layout/SiteCssLoader";
 import { HOME_SEO } from "@/content/pages/home";
 import { buildPageMetadata, DEFAULT_OG_IMAGE } from "@/lib/metadata";
 import { absoluteUrl } from "@/lib/site-url";
-
-import "./globals.css";
-import "@/styles/header.css";
 
 const baseMetadata = buildPageMetadata({
   seo: HOME_SEO,
@@ -88,6 +86,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <SiteCssLoader />
         <a href="#main-content" className="skip-link">
           본문 바로가기
         </a>

@@ -1,3 +1,4 @@
+import { ClinicDirectionsLink } from "@/components/content/ClinicDirectionsLink";
 import { CopyAddressButton } from "@/components/content/CopyAddressButton";
 import { CLINIC } from "@/config/clinic";
 
@@ -82,9 +83,7 @@ export function ClinicInfoPanel({
         </div>
       </dl>
       <p className="cg-clinic-info__links">
-        <a href={CLINIC.locationUrl} target="_blank" rel="noopener noreferrer">
-          오시는 길·지도 안내
-        </a>
+        <ClinicDirectionsLink>오시는길</ClinicDirectionsLink>
         <a href={CLINIC.consultUrl} target="_blank" rel="noopener noreferrer">
           상담 신청
         </a>

@@ -1,3 +1,5 @@
+import { preload } from "react-dom";
+
 import { HomeIntroBlock } from "@/components/content/ArticleBody";
 import { ClinicDoctorsSection } from "@/components/content/ClinicDoctorsSection";
 import { ClinicTrustSection } from "@/components/content/ClinicTrustSection";
@@ -36,15 +38,11 @@ export default function HomePage() {
   const clinicLd = medicalClinicJsonLd();
   const mobileHeroSrc = HOME_MOBILE_HERO_IMAGE.src;
 
+  // Single LCP preload (avoid duplicate <link rel=preload> tags)
+  preload(mobileHeroSrc, { as: "image", fetchPriority: "high" });
+
   return (
     <>
-      <link
-        rel="preload"
-        as="image"
-        href={mobileHeroSrc}
-        fetchPriority="high"
-      />
-
       <div className="cg-home cg-page--enter">
         <div className="cg-container">
           <div className="cg-home-top">
