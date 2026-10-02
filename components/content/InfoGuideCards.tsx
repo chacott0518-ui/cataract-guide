@@ -1,25 +1,32 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { ROUTES } from "@/config/routes";
-import { HOME_INFO_GUIDE_CARDS } from "@/content/info";
-import type { InfoGuideCard } from "@/types/content";
+import { HOME_RELATED_GUIDES } from "@/content/pages/home";
 
-function formatCardDate(isoDate: string): string {
-  const [y, m, d] = isoDate.split("-");
-  if (!y || !m || !d) return isoDate;
-  return `${y}.${m}.${d}`;
-}
+type RelatedGuideCard = {
+  id: string;
+  href: string;
+  topicLabel: string;
+  title: string;
+  description: string;
+  image?: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
+};
 
 type InfoGuideCardsProps = {
-  cards?: InfoGuideCard[];
+  cards?: readonly RelatedGuideCard[];
 };
 
 /**
- * 메인 6개 핵심 카드 밖의 ‘노안백내장 관련 정보’ 레이어.
- * GNB/CONTENT_CARDS와 분리되어 데이터 추가만으로 카드가 늘어난다.
+ * HOME 보조 안내 — 목차카드보다 작은 compact 카드 + 최신 톤 썸네일.
  */
 export function InfoGuideCards({
-  cards = HOME_INFO_GUIDE_CARDS,
+  cards = HOME_RELATED_GUIDES,
 }: InfoGuideCardsProps) {
   if (cards.length === 0) return null;
 
@@ -28,29 +35,35 @@ export function InfoGuideCards({
       className="cg-info-guides"
       aria-labelledby="info-guides-heading"
     >
-      <header className="cg-info-guides__header">
-        <h2 id="info-guides-heading" className="cg-info-guides__title">
-          노안백내장 관련 정보
+      <header className="cg-info-guides__header cg-section-head cg-section-head--compact">
+        <h2 id="info-guides-heading" className="cg-section-head__title">
+          함께 보면 좋은 안내
         </h2>
-        <p className="cg-info-guides__subtitle">
-          노안과 백내장을 이해하고 검사·치료 상담 전 확인할 내용을 주제별로
-          정리합니다.
+        <p className="cg-section-head__lead">
+          수술비용·회복·렌즈·병원 선택 등 이어서 확인할 안내입니다.
         </p>
       </header>
 
       <ul className="cg-info-guides__list">
         {cards.map((card) => (
-          <li key={card.id}>
+          <li key={card.id} className="cg-info-guides__item">
             <Link className="cg-info-guides__card" href={card.href} scroll>
-              <span className="cg-info-guides__label">{card.topicLabel}</span>
-              <span className="cg-info-guides__card-title">{card.title}</span>
-              <span className="cg-info-guides__desc">{card.description}</span>
-              <span className="cg-info-guides__meta">
-                {formatCardDate(card.publishedAt)} · {card.topicName}
-              </span>
-              <span className="cg-info-guides__more">
-                더 읽기
-                <span aria-hidden="true"> →</span>
+              {card.image?.src ? (
+                <span className="cg-info-guides__media">
+                  <Image
+                    src={card.image.src}
+                    alt={card.image.alt}
+                    width={card.image.width || 640}
+                    height={card.image.height || 480}
+                    className="cg-info-guides__img"
+                    sizes="112px"
+                  />
+                </span>
+              ) : null}
+              <span className="cg-info-guides__body">
+                <span className="cg-info-guides__card-title">{card.title}</span>
+                <span className="cg-info-guides__label">{card.topicLabel}</span>
+                <span className="cg-info-guides__desc">{card.description}</span>
               </span>
             </Link>
           </li>
@@ -58,7 +71,7 @@ export function InfoGuideCards({
       </ul>
 
       <Link href={ROUTES.infoHub} className="cg-info-guides__all">
-        노안백내장 의료정보 전체보기 →
+        노안백내장 의료정보 전체보기
       </Link>
     </section>
   );

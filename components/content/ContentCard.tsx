@@ -1,5 +1,4 @@
 import Link from "next/link";
-import type { CSSProperties } from "react";
 
 import type { ContentCard as ContentCardType } from "@/types/content";
 
@@ -23,32 +22,25 @@ export function ContentCard({
   card,
   active = false,
 }: ContentCardProps) {
-  const style = {
-    "--card-accent": card.accentColor,
-    "--card-accent-hover": card.accentHoverColor,
-  } as CSSProperties;
-
   const src = staticSrc(card.image.src);
 
   return (
     <Link
-      className={`cg-content-card cg-content-card--${card.accent}${active ? " is-active" : ""}`}
+      className={`cg-content-card cg-content-card--${card.id}${active ? " is-active" : ""}`}
       href={card.href}
       aria-current={active ? "page" : undefined}
-      style={style}
     >
       <span className="cg-content-card__media">
         {/* eslint-disable-next-line @next/next/no-img-element -- static public image */}
         <img
           src={src}
           alt={card.image.alt}
-          width={card.image.width || 1080}
-          height={card.image.height || 1080}
+          width={1080}
+          height={1080}
           className="cg-content-card__img"
           loading="lazy"
           decoding="async"
           fetchPriority="low"
-          style={{ width: "100%", height: "100%", objectFit: "contain" }}
         />
       </span>
       <span className="cg-content-card__body">
@@ -62,10 +54,7 @@ export function ContentCard({
         <span className="cg-content-card__desc cg-content-card__desc--mobile">
           {card.mobileCardDescription}
         </span>
-        <span className="cg-content-card__more">
-          더 읽기
-          <span aria-hidden="true"> →</span>
-        </span>
+        <span className="cg-content-card__more">더 읽기</span>
       </span>
     </Link>
   );

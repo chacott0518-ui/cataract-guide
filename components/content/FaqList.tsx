@@ -32,10 +32,14 @@ export function FaqAccordion({
     >
       {showTitle ? (
         <div className="cg-section-intro">
-          {numberLabel ? (
-            <p className="cg-article-section__num">{numberLabel}</p>
-          ) : null}
-          <h2 id={`${id}-title`}>{title}</h2>
+          <h2 id={`${id}-title`} className="cg-article-section__heading">
+            {numberLabel ? (
+              <span className="cg-article-section__num" aria-hidden="true">
+                {numberLabel}
+              </span>
+            ) : null}
+            <span className="cg-article-section__heading-text">{title}</span>
+          </h2>
         </div>
       ) : null}
       <div className="cg-faq-list">

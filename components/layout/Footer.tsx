@@ -24,80 +24,111 @@ export function Footer() {
     return doc.enabled && doc.href;
   });
 
+  const privacy = LEGAL.privacyPolicy.enabled ? LEGAL.privacyPolicy.href : null;
+  const otherLinks = enabledLinks.filter((item) => item.key !== "privacyPolicy");
+
   return (
     <footer className="cg-footer">
-      <div className="cg-container">
-        <p className="cg-footer__brand">{topicConfig.siteName}</p>
+      <div className="cg-container cg-footer__grid">
+        <div className="cg-footer__brandcol">
+          <div className="cg-footer__brandrow">
+            {/* eslint-disable-next-line @next/next/no-img-element -- local SVG brand mark */}
+            <img
+              src={CLINIC.logoPath}
+              alt={CLINIC.logoAlt}
+              width={108}
+              height={33}
+              className="cg-footer__logo"
+              loading="lazy"
+              decoding="async"
+            />
+            <p className="cg-footer__brand">{topicConfig.siteName}</p>
+          </div>
+          <p className="cg-footer__note">
+            본 콘텐츠는 일반적인 건강정보 제공을 목적으로 하며,
+            <br />
+            개인의 진단이나 치료를 대신하지 않습니다.
+          </p>
+          <p className="cg-footer__copy">© 2026 {topicConfig.siteName}</p>
+        </div>
 
         <div className="cg-footer__clinic-block">
+          <p className="cg-footer__col-title">병원 정보</p>
           <p className="cg-footer__clinic">
-            병원명: {CLINIC.name} ({CLINIC.legalName} / {CLINIC.brandName})
+            {CLINIC.name} ({CLINIC.legalName} / {CLINIC.brandName})
           </p>
           <p className="cg-footer__address">주소: {CLINIC.address}</p>
           <p className="cg-footer__phone">
-            전화:{" "}
-            <a href={CLINIC.phoneTel}>{CLINIC.phoneDisplay}</a>
+            전화: <a href={CLINIC.phoneTel}>{CLINIC.phoneDisplay}</a>
           </p>
           <p className="cg-footer__hours">진료시간: {CLINIC.hoursNote}</p>
           <p className="cg-footer__biz">
             사업자등록번호: {CLINIC.businessNumber} · 대표:{" "}
             {CLINIC.representative}
           </p>
-          <p className="cg-footer__map">
-            <a
-              href={CLINIC.locationUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              지도·오시는 길
-            </a>
-            {" · "}
-            <a
-              href={`${CLINIC.officialSiteUrl}/`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              개인정보처리방침·병원 안내
-            </a>
-          </p>
         </div>
 
-        <nav className="cg-footer__family" aria-label="Family Sites">
-          <p className="cg-footer__family-label">Family Sites</p>
-          <ul className="cg-footer__family-list">
-            {FAMILY_SITES.map((site) => (
-              <li key={site.href}>
-                {site.href.startsWith("/") ? (
-                  <Link href={site.href}>{site.label}</Link>
-                ) : (
-                  <a
-                    href={site.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {site.label}
-                  </a>
-                )}
+        <div className="cg-footer__links">
+          <ul className="cg-footer__linklist">
+            <li>
+              <a
+                href={CLINIC.locationUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                오시는길
+              </a>
+            </li>
+            <li>
+              <a
+                href={CLINIC.officialSiteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                병원 안내
+              </a>
+            </li>
+            <li>
+              {privacy ? (
+                <Link href={privacy}>개인정보처리방침</Link>
+              ) : (
+                <a
+                  href={`${CLINIC.officialSiteUrl}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  개인정보처리방침
+                </a>
+              )}
+            </li>
+            {otherLinks.map((item) => (
+              <li key={item.key}>
+                <Link href={LEGAL[item.key].href!}>{item.label}</Link>
               </li>
             ))}
           </ul>
-        </nav>
 
-        <p className="cg-footer__note">
-          본 콘텐츠는 일반적인 건강정보 제공을 목적으로 하며,
-          <br />
-          개인의 진단이나 치료를 대신하지 않습니다.
-        </p>
-        <p className="cg-footer__copy">© 2026 {topicConfig.siteName}</p>
-        {enabledLinks.length > 0 ? (
-          <nav className="cg-footer__legal" aria-label="법률 문서">
-            {enabledLinks.map((item) => (
-              <Link key={item.key} href={LEGAL[item.key].href!}>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-        ) : null}
+          <details className="cg-footer__dropdown">
+            <summary className="cg-footer__dropdown-btn">Family Sites</summary>
+            <ul className="cg-footer__dropdown-menu">
+              {FAMILY_SITES.map((site) => (
+                <li key={site.href}>
+                  {site.href.startsWith("/") ? (
+                    <Link href={site.href}>{site.label}</Link>
+                  ) : (
+                    <a
+                      href={site.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {site.label}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </details>
+        </div>
       </div>
     </footer>
   );

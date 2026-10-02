@@ -9,8 +9,11 @@ const base = (process.argv[2] || "http://localhost:3000").replace(/\/$/, "");
 
 const FORBIDDEN_WORDS = [
   "제휴",
+  "제휴문의",
   "광고 제휴",
   "콘텐츠 제휴",
+  "콘텐츠 및 광고 제휴",
+  "콘텐츠 제휴가 필요하신가요",
   "개발자",
   "테스트",
   "샘플",
@@ -172,6 +175,9 @@ const hasHeroPreload =
   );
 const hasHeroImg =
   html.includes(`src="${heroRaw}"`) ||
+  /cg-home-hero__img--mobile[^>]*src=["'][^"']*hero-mobile-lcp\.webp["']/i.test(
+    html,
+  ) ||
   /cg-home-feature__img--mobile[^>]*src=["'][^"']*hero-mobile-lcp\.webp["']/i.test(
     html,
   );
@@ -182,7 +188,10 @@ else
     `mobile hero static mismatch preload=${hasHeroPreload} img=${hasHeroImg}`,
   );
 
-if (/cg-home-feature__img--mobile[^>]*src=["']\/_next\/image/i.test(html))
+if (
+  /cg-home-hero__img--mobile[^>]*src=["']\/_next\/image/i.test(html) ||
+  /cg-home-feature__img--mobile[^>]*src=["']\/_next\/image/i.test(html)
+)
   fail("mobile hero img still via /_next/image");
 else ok("HOME mobile hero uses static img src");
 

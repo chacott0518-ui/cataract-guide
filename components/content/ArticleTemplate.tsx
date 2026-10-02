@@ -2,9 +2,9 @@ import type { CSSProperties } from "react";
 
 import { ArticleBody } from "@/components/content/ArticleBody";
 import { ArticleConclusion } from "@/components/content/ArticleConclusion";
-import { ArticleImagePair } from "@/components/content/ArticleImagePair";
 import { ArticleIntro } from "@/components/content/ArticleIntro";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { ClinicInfoSection } from "@/components/content/ClinicInfoPanel";
 import { ClinicDoctorsSection } from "@/components/content/ClinicDoctorsSection";
 import { ContentCardGrid } from "@/components/content/ContentCardGrid";
 import { FaqAccordion } from "@/components/content/FaqList";
@@ -139,14 +139,12 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
     "--page-accent-hover": page.accentHoverColor,
   } as CSSProperties;
 
-  const isInfoGuide = page.showPublishedDate === true;
-
   const partnerCardSection = showContentCards ? (
     <ContentCardGrid activeHref={page.href} showIntro={showGuideHeading} />
   ) : null;
 
   const headerBlock = (
-    <header className="cg-article-start">
+    <header className="cg-article-start cg-home__header">
       {showEyebrow ? (
         <p className="cg-article-start__eyebrow">{page.categoryLabel}</p>
       ) : null}
@@ -181,27 +179,15 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
             ]}
           />
 
-          {isInfoGuide ? (
-            <>
-              {partnerCardSection}
-              {headerBlock}
-            </>
-          ) : (
-            <>
-              {headerBlock}
-              {partnerCardSection}
-            </>
-          )}
+          {headerBlock}
 
           {leadQuestion ? (
             <p className="cg-article-lead-q">{leadQuestion}</p>
           ) : null}
 
-          {topImages.length > 0 ? (
-            <ArticleImagePair images={topImages} priority />
-          ) : null}
-
           {page.intro ? <ArticleIntro paragraphs={page.intro} /> : null}
+
+          {partnerCardSection}
 
           {page.hubContextLink ? (
             <HubContextLink link={page.hubContextLink} />
@@ -213,11 +199,27 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
 
           {toc.length > 0 ? <TableOfContents items={toc} /> : null}
 
-          {bodyImage ? (
-            <ArticleImagePair images={[bodyImage]} priority={false} />
+          <ArticleBody
+            sections={page.sections}
+            decorateImages={[
+              ...topImages,
+              ...(bodyImage ? [bodyImage] : []),
+            ].filter(
+              (img, i, arr) =>
+                Boolean(img?.src) &&
+                arr.findIndex((x) => x.src === img.src) === i,
+            )}
+          />
+
+          {page.conclusion ? (
+            <ArticleConclusion body={page.conclusion} heading="결론" />
           ) : null}
 
-          <ArticleBody sections={page.sections} />
+          {relatedGuides.length > 0 ? (
+            <RelatedInfoGuides guides={relatedGuides} />
+          ) : null}
+
+          <RelatedPages currentId={page.id} />
 
           {pageFaqs.length > 0 ? (
             <FaqAccordion
@@ -229,15 +231,12 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
             />
           ) : null}
 
-          {relatedGuides.length > 0 ? (
-            <RelatedInfoGuides guides={relatedGuides} />
-          ) : null}
-
-          {page.conclusion ? (
-            <ArticleConclusion body={page.conclusion} heading="결론" />
-          ) : null}
-
           <HealthInformationNotice />
+
+          <ClinicInfoSection
+            publishedAt={formatDisplayDate(page.publishedAt)}
+            modifiedAt={formatDisplayDate(page.updatedAt)}
+          />
 
           {showDoctors ? <ClinicDoctorsSection compact /> : null}
 
@@ -246,8 +245,6 @@ export function ArticleTemplate({ page }: ArticleTemplateProps) {
           ) : null}
 
           {showFaqHub ? <FaqHubCard card={FAQ_HUB_CARD} /> : null}
-
-          <RelatedPages currentId={page.id} />
         </div>
       </article>
       <JsonLd data={schemas} />

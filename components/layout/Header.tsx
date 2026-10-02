@@ -69,20 +69,18 @@ export function Header() {
               aria-label={`${topicConfig.logoText} 홈`}
               onClick={closeMenu}
             >
-              <span className="cg-header-logo__mark" aria-hidden="true" />
               <span className="cg-header-logo__text">{topicConfig.logoText}</span>
             </Link>
 
             <div className="cg-header-actions">
               {CONTACT.kakaoEnabled ? (
                 <a
-                  className="cg-action-btn cg-header-kakao cg-header-kakao--pc"
+                  className="cg-header-kakao cg-header-kakao--pc"
                   href={CONTACT.kakaoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   {CONTACT.kakaoLabel}
-                  <span aria-hidden="true">→</span>
                 </a>
               ) : null}
 

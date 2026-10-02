@@ -130,8 +130,14 @@ export type ArticleSection = {
   level?: "h2" | "h3";
   /** 섹션 내 인라인 FAQ (FAQ 페이지 그룹용) */
   faqIds?: string[];
-  /** H2 흐름 하단 관련 참고 이미지 */
+  /** 섹션 좌우 배치용 이미지 */
   sectionImage?: ContentImage;
+  /**
+   * 이미지 위치.
+   * start: 이미지 좌 / 텍스트 우 (모바일: 이미지→텍스트)
+   * end: 텍스트 좌 / 이미지 우 (모바일: 이미지→텍스트)
+   */
+  mediaPosition?: "start" | "end";
 };
 
 export type ContentCard = {
@@ -262,6 +268,8 @@ export type InfoGuideCard = {
   description: string;
   publishedAt: string;
   topicName: string;
+  /** HOME 관련 안내 카드 썸네일 (1:1 영역 + cover) */
+  image?: ContentImage;
 };
 
 /** 하위 페이지 → 메인 허브 문맥링크 */

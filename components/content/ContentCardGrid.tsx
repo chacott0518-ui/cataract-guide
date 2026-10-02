@@ -7,6 +7,8 @@ type ContentCardGridProps = {
   eyebrow?: string;
   title?: string;
   description?: string;
+  /** 상세페이지 상단 — HOME 카드와 같은 톤, 크기는 compact */
+  compact?: boolean;
 };
 
 export function ContentCardGrid({
@@ -15,9 +17,13 @@ export function ContentCardGrid({
   eyebrow = "CONTENT GUIDE",
   title = "노안백내장 핵심 정보",
   description = "수술 전 확인할 내용을 주제별로 정리했습니다.",
+  compact = false,
 }: ContentCardGridProps) {
   return (
-    <section className="cg-card-grid" aria-labelledby="content-card-grid-title">
+    <section
+      className={`cg-card-grid${compact ? " cg-card-grid--compact" : ""}`}
+      aria-labelledby="content-card-grid-title"
+    >
       {showIntro ? (
         <div className="cg-section-intro">
           <p className="cg-section-intro__eyebrow">{eyebrow}</p>

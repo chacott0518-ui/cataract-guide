@@ -33,7 +33,7 @@ export function RelatedInfoGuides({ guides }: RelatedInfoGuidesProps) {
         ))}
       </ul>
       <Link href={ROUTES.infoHub} className="cg-related-guides__back">
-        ← 노안백내장 의료정보 전체보기
+        노안백내장 의료정보 전체보기
       </Link>
     </nav>
   );

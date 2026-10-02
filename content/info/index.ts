@@ -40,7 +40,7 @@ export const INFO_GUIDE_PAGES: ContentPage[] = [
 
 function toInfoCard(page: ContentPage): InfoGuideCard {
   return {
-    id: page.id as InfoGuideCard["id"],
+    id: page.id as InfoGuideId,
     href: page.href,
     topicLabel: page.infoTopicLabel || page.navLabel,
     title: page.h1,
@@ -50,7 +50,7 @@ function toInfoCard(page: ContentPage): InfoGuideCard {
   };
 }
 
-/** 홈 ‘노안백내장 관련 정보’ 섹션 대표 4개 (전체 목록은 /의료정보 허브) */
+/** 홈 ‘함께 보면 좋은 안내’ 섹션 대표 4개 */
 const HOME_INFO_GUIDE_IDS: InfoGuideId[] = [
   "preExam",
   "consultationQuestions",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 
 import { CLINIC } from "@/config/clinic";
 import { CONTACT } from "@/config/contact";
@@ -26,7 +26,20 @@ export function ClinicFloatingNav() {
     window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
   };
 
+  /** 병원정보 영역이 있으면 페이지 안에서 이동, 없으면 기존 외부 링크 유지 */
+  const goToClinicInfo = (event: MouseEvent<HTMLAnchorElement>) => {
+    const target = document.getElementById("clinic-info");
+    if (!target) return;
+    event.preventDefault();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    target.scrollIntoView({
+      behavior: reduce ? "auto" : "smooth",
+      block: "start",
+    });
+  };
+
   return (
+    <>
     <nav
       className={`cg-float-nav ${visible ? "is-visible" : ""}`}
       aria-label="빠른 상담"
@@ -80,5 +93,66 @@ export function ClinicFloatingNav() {
         <span className="cg-float-nav__label">TOP</span>
       </button>
     </nav>
+
+    <nav className="cg-mobile-dock" aria-label="모바일 빠른 메뉴">
+      <a
+        className="cg-mobile-dock__item cg-mobile-dock__item--book"
+        href={CONTACT.bookingUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg className="cg-mobile-dock__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="3.5" y="5" width="17" height="15.5" rx="2.5" />
+          <path d="M3.5 10h17M8 3v4M16 3v4" />
+        </svg>
+        <span>상담예약</span>
+      </a>
+      <a
+        className="cg-mobile-dock__item cg-mobile-dock__item--tel"
+        href={CONTACT.phoneNumber}
+        aria-label={`전화상담 ${CLINIC.phoneDisplay}`}
+      >
+        <svg className="cg-mobile-dock__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.74a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z" />
+        </svg>
+        <span>전화상담</span>
+      </a>
+      <a
+        className="cg-mobile-dock__item cg-mobile-dock__item--kakao"
+        href={CONTACT.kakaoUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <svg className="cg-mobile-dock__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-5 4v-4H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+        </svg>
+        <span>카톡상담</span>
+      </a>
+      <a
+        className="cg-mobile-dock__item cg-mobile-dock__item--map"
+        href={CONTACT.locationUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={goToClinicInfo}
+      >
+        <svg className="cg-mobile-dock__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z" />
+          <circle cx="12" cy="9.5" r="2.5" />
+        </svg>
+        <span>오시는길</span>
+      </a>
+      <button
+        type="button"
+        className="cg-mobile-dock__item cg-mobile-dock__item--top"
+        onClick={scrollTop}
+        aria-label="맨 위로"
+      >
+        <svg className="cg-mobile-dock__icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 19V5M5 12l7-7 7 7" />
+        </svg>
+        <span>TOP</span>
+      </button>
+    </nav>
+    </>
   );
 }

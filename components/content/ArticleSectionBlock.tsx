@@ -9,7 +9,6 @@ import { FaqAccordion } from "@/components/content/FaqList";
 import { CompareTable, ResponsiveTable } from "@/components/content/ResponsiveTable";
 import { StepsBlock } from "@/components/content/StepsBlock";
 import { TimelineBlock } from "@/components/content/TimelineBlock";
-import { getLayoutDecorativeIcon } from "@/config/section-icons";
 import { getFaqsByIds } from "@/content/faqs";
 import type { ArticleSection } from "@/types/content";
 
@@ -75,6 +74,7 @@ type ArticleSectionBlockProps = {
   className?: string;
 };
 
+/** 의료정보형 에디토리얼 섹션 — 본문 카드 박스 없이 좌우/1열 배치 */
 export function ArticleSectionBlock({
   section,
   showNumbers = true,
@@ -85,61 +85,79 @@ export function ArticleSectionBlock({
     section.faqIds && section.faqIds.length > 0
       ? getFaqsByIds(section.faqIds)
       : [];
-  const icon =
-    section.decorativeIcon || getLayoutDecorativeIcon(section.layout);
+  const hasMedia = Boolean(section.sectionImage?.src);
+  const reverse = hasMedia && section.mediaPosition === "end";
+
+  const rowClass = [
+    "cg-editorial-row",
+    reverse ? "cg-editorial-row--reverse" : "",
+    !hasMedia ? "cg-editorial-row--text" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <section
       id={section.id}
-      className={`cg-article-section${className ? ` ${className}` : ""}`}
+      className={`cg-editorial-section${className ? ` ${className}` : ""}`}
       aria-labelledby={`${section.id}-heading`}
     >
-      {showNumbers && section.numberLabel ? (
-        <p className="cg-article-section__num">{section.numberLabel}</p>
-      ) : null}
-      <HeadingTag id={`${section.id}-heading`}>
-        <span className="cg-article-section__icon" aria-hidden="true">
-          {icon}
-        </span>
-        <span className="cg-article-section__heading-text">
-          {section.heading}
-        </span>
-      </HeadingTag>
-      {section.directAnswer ? (
-        <p className="cg-article-section__answer">{section.directAnswer}</p>
-      ) : null}
-      {section.paragraphs.map((paragraph) => (
-        <p key={paragraph.slice(0, 40)}>{paragraph}</p>
-      ))}
-      <SectionVisuals section={section} />
-      {section.sectionImage?.src ? (
-        <figure className="cg-article-section__figure">
-          <Image
-            src={section.sectionImage.src}
-            alt={section.sectionImage.alt}
-            width={section.sectionImage.width || 1200}
-            height={section.sectionImage.height || 900}
-            className="cg-article-section__img"
-            style={{ width: "100%", height: "auto" }}
-            sizes="(max-width: 900px) 100vw, 720px"
-          />
-        </figure>
-      ) : null}
-      {section.callout ? <ArticleCallout text={section.callout} /> : null}
-      {inlineFaqs.length > 0 ? (
-        <FaqAccordion
-          items={inlineFaqs}
-          title=""
-          id={`${section.id}-faqs`}
-          className="cg-page-faq cg-inline-faq"
-        />
-      ) : null}
-      {section.relatedHref ? (
-        <RelatedArticleLink
-          href={section.relatedHref}
-          label={section.relatedLabel || "관련 내용 보기"}
-        />
-      ) : null}
+      <div className={rowClass}>
+        {hasMedia && section.sectionImage ? (
+          <figure className="cg-editorial-media">
+            <Image
+              src={section.sectionImage.src}
+              alt={section.sectionImage.alt}
+              width={section.sectionImage.width || 1200}
+              height={section.sectionImage.height || 900}
+              className="cg-editorial-media__img"
+              style={{ width: "100%", height: "auto" }}
+              sizes="(max-width: 767px) 100vw, 540px"
+            />
+          </figure>
+        ) : null}
+
+        <div className="cg-editorial-copy">
+          <HeadingTag
+            id={`${section.id}-heading`}
+            className="cg-editorial-heading"
+          >
+            {showNumbers && section.numberLabel ? (
+              <span className="cg-editorial-num" aria-hidden="true">
+                {section.numberLabel}
+              </span>
+            ) : null}
+            <span className="cg-editorial-title">{section.heading}</span>
+          </HeadingTag>
+
+          <div className="cg-editorial-text">
+            {section.directAnswer ? (
+              <p className="cg-editorial-lead">{section.directAnswer}</p>
+            ) : null}
+            {section.paragraphs.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            ))}
+            <div className="cg-editorial-visuals">
+              <SectionVisuals section={section} />
+            </div>
+            {section.callout ? <ArticleCallout text={section.callout} /> : null}
+            {inlineFaqs.length > 0 ? (
+              <FaqAccordion
+                items={inlineFaqs}
+                title=""
+                id={`${section.id}-faqs`}
+                className="cg-page-faq cg-inline-faq"
+              />
+            ) : null}
+            {section.relatedHref ? (
+              <RelatedArticleLink
+                href={section.relatedHref}
+                label={section.relatedLabel || "관련 내용 보기"}
+              />
+            ) : null}
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

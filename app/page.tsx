@@ -1,19 +1,17 @@
-import {
-  ArticleBody,
-  HomeIntroBlock,
-} from "@/components/content/ArticleBody";
+import { HomeIntroBlock } from "@/components/content/ArticleBody";
+import { ClinicDoctorsSection } from "@/components/content/ClinicDoctorsSection";
 import { ClinicTrustSection } from "@/components/content/ClinicTrustSection";
 import { ContentCardGrid } from "@/components/content/ContentCardGrid";
-import { ExamNoticeBox } from "@/components/content/ExamNoticeBox";
 import { FaqAccordion } from "@/components/content/FaqList";
+import { HomeProseSections } from "@/components/content/HomeProseSections";
 import { InfoGuideCards } from "@/components/content/InfoGuideCards";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { HOME_MOBILE_HERO_IMAGE } from "@/config/media";
 import { getFaqsByIds } from "@/content/faqs";
 import {
-  HOME_EXAM_NOTICE,
   HOME_FAQ_IDS,
   HOME_INTRO,
+  HOME_RELATED_GUIDES,
   HOME_SEO,
   HOME_SECTIONS,
 } from "@/content/pages/home";
@@ -49,24 +47,27 @@ export default function HomePage() {
 
       <div className="cg-home cg-page--enter">
         <div className="cg-container">
-          <header className="cg-page__header cg-home__header">
-            <h1 className="cg-home__title">노안백내장</h1>
-          </header>
+          <div className="cg-home-top">
+            <header className="cg-page__header cg-home__header">
+              <h1 className="cg-home__title">노안백내장</h1>
+            </header>
 
-          {/* 1) 핵심 답변 */}
-          <HomeIntroBlock
-            heading={HOME_INTRO.heading}
-            paragraphs={HOME_INTRO.paragraphs}
-            summary={HOME_INTRO.summary}
-            featureImage={HOME_INTRO.featureImage}
-            featureImageMobile={HOME_INTRO.featureImageMobile}
+            <HomeIntroBlock
+              paragraphs={HOME_INTRO.paragraphs}
+              summary={HOME_INTRO.summary}
+              featureImage={HOME_INTRO.featureImage}
+              featureImageMobile={HOME_INTRO.featureImageMobile}
+            />
+          </div>
+
+          <ContentCardGrid
+            showIntro
+            eyebrow="TOPIC GUIDE"
+            title="노안백내장 핵심 정보"
+            description="수술비용·회복·주의사항·병원 선택·렌즈·FAQ를 주제별로 확인하세요."
           />
 
-          <ContentCardGrid />
-
-          <ArticleBody sections={HOME_SECTIONS} grid={false} />
-
-          <ExamNoticeBox body={HOME_EXAM_NOTICE} />
+          <HomeProseSections sections={HOME_SECTIONS} />
 
           <ClinicTrustSection
             publishedAt={HOME_PUBLISHED}
@@ -74,14 +75,16 @@ export default function HomePage() {
             reviewerName={HOME_REVIEWER}
           />
 
+          <ClinicDoctorsSection />
+
+          <InfoGuideCards cards={HOME_RELATED_GUIDES} />
+
           <FaqAccordion
             items={faqs}
-            title="노안백내장 자주 묻는 질문"
+            title="노안백내장 자주 묻는 질문 FAQ"
             id="faq"
             className="cg-main-faq"
           />
-
-          <InfoGuideCards />
         </div>
       </div>
       <JsonLd
