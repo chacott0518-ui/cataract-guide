@@ -53,7 +53,7 @@ export const RECOVERY_PAGE: ContentPage = {
   showFaqHub: true,
   repeatImageBeforeSectionNumber: null,
   seo: {
-    title: "노안백내장 회복기간 | 노안백내장",
+    title: "노안백내장 회복기간, 일상 복귀 전 확인할 점 | 노안백내장",
     description:
       "노안백내장 회복기간은 개인차가 있으며, 세안·운전·운동 등 일상 복귀 시점과 경과 확인 시 살펴볼 점을 안내합니다.",
     keywords: [

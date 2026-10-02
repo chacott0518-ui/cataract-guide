@@ -49,7 +49,7 @@ export const FAQ_PAGE: ContentPage = {
   showFaqHub: false,
   repeatImageBeforeSectionNumber: null,
   seo: {
-    title: "노안백내장 FAQ | 노안백내장",
+    title: "노안백내장 FAQ, 검사·렌즈·회복 질문 정리 | 노안백내장",
     description:
       "노안백내장 FAQ에서 노안과 백내장 차이, 증상·검사, 수술비용·렌즈, 회복과 병원 선택에 관한 자주 묻는 질문을 주제별로 확인하세요.",
     keywords: [

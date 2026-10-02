@@ -54,7 +54,7 @@ export const HOSPITAL_PAGE: ContentPage = {
   showFaqHub: true,
   repeatImageBeforeSectionNumber: null,
   seo: {
-    title: "노안백내장 병원 선택 | 노안백내장",
+    title: "노안백내장 병원 선택, 검사·렌즈 상담 기준은? | 노안백내장",
     description:
       "노안백내장 병원 선택 시 특정 기관 추천이 아니라 검사 체계, 렌즈 상담, 비용·사후관리를 비교할 기준을 안내합니다.",
     keywords: [

@@ -53,7 +53,7 @@ export const CAUTION_PAGE: ContentPage = {
   showFaqHub: true,
   repeatImageBeforeSectionNumber: null,
   seo: {
-    title: "노안백내장 주의사항 | 노안백내장",
+    title: "노안백내장 주의사항, 수술 전후 꼭 확인할 점 | 노안백내장",
     description:
       "노안백내장 주의사항으로 수술 전 검사 준비, 당일 안내, 수술 후 생활 관리와 의료진에게 확인할 증상을 정리합니다.",
     keywords: [
