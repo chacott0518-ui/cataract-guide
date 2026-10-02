@@ -1,6 +1,6 @@
 /**
  * 2026-09-14 이미지 매핑표 기준 — 20장 WebP 확정 경로.
- * currentSrc === targetSrc (임시 placeholder 제거).
+ * currentSrc === targetSrc.
  */
 import type { ContentImage } from "@/types/content";
 
@@ -35,7 +35,7 @@ const BODY = `${BASE}/본문`;
 export const HERO_PC_SLOT: ImageSlotSpec = slot({
   id: "hero-pc",
   targetSrc: `${BASE}/노안백내장-hero-pc.webp`,
-  alt: "노안과 백내장 차이를 한눈에 정리한 노안백내장 안내 이미지",
+  alt: "노안백내장 검사와 노안·백내장 차이 안내 이미지",
   masterPc: { width: 1600, height: 900 },
   renderPc: "HOME intro ~960–1180px, 16:9, object-fit:contain",
   renderMobile: "숨김(모바일은 hero-mobile)",
@@ -48,7 +48,7 @@ export const HERO_PC_SLOT: ImageSlotSpec = slot({
 export const HERO_MOBILE_SLOT: ImageSlotSpec = slot({
   id: "hero-mobile",
   targetSrc: `${BASE}/노안백내장-hero-mobile.webp`,
-  alt: "모바일용 노안백내장 대표 안내 — 검사와 상담 판단 포인트",
+  alt: "노안백내장 검사·렌즈 상담 판단 포인트를 담은 모바일 대표 이미지",
   masterPc: { width: 1080, height: 1350 },
   masterMobile: { width: 1080, height: 1350 },
   renderPc: "숨김",

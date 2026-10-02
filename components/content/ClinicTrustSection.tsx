@@ -1,14 +1,25 @@
 import Link from "next/link";
 
+import { ClinicConsultBanner } from "@/components/advertising/AdInquiryBanner";
+import { ClinicDoctorsRail } from "@/components/content/ClinicDoctorsRail";
 import { CLINIC, CLINIC_CATARACT_EQUIPMENT } from "@/config/clinic";
 import { CLINIC_DOCTORS } from "@/config/doctors";
 import { ROUTES } from "@/config/routes";
-import { ClinicDoctorsRail } from "@/components/content/ClinicDoctorsRail";
+
+type ClinicTrustSectionProps = {
+  publishedAt?: string;
+  modifiedAt?: string;
+  reviewerName?: string;
+};
 
 /**
- * HOME 중하단 신뢰 섹션 — head-query 아래. 본문 CTA 배너 없음(floating 사용).
+ * HOME 중하단 신뢰 섹션 — NAP·의료진·검수·상담 CTA를 서버 HTML visible text로 출력.
  */
-export function ClinicTrustSection() {
+export function ClinicTrustSection({
+  publishedAt = "2026-07-22",
+  modifiedAt = "2026-10-02",
+  reviewerName = "송은석",
+}: ClinicTrustSectionProps) {
   return (
     <section
       id="clinic-visit"
@@ -23,16 +34,85 @@ export function ClinicTrustSection() {
           width={140}
           height={42}
           className="cg-clinic-trust__logo"
+          loading="lazy"
+          decoding="async"
         />
       </div>
       <h2 id="clinic-trust-heading" className="cg-clinic-trust__title">
-        {CLINIC.name}에서 확인하는 노안·백내장 검사와 상담
+        {CLINIC.brandName}({CLINIC.name}) 의료진 검수·상담으로 이어지는 노안백내장
+        안내
       </h2>
       <p className="cg-clinic-trust__lead">
         이 사이트의 검색 주제는 노안백내장이며, 진료·상담 안내는{" "}
-        {CLINIC.name}({CLINIC.legalName}) 정보를 기준으로 연결합니다. 검사
-        결과와 생활 패턴에 따라 상담 내용이 달라질 수 있습니다.
+        {CLINIC.name}({CLINIC.legalName}, 브랜드명 {CLINIC.brandName}) 정보를
+        기준으로 연결합니다. 콘텐츠는 안과전문의 {reviewerName} 원장 검수 흐름을
+        반영하며, 검사 결과와 생활 패턴에 따라 상담 내용이 달라질 수 있습니다.
       </p>
+
+      <dl className="cg-clinic-trust__nap">
+        <div>
+          <dt>병원명</dt>
+          <dd>
+            {CLINIC.name} / {CLINIC.legalName} ({CLINIC.brandName})
+          </dd>
+        </div>
+        <div>
+          <dt>주소</dt>
+          <dd>{CLINIC.address}</dd>
+        </div>
+        <div>
+          <dt>전화</dt>
+          <dd>
+            <a href={CLINIC.phoneTel}>{CLINIC.phoneDisplay}</a>
+          </dd>
+        </div>
+        <div>
+          <dt>진료시간</dt>
+          <dd>{CLINIC.hoursNote}</dd>
+        </div>
+        <div>
+          <dt>사업자등록번호</dt>
+          <dd>{CLINIC.businessNumber}</dd>
+        </div>
+        <div>
+          <dt>대표</dt>
+          <dd>{CLINIC.representative}</dd>
+        </div>
+        <div>
+          <dt>작성일</dt>
+          <dd>
+            <time dateTime={publishedAt}>{publishedAt}</time>
+          </dd>
+        </div>
+        <div>
+          <dt>수정일</dt>
+          <dd>
+            <time dateTime={modifiedAt}>{modifiedAt}</time>
+          </dd>
+        </div>
+        <div>
+          <dt>안과전문의 검수</dt>
+          <dd>
+            {reviewerName} 원장 (안과전문의) · {CLINIC.name}
+          </dd>
+        </div>
+      </dl>
+
+      <p className="cg-clinic-trust__note">
+        <a href={CLINIC.locationUrl} target="_blank" rel="noopener noreferrer">
+          오시는 길·지도 안내
+        </a>
+        {" · "}
+        <a href={CLINIC.consultUrl} target="_blank" rel="noopener noreferrer">
+          상담 신청
+        </a>
+        {" · "}
+        <a href={CLINIC.bookingUrl} target="_blank" rel="noopener noreferrer">
+          온라인 예약
+        </a>
+      </p>
+
+      <ClinicConsultBanner variant="bottom" />
 
       <ul className="cg-clinic-trust__links">
         <li>
@@ -66,7 +146,9 @@ export function ClinicTrustSection() {
         </a>
       </p>
 
-      <h3 className="cg-clinic-trust__sub">{CLINIC.brandName} 의료진</h3>
+      <h3 className="cg-clinic-trust__sub">
+        {CLINIC.brandName} · 에스앤비안과 의료진
+      </h3>
       <ClinicDoctorsRail doctors={CLINIC_DOCTORS} />
       <p className="cg-clinic-trust__note">
         <a

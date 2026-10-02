@@ -30,6 +30,7 @@ export function ClinicFloatingNav() {
     <nav
       className={`cg-float-nav ${visible ? "is-visible" : ""}`}
       aria-label="빠른 상담"
+      aria-hidden={visible ? undefined : true}
     >
       {CONTACT.phoneEnabled ? (
         <a

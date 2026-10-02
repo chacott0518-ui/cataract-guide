@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { CRITICAL_CSS } from "@/app/critical.css";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { ClinicFloatingNav } from "@/components/layout/ClinicFloatingNav";
@@ -10,13 +11,7 @@ import { absoluteUrl } from "@/lib/site-url";
 
 import "./globals.css";
 import "@/styles/header.css";
-import localFont from "next/font/local";
-const pretendard = localFont({
-  src: "../public/fonts/PretendardVariable.woff2",
-  display: "swap",
-  weight: "45 920",
-  variable: "--font-ko",
-});
+
 const baseMetadata = buildPageMetadata({
   seo: HOME_SEO,
   path: "/",
@@ -78,7 +73,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className={pretendard.variable}>
+    <html lang="ko">
+      <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: CRITICAL_CSS,
+          }}
+        />
+        {/* Desktop-only brand font — mobile does not request ~2MB woff2 */}
+        <link
+          rel="stylesheet"
+          href="/fonts/pretendard-desktop.css"
+          media="(min-width: 768px)"
+        />
+      </head>
       <body>
         <a href="#main-content" className="skip-link">
           본문 바로가기

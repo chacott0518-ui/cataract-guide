@@ -10,7 +10,7 @@
  * - URL·OWNER·콘텐츠 삭제·통합 금지. exact/near-duplicate 문장만 정리.
  */
 export const CLINIC = {
-  /** Schema·본문 Entity 표시명 */
+  /** 본문·구조화 데이터 표시명 */
   name: "에스앤비안과의원",
   /** UI 브랜드 표기 */
   brandName: "S&B안과",

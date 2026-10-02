@@ -28,13 +28,39 @@ export function Footer() {
     <footer className="cg-footer">
       <div className="cg-container">
         <p className="cg-footer__brand">{topicConfig.siteName}</p>
-        <p className="cg-footer__clinic">
-          진료·상담: {CLINIC.name} ({CLINIC.legalName})
-        </p>
-        <p className="cg-footer__address">
-          {CLINIC.address} · {CLINIC.phoneDisplay}
-        </p>
-        <p className="cg-footer__hours">{CLINIC.hoursNote}</p>
+
+        <div className="cg-footer__clinic-block">
+          <p className="cg-footer__clinic">
+            병원명: {CLINIC.name} ({CLINIC.legalName} / {CLINIC.brandName})
+          </p>
+          <p className="cg-footer__address">주소: {CLINIC.address}</p>
+          <p className="cg-footer__phone">
+            전화:{" "}
+            <a href={CLINIC.phoneTel}>{CLINIC.phoneDisplay}</a>
+          </p>
+          <p className="cg-footer__hours">진료시간: {CLINIC.hoursNote}</p>
+          <p className="cg-footer__biz">
+            사업자등록번호: {CLINIC.businessNumber} · 대표:{" "}
+            {CLINIC.representative}
+          </p>
+          <p className="cg-footer__map">
+            <a
+              href={CLINIC.locationUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              지도·오시는 길
+            </a>
+            {" · "}
+            <a
+              href={`${CLINIC.officialSiteUrl}/`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              개인정보처리방침·병원 안내
+            </a>
+          </p>
+        </div>
 
         <nav className="cg-footer__family" aria-label="Family Sites">
           <p className="cg-footer__family-label">Family Sites</p>

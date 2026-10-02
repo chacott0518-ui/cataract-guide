@@ -1,4 +1,5 @@
 import { CLINIC } from "@/config/clinic";
+import { CLINIC_DOCTORS } from "@/config/doctors";
 import { medicalClinicEntity, SITE } from "@/config/site";
 import { CONTENT_CARDS } from "@/lib/content-registry";
 import { toIso8601Kst } from "@/lib/dates";
@@ -35,7 +36,7 @@ export function medicalClinicJsonLd() {
     "@id": clinicId,
     name: CLINIC.name,
     legalName: CLINIC.legalName,
-    alternateName: [CLINIC.brandName, CLINIC.legalName],
+    alternateName: [CLINIC.brandName, "에스앤비안과", CLINIC.legalName],
     url: CLINIC.officialSiteUrl,
     telephone: CLINIC.phoneDisplay,
     address: {
@@ -48,6 +49,21 @@ export function medicalClinicJsonLd() {
     logo: absoluteUrl(CLINIC.logoPath),
     image: absoluteUrl(CLINIC.logoPath),
   };
+}
+
+/** 화면에 노출된 의료진과 1:1 — 가짜 리뷰/평점 없음 */
+export function physiciansJsonLd() {
+  const clinicId = absoluteUrl("/#medical-clinic");
+  return CLINIC_DOCTORS.map((doctor) => ({
+    "@context": "https://schema.org",
+    "@type": "Physician",
+    "@id": absoluteUrl(`/#physician-${doctor.id}`),
+    name: doctor.name,
+    jobTitle: `${doctor.role} · ${doctor.specialties.join(", ")}`,
+    image: absoluteUrl(doctor.imageSrc),
+    url: doctor.detailHref,
+    worksFor: { "@id": clinicId },
+  }));
 }
 
 export function websiteJsonLd() {
@@ -77,6 +93,7 @@ export function webPageJsonLd(options: {
   type?: "WebPage" | "MedicalWebPage";
   datePublished?: string;
   dateModified?: string;
+  reviewerName?: string;
 }) {
   const url = absoluteUrl(options.path);
   const pageType = options.type ?? "WebPage";
@@ -86,6 +103,10 @@ export function webPageJsonLd(options: {
   const dateModified = options.dateModified
     ? toIso8601Kst(options.dateModified)
     : datePublished;
+
+  const reviewer = options.reviewerName
+    ? CLINIC_DOCTORS.find((d) => d.name === options.reviewerName)
+    : undefined;
 
   return {
     "@context": "https://schema.org",
@@ -104,17 +125,34 @@ export function webPageJsonLd(options: {
           sourceOrganization: {
             "@id": absoluteUrl("/#medical-clinic"),
           },
+          about: {
+            "@id": absoluteUrl("/#medical-clinic"),
+          },
+        }
+      : {}),
+    ...(reviewer
+      ? {
+          reviewedBy: {
+            "@id": absoluteUrl(`/#physician-${reviewer.id}`),
+          },
+          author: {
+            "@id": absoluteUrl("/#organization"),
+          },
         }
       : {}),
     ...(options.image
       ? { image: absoluteUrl(options.image) }
       : { image: absoluteUrl(DEFAULT_OG_IMAGE) }),
     ...(options.keywords && options.keywords.length > 0
-      ? { keywords: options.keywords.slice(0, 8).join(", ") }
+      ? { keywords: options.keywords.slice(0, 10).join(", ") }
       : {}),
     ...(datePublished ? { datePublished } : {}),
     ...(dateModified ? { dateModified } : {}),
   };
+}
+
+function staticImageUrl(src: string): string {
+  return absoluteUrl(src.split("?")[0] || src);
 }
 
 export function itemListJsonLd() {
@@ -122,12 +160,13 @@ export function itemListJsonLd() {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: `${SITE.name} 주요 콘텐츠`,
+    numberOfItems: CONTENT_CARDS.length,
     itemListElement: CONTENT_CARDS.map((card, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: card.title,
       url: absoluteUrl(card.href),
-      image: absoluteUrl(card.image.src),
+      image: staticImageUrl(card.image.src),
       description: card.description,
     })),
   };
@@ -141,6 +180,7 @@ export function infoHubItemListJsonLd(
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "노안백내장 의료정보 가이드",
+    numberOfItems: entries.length,
     itemListElement: entries.map((entry, index) => ({
       "@type": "ListItem",
       position: index + 1,

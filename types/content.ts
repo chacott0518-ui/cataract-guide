@@ -180,7 +180,7 @@ export type ContentPage = {
   breadcrumbLabel?: string;
   /**
    * 질문형·상세 제목.
-   * H1과 다르면 화면에서는 H2로 출력. Article JSON-LD headline 등으로 활용.
+   * H1과 다르면 화면에서는 H2로 출력.
    */
   heading: string;
   /** @deprecated 화면 미표시. 스키마/내부 참고용으로만 유지할 수 있음 */
@@ -211,7 +211,7 @@ export type ContentPage = {
   thumbnail: ContentImage;
   /** H1 아래 상단 대표 이미지 (보통 1장) */
   topImages: ContentImage[];
-  /** 첫 제휴 CTA 아래·질문형 H2 위에 두는 본문 이미지 */
+  /** 본문 상단 질문형 H2 위에 두는 본문 이미지 */
   bodyImage?: ContentImage | null;
   /** @deprecated topImages 우선 */
   heroImage: ContentImage;

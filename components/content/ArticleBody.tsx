@@ -1,9 +1,11 @@
-import Image from "next/image";
-
 import { ArticleRepeatImage } from "@/components/content/ArticleRepeatImage";
 import { ArticleSectionBlock } from "@/components/content/ArticleSectionBlock";
 import { HomeArticleSlider } from "@/components/content/HomeArticleSlider";
 import type { ArticleSection, ContentImage } from "@/types/content";
+
+function staticSrc(src: string): string {
+  return src.split("?")[0] || src;
+}
 
 type ArticleBodyProps = {
   sections: ArticleSection[];
@@ -72,27 +74,31 @@ export function HomeIntroBlock({
       {hasPc || hasMobile ? (
         <figure className="cg-home-feature">
           {hasPc ? (
-            <Image
-              src={featureImage!.src}
+            // eslint-disable-next-line @next/next/no-img-element -- static PC hero, no optimizer
+            <img
+              src={staticSrc(featureImage!.src)}
               alt={featureImage!.alt}
               width={featureImage!.width || 1600}
               height={featureImage!.height || 900}
-              sizes="(max-width: 900px) 0px, 1180px"
               className="cg-home-feature__img cg-home-feature__img--pc"
               style={{ width: "100%", height: "auto" }}
-              priority
+              loading="lazy"
+              decoding="async"
+              fetchPriority="low"
             />
           ) : null}
           {hasMobile ? (
-            <Image
-              src={featureImageMobile!.src}
+            // eslint-disable-next-line @next/next/no-img-element -- static src matches preload
+            <img
+              src={staticSrc(featureImageMobile!.src)}
               alt={featureImageMobile!.alt}
-              width={featureImageMobile!.width || 1080}
-              height={featureImageMobile!.height || 1350}
-              sizes="(max-width: 900px) 100vw, 0px"
+              width={featureImageMobile!.width || 750}
+              height={featureImageMobile!.height || 938}
               className="cg-home-feature__img cg-home-feature__img--mobile"
               style={{ width: "100%", height: "auto" }}
-              priority
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
             />
           ) : null}
         </figure>

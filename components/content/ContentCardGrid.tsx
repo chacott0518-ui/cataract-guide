@@ -30,12 +30,11 @@ export function ContentCardGrid({
         </h2>
       )}
       <div className="cg-card-grid__list">
-          {CONTENT_CARDS.map((card, index) => (
+          {CONTENT_CARDS.map((card) => (
           <ContentCard
             key={`${card.id}-${card.image.src}`}
             card={card}
             active={activeHref === card.href}
-            priority={index < 6}
           />
         ))}
       </div>

@@ -48,8 +48,9 @@
   --cg-panel-hospital: #f3f8f7;
   --cg-panel-default: #f7f3ec;
 
-  --font-ko: "Pretendard Variable", Pretendard, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", "Apple SD Gothic Neo", sans-serif;
+  /* Mobile: system stack only. Desktop Pretendard loaded via media link. */
+  --font-ko: system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Segoe UI", sans-serif;
 
   /* 모바일 우선 타이포 */
   --text-h1: 1.7rem; /* ~27px */
@@ -91,6 +92,13 @@
 @media (min-width: 768px) and (max-width: 1024px) {
   :root {
     --cg-header-pad: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  :root {
+    --font-ko: "Pretendard Variable", Pretendard, system-ui, -apple-system,
+      BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
   }
 }
 
@@ -713,7 +721,10 @@ img {
 .cg-partner-cta__btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
+  min-height: 44px;
+  min-width: 44px;
   padding: 10px 14px;
   border-radius: 999px;
   background: var(--cg-ink);
@@ -749,7 +760,8 @@ img {
   justify-content: center;
   gap: 6px;
   width: fit-content;
-  min-height: 40px;
+  min-height: 44px;
+  min-width: 44px;
   padding: 0 16px;
   border-radius: 11px;
   background: var(--cg-action-bg);
@@ -1356,6 +1368,78 @@ img {
   background: transparent;
   padding: 0;
   border-radius: 10px;
+}
+
+.cg-faq-item > summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.cg-faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.cg-faq-item[open] .cg-faq-item__trigger {
+  color: var(--cg-link);
+  background: rgba(11, 99, 206, 0.08);
+}
+
+.cg-faq-item[open] .cg-faq-item__icon {
+  color: var(--cg-link);
+  transform: rotate(180deg);
+}
+
+.cg-clinic-trust__nap {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(16, 47, 61, 0.08);
+}
+
+.cg-clinic-trust__nap > div {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 8px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.cg-clinic-trust__nap dt {
+  margin: 0;
+  color: var(--cg-muted);
+  font-weight: 600;
+}
+
+.cg-clinic-trust__nap dd {
+  margin: 0;
+  color: var(--cg-ink);
+}
+
+@media (max-width: 639px) {
+  .cg-clinic-trust__nap > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+.cg-footer__clinic-block {
+  margin: 10px 0 14px;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--cg-body);
+}
+
+.cg-footer__clinic-block p {
+  margin: 0 0 4px;
+}
+
+.cg-footer__clinic-block a {
+  color: var(--cg-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .cg-faq-item:last-child {
@@ -3354,15 +3438,21 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 48px;
+    min-width: 48px;
     color: #fff;
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1.2;
     text-decoration: none;
     background: transparent;
     border: 0;
     cursor: pointer;
   }
-  .cg-float-nav__item--kakao { background: #fee500; color: #191919; }
+  .cg-float-nav__item--kakao {
+    background: #fee500;
+    color: #191919;
+  }
   body { padding-bottom: calc(var(--cg-float-nav-h) + env(safe-area-inset-bottom)); }
 }
 @media (min-width: 901px) {

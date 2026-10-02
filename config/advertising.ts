@@ -2,7 +2,7 @@ import { CONTACT } from "@/config/contact";
 import { CLINIC } from "@/config/clinic";
 
 /**
- * 진료 연결 CTA 설정 (제휴·광고 모집 문구 없음).
+ * 진료 연결 CTA 설정.
  */
 export const CLINIC_CTA = {
   top: {

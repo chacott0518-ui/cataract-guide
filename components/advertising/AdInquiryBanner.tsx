@@ -7,7 +7,7 @@ type ClinicConsultBannerProps = {
 };
 
 /**
- * 에스앤비안과의원 진료 연결 CTA (제휴·광고 모집 문구 없음).
+ * 에스앤비안과의원 진료 연결 CTA.
  */
 export function ClinicConsultBanner({
   variant = "top",
@@ -80,7 +80,7 @@ export function PartnershipCTA(props: ClinicConsultBannerProps) {
   return <ClinicConsultBanner {...props} />;
 }
 
-/** @deprecated */
+/** @deprecated ClinicConsultBanner 사용 */
 export function AdInquiryBanner() {
   return <ClinicConsultBanner variant="bottom" />;
 }

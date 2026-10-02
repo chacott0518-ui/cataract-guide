@@ -81,7 +81,7 @@ export function getAllFaqs(): FaqItem[] {
   return [...ALL_FAQS].sort((a, b) => a.order - b.order);
 }
 
-/** FAQ 통합 페이지 그룹별 ID (화면·JSON-LD 동일 원본) */
+/** FAQ 통합 페이지 그룹별 ID (화면 FAQ와 동일 원본) */
 export const FAQ_HUB_GROUPS = [
   {
     id: "faq-diff",

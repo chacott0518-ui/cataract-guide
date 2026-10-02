@@ -109,12 +109,27 @@ export const TOPIC_MEDIA: Record<ContentClusterId, TopicMedia> = {
   },
 };
 
-/** HOME Hero PC (16:9) */
-export const HOME_FEATURE_IMAGE: ContentImage = slotAsContentImage(HERO_PC_SLOT);
+/** HOME Hero PC (16:9) — below-fold on mobile, lazy static */
+export const HOME_FEATURE_IMAGE: ContentImage = {
+  ...slotAsContentImage(HERO_PC_SLOT),
+  src: HERO_PC_SLOT.targetSrc,
+};
 
-/** HOME Hero Mobile (4:5) */
-export const HOME_FEATURE_IMAGE_MOBILE: ContentImage =
-  slotAsContentImage(HERO_MOBILE_SLOT);
+/**
+ * HOME 모바일 대표 이미지 — static src (optimizer/query 없음).
+ * preload href 와 img src 가 반드시 동일해야 한다.
+ */
+export const HOME_MOBILE_HERO_IMAGE: ContentImage = {
+  src: "/images/노안백내장/노안백내장-hero-mobile-sm.webp",
+  alt: "노안백내장 검사·렌즈 상담 판단 포인트를 담은 모바일 대표 이미지",
+  width: 750,
+  height: 938,
+};
+
+/** @deprecated alias */
+export const HOME_LCP_IMAGE = HOME_MOBILE_HERO_IMAGE;
+/** @deprecated alias */
+export const HOME_FEATURE_IMAGE_MOBILE: ContentImage = HOME_MOBILE_HERO_IMAGE;
 
 export const GUIDE_SECTION_IMAGES = {
   diff: slotAsContentImage(BODY_INFO_SLOTS[0]),

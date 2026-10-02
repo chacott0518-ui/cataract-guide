@@ -8,7 +8,7 @@ export const siteEntity: SiteEntity = {
   name: topicConfig.siteName,
   type: "WebSite",
   description:
-    "노안과 백내장의 차이부터 수술비용, 회복기간, 주의사항, 병원 선택과 FAQ까지 정리하는 정보 사이트",
+    "노안과 백내장 차이, 검사, 렌즈 선택, 수술비용·회복·주의사항과 FAQ를 정리하고 S&B안과 상담으로 연결하는 정보 사이트",
   logo: "/icon.svg",
   language: topicConfig.locale,
 };
