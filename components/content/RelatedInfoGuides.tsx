@@ -16,7 +16,7 @@ export function RelatedInfoGuides({ guides }: RelatedInfoGuidesProps) {
   return (
     <nav className="cg-related-guides" aria-labelledby="related-guides-title">
       <h2 id="related-guides-title" className="cg-related-guides__title">
-        다른 노안백내장 의료정보
+        다른 의료정보
       </h2>
       <ul className="cg-related-guides__grid">
         {guides.map((guide) => (
@@ -33,7 +33,7 @@ export function RelatedInfoGuides({ guides }: RelatedInfoGuidesProps) {
         ))}
       </ul>
       <Link href={ROUTES.infoHub} className="cg-related-guides__back">
-        노안백내장 의료정보 전체보기
+        의료정보 전체보기
       </Link>
     </nav>
   );

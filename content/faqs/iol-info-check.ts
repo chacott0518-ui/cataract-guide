@@ -12,7 +12,7 @@ export const IOL_INFO_CHECK_FAQS: FaqItem[] = [
   {
     id: "iol-check-02",
     order: 2,
-    question: "다초점 렌즈가 단초점보다 무조건 좋은가요?",
+    question: "다초점 렌즈가 단초점보다 일률적으로 좋은가요?",
     answer:
       "그렇게 단정할 수 없습니다. 각 렌즈는 특성과 한계가 다르며, 무엇이 더 적합한지는 눈 상태와 생활패턴에 따라 달라질 수 있습니다. 상담에서 두 방식의 장단점을 함께 설명받는 것이 중요합니다.",
     categories: ["iolInfoCheck"],

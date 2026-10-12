@@ -288,37 +288,37 @@ export const HUB_FAQS: FaqItem[] = [
   {
     id: "hub-review-01",
     order: 70,
-    question: "노안백내장 후기를 그대로 믿기 어려운 이유는 무엇인가요?",
+    question: "노안백내장 온라인 경험담을 그대로 믿기 어려운 이유는 무엇인가요?",
     answer:
-      "후기 작성자와 본인의 눈 상태·렌즈·생활 패턴이 다를 수 있기 때문입니다. 참고 자료로 활용하되, 중요한 판단은 검사와 상담에서 확인하는 편이 안전합니다.",
+      "작성자와 본인의 눈 상태·렌즈·생활 패턴이 다를 수 있기 때문입니다. 참고 자료로 활용하되, 중요한 판단은 검사와 상담에서 확인하는 편이 안전합니다.",
     relatedSlug: "노안백내장-후기",
-    relatedLabel: "후기 확인 기준",
+    relatedLabel: "확인 기준 안내",
     categories: ["hub", "reviews"],
   },
   {
     id: "hub-review-02",
     order: 71,
-    question: "광고성 후기는 어떻게 구분할 수 있나요?",
+    question: "광고성 경험담은 어떻게 구분할 수 있나요?",
     answer:
       "결과만 강조하거나 광고·협찬 표시가 불분명한 글은 신중히 구분하세요. 개인 상태·렌즈·회복 과정이 구체적으로 적힌 글을 우선 참고하는 편이 도움이 됩니다.",
     relatedSlug: "노안백내장-후기",
-    relatedLabel: "후기 확인 기준",
+    relatedLabel: "확인 기준 안내",
     categories: ["hub", "reviews"],
   },
   {
     id: "hub-review-03",
     order: 72,
-    question: "후기 작성자의 렌즈 종류를 확인해야 하나요?",
+    question: "경험담 작성자의 렌즈 종류를 확인해야 하나요?",
     answer:
       "렌즈 종류와 초점 범위가 적혀 있으면 비교 기준으로 쓰기 쉬워집니다. 렌즈 정보 없이 결과만 적힌 글은 본인 상황에 그대로 적용하기 어렵습니다.",
     relatedSlug: "노안백내장-후기",
-    relatedLabel: "후기 확인 기준",
+    relatedLabel: "확인 기준 안내",
     categories: ["hub", "reviews"],
   },
   {
     id: "hub-review-04",
     order: 73,
-    question: "회복기간 후기가 사람마다 다른 이유는 무엇인가요?",
+    question: "회복기간 경험담이 사람마다 다른 이유는 무엇인가요?",
     answer:
       "기존 눈 상태, 렌즈 적응, 양안 일정과 생활 환경에 따라 회복 체감이 달라질 수 있습니다. 다른 사람의 일정과 동일하게 맞추기보다 본인 경과를 기준으로 확인하세요.",
     relatedSlug: "노안백내장-회복기간",
@@ -328,11 +328,11 @@ export const HUB_FAQS: FaqItem[] = [
   {
     id: "hub-review-05",
     order: 74,
-    question: "수술 결과만 강조된 후기는 왜 주의해야 하나요?",
+    question: "수술 결과만 강조된 경험담은 왜 주의해야 하나요?",
     answer:
       "결과만 강조되면 적응 과정·불편·개인차 정보가 빠져 기대와 실제가 어긋나기 쉽습니다. 과정과 조건이 함께 적힌 글을 우선 참고하는 편이 안전합니다.",
     relatedSlug: "노안백내장-후기",
-    relatedLabel: "후기 확인 기준",
+    relatedLabel: "확인 기준 안내",
     categories: ["hub", "reviews"],
   },
 ];

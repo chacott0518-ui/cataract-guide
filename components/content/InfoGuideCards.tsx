@@ -71,7 +71,7 @@ export function InfoGuideCards({
       </ul>
 
       <Link href={ROUTES.infoHub} className="cg-info-guides__all">
-        노안백내장 의료정보 전체보기
+        의료정보 전체보기
       </Link>
     </section>
   );

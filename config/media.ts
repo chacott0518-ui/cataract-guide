@@ -83,7 +83,7 @@ export const TOPIC_MEDIA: Record<ContentClusterId, TopicMedia> = {
     secondaryImageAlt: cardById("card-reviews").alt,
     accentColor: "#DF3E73",
     accentHoverColor: "#B32656",
-    mobileCardDescription: "후기와 과장 표현 구분",
+    mobileCardDescription: "확인 기준과 과장 표현 구분",
     thumbnail: cardById("card-reviews"),
     secondaryImage: cardById("card-reviews"),
   },

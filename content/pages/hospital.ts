@@ -16,7 +16,7 @@ export const HOSPITAL_PAGE: ContentPage = {
   heading: "노안백내장 병원선택, 어떤 기준을 비교해야 할까요?",
   intro: [
     "노안백내장 병원선택은 특정 기관을 추천하는 과정이 아니라, 검사 체계·렌즈 설명·비용 구성·사후관리를 비교하는 과정입니다. 같은 수술 명칭이라도 설명의 구체성과 관리 범위가 다를 수 있습니다.",
-    "후기나 광고 문구만으로 판단하기보다, 내 눈 상태에 맞는 검사와 결과 설명, 렌즈의 장점과 제한점, 재방문·이상 증상 대응까지 질문해 두는 편이 안전합니다.",
+    "경험담이나 광고 문구만으로 판단하기보다, 내 눈 상태에 맞는 검사와 결과 설명, 렌즈의 장점과 제한점, 재방문·이상 증상 대응까지 질문해 두는 편이 안전합니다.",
   ],
   hubContextLink: {
     before:
@@ -37,7 +37,7 @@ export const HOSPITAL_PAGE: ContentPage = {
   faqTitle: "노안백내장 병원선택 자주 묻는 질문",
   conclusion: [
     "노안백내장 병원선택은 검사 항목과 결과 설명, 렌즈 상담의 균형, 비용의 포함·추가 구분, 경과 확인과 연락 체계를 함께 비교하는 것이 도움이 됩니다.",
-    "특정 병원을 최고라고 단정할 수 없으며, 최종 판단은 검사와 상담을 통해 이루어져야 합니다. 이 페이지는 비교 기준을 안내하는 일반 정보입니다.",
+    "특정 병원을 우월하다고 단정할 수 없으며, 최종 판단은 검사와 상담을 통해 이루어져야 합니다. 이 페이지는 비교 기준을 안내하는 일반 정보입니다.",
   ],
   thumbnail: TOPIC_MEDIA.hospital.thumbnail,
   topImages: [TOPIC_MEDIA.hospital.pageHero!],
@@ -195,7 +195,7 @@ export const HOSPITAL_PAGE: ContentPage = {
         },
       ],
       relatedHref: ROUTES.reviews,
-      relatedLabel: "노안백내장 후기 확인 기준 보기",
+      relatedLabel: "확인 기준 안내 보기",
     },
   ],
 };

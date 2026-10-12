@@ -326,6 +326,94 @@ for (const { word, re } of FORBIDDEN_TOKENS) {
 }
 if (forbiddenHits === 0) ok(`forbiddenWords clean (${FORBIDDEN_WORDS.length + FORBIDDEN_TOKENS.length} rules)`);
 
+/** 의료광고 위험 표현 — HOME + 주요 하위페이지 visible text */
+const FORBIDDEN_MEDICAL_AD = [
+  { label: "완치", re: /완치/ },
+  { label: "100%", re: /100%/ },
+  { label: "최고", re: /최고/ },
+  { label: "최상", re: /최상(?!단)/ },
+  { label: "유일", re: /유일/ },
+  { label: "부작용 없음", re: /부작용\s*없음/ },
+  { label: "통증 없음", re: /통증\s*없음/ },
+  { label: "회복 보장", re: /회복\s*보장/ },
+  { label: "빠른 회복 보장", re: /빠른\s*회복\s*보장/ },
+  { label: "무조건", re: /무조건/ },
+  { label: "확실한", re: /확실한/ },
+  { label: "실패 없음", re: /실패\s*없음/ },
+  { label: "재발 없음", re: /재발\s*없음/ },
+  { label: "누구나 가능", re: /누구나\s*가능/ },
+  { label: "모든 사람에게 적합", re: /모든\s*사람에게\s*적합/ },
+  { label: "최저가", re: /최저가/ },
+  { label: "특가", re: /특가/ },
+  { label: "할인", re: /할인/ },
+  { label: "무료", re: /무료/ },
+  { label: "전후사진", re: /전후\s*사진/ },
+  { label: "치료경험담", re: /치료경험담/ },
+  { label: "실제 환자", re: /실제\s*환자/ },
+  { label: "타 병원보다", re: /타\s*병원보다/ },
+  { label: "전문병원", re: /전문병원/ },
+  // 설명의·기대가 오탐 방지
+  { label: "명의", re: /(?<!설)명의/ },
+  { label: "대가", re: /(?<!기)대가(?![가감식])/ },
+];
+
+const MEDICAL_AUDIT_PATHS = [
+  "/",
+  "/노안백내장-수술비용",
+  "/노안백내장-회복기간",
+  "/노안백내장-주의사항",
+  "/노안백내장-병원선택",
+  "/노안백내장-단초점-다초점-차이",
+  "/노안백내장-faq",
+  "/의료정보",
+];
+
+async function auditMedicalAdWords(path) {
+  const url = `${base}${path === "/" ? "/" : encodeURI(path)}`;
+  let pageHtml;
+  try {
+    const r = await fetch(url, { redirect: "follow" });
+    if (!r.ok) {
+      fail(`forbiddenMedicalAdWords fetch fail ${path} status=${r.status}`);
+      return;
+    }
+    pageHtml = await r.text();
+  } catch (e) {
+    fail(`forbiddenMedicalAdWords fetch error ${path}: ${e.message}`);
+    return;
+  }
+  const pageTitle = pick(pageHtml, /<title[^>]*>([^<]*)<\/title>/i) || "";
+  const pageDesc =
+    pick(
+      pageHtml,
+      /<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i,
+    ) ||
+    pick(
+      pageHtml,
+      /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']description["']/i,
+    ) ||
+    "";
+  const pageVisible = `${pageTitle} ${pageDesc} ${visibleText(pageHtml)}`;
+  let hits = 0;
+  for (const { label, re } of FORBIDDEN_MEDICAL_AD) {
+    if (re.test(pageVisible)) {
+      fail(`forbiddenMedicalAdWords [${path}]: ${label}`);
+      hits += 1;
+    }
+  }
+  if (hits === 0) ok(`forbiddenMedicalAdWords clean [${path}]`);
+}
+
+for (const p of MEDICAL_AUDIT_PATHS) {
+  await auditMedicalAdWords(p);
+}
+
+if (visible.includes("의료정보 전체보기") && !visible.includes("노안백내장 의료정보 전체보기"))
+  ok("의료정보 hub anchor without leading 노안백내장");
+else if (visible.includes("노안백내장 의료정보 전체보기"))
+  fail("의료정보 hub anchor still starts with 노안백내장");
+else warn("의료정보 전체보기 anchor not found on HOME");
+
 console.log(`\n=== HOME HTML AUDIT ${base}/ ===`);
 console.log(`PASS ${pass.length} | WARN ${warns.length} | FAIL ${errors.length}`);
 for (const m of pass) console.log(`PASS  ${m}`);
